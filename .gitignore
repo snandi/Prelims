@@ -21,3 +21,4 @@ HeaderfileTexDocs.tex
 derivs.m
 *.lot
 *.eps
+*.out

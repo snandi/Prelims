@@ -14,39 +14,11 @@
 % for a 12 Point UW PhD Thesis without Margin Check
 \documentclass[12pt]{withesis}
 %
-% for a 10 Point UW PhD Thesis with Margin Check
-%\documentclass[10pt,margincheck]{withesis}
-%
-% The margincheck option flags lines which overflow their hbox with a black
-%  box at the end of the line.  This usually (but not always) indicates a
-%  margin violation on the right margin.  Left margin violations aren't
-%  indicated and if the margin violation is large enough, there isn't room
-%  for the black box to be visiable.  
-%
-% This option can be also used in conjunction with the msthesis option.
-%
-% or for a 12 Point UW Masters Thesis
-%\documentclass[12pt,msthesis]{withesis}
-%
-% or for a 10 Point UW Masters Thesis
-%\documentclass[10pt,msthesis]{withesis}
-%
-% The msthesis option changes the page margins from 1" all around
-% (the PhD format) to 1.25" left and 1" remaining margins (MS format).
-% The defaults for degree and thesis are changed to be MS and thesis.
-% These defaults can be overridden if the margins for the MS thesis
-% are desired for other documents.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Usepackages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\input{HeaderfileTexPrelims}
 
-% To include optional packages, use the \usepackage command.
-%  The package epsfig is used to bring in the Encapsulated PostScript
-%    figures into the document.
-%  The package times is used to change the fonts to Times Roman; however
-%    because the times typewriter font looks odd, the original LaTeX
-%    Computer Modern font is kept for the typewriter font using
-%      \renewcommand{\ttdefault}{cmtt}
-%    Note that Times Roman is a PostScript font and therefore, the document
-%    cannot be correctly viewed from the *.dvi file.  It should be converted
-%    to a *.ps file first and then viewed with a PostScript previewer...
 \usepackage{epsfig}
 \usepackage{times}
 \renewcommand{\ttdefault}{cmtt}
@@ -103,7 +75,6 @@
 % End of Preamble, start of document
 %
 
-
 \begin{document}
 
 % Choose your bibliography style
@@ -118,15 +89,15 @@
 \include{bibs}                   % Chapter 4 From PU Thesis styles, by J.D. McCauley
 \include{usage}                  % Chapter 5 Strongly based on similar by J.D. McCauley
 
-\bibliography{refs}              % Make the bibliography
+%\bibliography{refs}              % Make the bibliography
+\bibliography{bibTex_Reference}  % Make the bibliography
 
 \begin{appendices}               % Start of the Appendix Chapters.  If there is only
                                  % one Appendix Chapter, then use \begin{appendix}
 \include{code}                   % Including computer code listings
-%\include{bibref}                 % a BibTeX reference
-\include{bibTex_Reference}       % a BibTeX reference
-\include{math}                   % Complex Equations from the UW Math Department
-\include{acro}                   % A discussion on generating PDF files.
+\include{bibref}                 % a BibTeX reference
+%\include{math}                   % Complex Equations from the UW Math Department
+%\include{acro}                   % A discussion on generating PDF files.
 \end{appendices}                 % End of the Appendix Chapters.  ibid on \end{appendix}
 %\include{vita}                  % Optional Vita, use \begin{vita} vita text \end{vita}
 \end{document}
