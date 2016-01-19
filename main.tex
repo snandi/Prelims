@@ -19,6 +19,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\input{HeaderfileTexPrelims}
 
+\usepackage{amsmath}
 \usepackage{epsfig}
 \usepackage{times}
 \renewcommand{\ttdefault}{cmtt}
@@ -83,21 +84,27 @@
 
 
 \include{prelude}                % Title page, abstract, table of contents, etc
-\include{intro}                  % Chapter 1
-\include{essentials}             % Edited ``Essential LaTeX'' by Jon Warbrick
-\include{figs}                   % Chapter 3 Edited from UW Math Dept's Sample Thesis
-\include{bibs}                   % Chapter 4 From PU Thesis styles, by J.D. McCauley
-\include{usage}                  % Chapter 5 Strongly based on similar by J.D. McCauley
+\include{Ch1_Intro}              % Chapter 1
+\include{Ch2_Intensity}          % Chapter 2
+\include{Ch3_Registration}       % Chapter 3
+\include{Ch4_Uniqueness}         % Chapter 4
+\include{Ch5_Heterozygotes}      % Chapter 5
+\include{Ch6_Ongoing}            % Chapter 6
 
-%\bibliography{refs}              % Make the bibliography
+%\include{essentials}            % Edited ``Essential LaTeX'' by Jon Warbrick
+%\include{figs}                  % Chapter 3 Edited from UW Math Dept's Sample Thesis
+%\include{bibs}                  % Chapter 4 From PU Thesis styles, by J.D. McCauley
+%\include{usage}                 % Chapter 5 Strongly based on similar by J.D. McCauley
+
+%\bibliography{refs}             % Make the bibliography
 \bibliography{bibTex_Reference}  % Make the bibliography
 
-\begin{appendices}               % Start of the Appendix Chapters.  If there is only
+%\begin{appendices}              % Start of the Appendix Chapters.  If there is only
                                  % one Appendix Chapter, then use \begin{appendix}
-\include{code}                   % Including computer code listings
-\include{bibref}                 % a BibTeX reference
-%\include{math}                   % Complex Equations from the UW Math Department
-%\include{acro}                   % A discussion on generating PDF files.
-\end{appendices}                 % End of the Appendix Chapters.  ibid on \end{appendix}
+%\include{code}                  % Including computer code listings
+%\include{bibref}                % a BibTeX reference
+%\include{math}                  % Complex Equations from the UW Math Department
+%\include{acro}                  % A discussion on generating PDF files.
+%\end{appendices}                % End of the Appendix Chapters.  ibid on \end{appendix}
 %\include{vita}                  % Optional Vita, use \begin{vita} vita text \end{vita}
 \end{document}
