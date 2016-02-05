@@ -22,3 +22,5 @@ derivs.m
 *.lot
 *.eps
 *.out
+Images
+Images/*
