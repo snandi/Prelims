@@ -4,15 +4,60 @@
 \noindent
 {\bf{Definition 3.1}} {\emph{A random variable $\Y$ is called a functional variable if it takes values in an infinite-dimensional space. An observation $Y$ of $\Y$ is called a functional data. \cite{Ferraty_Vieu_2006_Nonparametric}}}\\
 \noindent
-{\bf{Definition 3.2}} {\emph{A functional dataset $Y_1, \dots, Y_n$ is an observation of $n$ functional variables $\Y_1, \dots, \Y_n$ distributed as $\Y$.}}\\
+{\bf{Definition 3.2}} {\emph{A functional dataset $Y_1, \dots, Y_n$ is an observation of $n$ functional variables $\Y_1, \dots, \Y_n$ as $\Y$.}}\\
 
-Functional data (FD) are discrete observations of a continuous underlying process. They arise in many different scenarios. For example, children growing taller can be considered a continuous process, but recording their heights every few months is a set of discrete observation of that process. Pioneered by Ramsay and Silvermann \cite{Ramsay_2006_Functional}, there has been substantial progress in statistical approaches to analyzing FD in recent past. Following are some important aspects of functional data analysis (FDA) that are relevant to our dataset, pertaining to the goal of our research. 
+The basic philosophy of functional data analysis (FDA) is to think of observed data functions as single entities, rather than merely as a sequence of individual observations \cite{Ramsay_2006_Functional}. In
+practice, functional data are discrete observations as $p$ pairs $(x_j, y_j)$, and $y_j (\text{or} Y_{ij}$ is a snapshot of the function at position (or time) $x_j$, possibly blurred by measurement error. Pioneered by Ramsay and Silvermann \cite{Ramsay_2006_Functional}, there has been substantial progress in statistical approaches to FDA in recent past. Following are some important aspects FDA that are relevant to our dataset, pertaining to the goals of our research. 
 
 \subsection{Smoothing}
+In FDA, it is important that the underlying function $\Y$ is smooth, so that a pair of adjacent data values from replicate $i$, $Y_{i,j}$, and $Y_{i,j+1}$ are linked together to some extent and unlikely to be too different from each other. If this smoothness property did not apply, there would be nothing much to be gained by treating the data as functional rather than just multivariate. 
+
+In fluoroscanning, consider the image of a DNA molecule, as shown in \ref{fig:Fig3_NMap_Intensity}. The grey level of each pixel point of the image of a DNA molecule corresponds to approximately 200 bp of genomic sequence. The pixel intensity value is a result of superimposition of 
+\begin{wrapfigure}{l}{0.5\textwidth}
+\begin{center}
+%\includegraphics[scale=1]{Images/Image6_NMap_Intensity.pdf}
+\includegraphics[scale=0.6]{Images/Image6_NMap_Intensity.pdf}
+\end{center}
+\caption{Image of DNA molecule}
+\label{fig:Fig3_NMap_Intensity}
+\end{wrapfigure}
+point spread functions of the fluorescent dye molecules intercalated between the nucleotide bases. As demonstrated in fig \ref{fig:Fig3_Bivariate1} and \ref{fig:Fig3_Bivariate2} below, the intensity value of each pixel is a result of neighboring bases as well. Fig \ref{fig:Fig3_Bivariate2} is a superimposition of the point spread functions in fig \ref{fig:Fig3_Bivariate1}.  
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.27, page = 2]{Plots/BivariatePlots.pdf}
+\includegraphics[scale = 0.27, page = 1]{Plots/BivariatePlots.pdf}
+\includegraphics[scale = 0.27, page = 3]{Plots/BivariatePlots.pdf}
+\end{center}
+\caption{Point spread functions of 3 adjacent fluorescent sources}
+\label{fig:Fig3_Bivariate1}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.5, page = 4]{Plots/BivariatePlots.pdf}
+\end{center}
+\caption{Superimposition of point spread function}
+\label{fig:Fig3_Bivariate2}
+\end{figure}
+Based on the optical resolution of the camera, we estimate it to be around 600 bp. Hence, there is an inherent smoothness in the underlying fluorescence intensity profiles of the images of the DNA molecules. Fig \ref{fig:Fig3_frag1058_orig} is an example of fluorescence intensity profiles of fragments of DNA molecules that have been aligned to interval 1058 of chromosome 13, of the reference human genome. It is imperative to smooth the intensity profiles before any subsequent analysis. Another important aspect of the dataset is the different lengths of the molecular fragments, aligned to the same genomic location. As explained in \ref{Ch2_data}, there could be several possible reasons causing this. One of the goals of this research is to find consensus fluorescence intensity profiles of all genomic loci with large enough sample size. In order to estimate a consensus $\hat{\Y}$ from $n$ sample profiles $Y_1, \dots, Y_n$, each $Y_i$ need to be of the same length. 
+
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 2]{Plots/chr13_frag1058.pdf}
+\end{center}
+\caption{Intensity profiles of fragments of molecules aligned to human chr 13, fragment 1058}
+\label{fig:Fig3_frag1058_orig}
+\end{figure}
+
+
 
 \subsection{Amplitude and Phase variability}
 
 \subsection{Registration}
+
+\subsection{Functional outlier detection}
 
 \section{Curve Registration}
 \subsection{Ramsay-Silverman}
