@@ -86,7 +86,7 @@ Below is a demonstration of applying the above mentioned data preparation proced
 %\end{figure}
 
 \subsection{Amplitude and Phase variability}
-A problem of critical importance in FDA is the presence of both amplitude and phase variability in functional observations. Even simple analysis like averaging of replicated curves will produce erroneous estimates if phase variability is not minimized first. Fig \cite{fig:Fig3_AmpPhase} illustrates the two types of variabilities. 
+A problem of critical importance in FDA is the presence of both amplitude and phase variability in functional observations. Even simple analysis like averaging of replicated curves will produce erroneous estimates if phase variability is not eliminated (or reduced) first. Fig \ref{fig:Fig3_AmpPhase} illustrates the two types of variabilities. 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale = 0.42, page = 1]{Plots/AmpPhaseVar.pdf}
@@ -95,13 +95,54 @@ A problem of critical importance in FDA is the presence of both amplitude and ph
 \caption{Amplitude and Phase variabilities in FD}
 \label{fig:Fig3_AmpPhase}
 \end{figure}
-
-
-\subsection{Registration}
+We have observed substantial amount of phase variability in the fluorescence intensity dataset. Hence, before estimating the consensus fluorescence intensity profiles of genomic regions, it is imperative that we address this variability. Pioneered by Ramsay and Silverman \cite{Ramsay_2006_Functional}, \cite{Ramsay_Li_1998_JRSSB}, \cite{Ramsay_etal_2009_Functional_R}, {\emph{Curve Registration}} is a FDA technique to address the phase variability problem. We discuss it in more details in Sec \ref{Chr3_Regist}.
 
 \subsection{Functional outlier detection}
+In addition to variability in the data introduced by different lengths of molecular fragments (aligned to the same genomic locus), and phase variability, there are several other reasons why some molecule could produce an ``outlier'' intensity profile. Below are some images (fig \cite{fig:Fig3_OutlierImages}) of the surfaces with DNA molecules that are examples of outlier intensity profiles. There could be some DNA fragments near the molecule under consideration. There could be molecules crossing each other. Each of those instances would result in some pixel intensity values that would not be appropriate to use in our analyses. 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.5]{Images/Outlier_1.png}
+\includegraphics[scale = 0.3]{Images/Outlier_2.png}
+\includegraphics[scale = 0.35]{Images/Outlier_3.png}
+\includegraphics[scale = 0.45]{Images/Outlier_4.png}
+\end{center}
+\caption{Outliers}
+\label{fig:Fig3_OutlierImages}
+\end{figure}
+Using the intensity grey levels of up to three pixels both above and below a molecule, a ``quality score'' was developed to detect some of these outliers. However, more subtle reasons such has slight curvature in the molecule backbones, existence of surface noise underneath the molecule backbones, etc, could still be responsible for producing outlier observations. To address these cases, we used functional data depth measures, as proposed in \cite{Febrero-Bande_etal_2007_Environmetrics}. We use the Fraiman and Muniz depth, first to introduced in \cite{Fraiman_Muniz_2001_SEIO}. Let $F_{n,x} (Y_i (x))$ be the empirical cumulative distribution function of the values of the curves $Y_1(x), \dots , Y_n(x)$ at a given position $x \in [a, b]$, given by
+\[ F_{n,x} (Y_i (x)) = \frac{1}{n}\sum\limits_{k=1}^{n} \Ind\{ Y_k(x) \leq Y_i(x)\}\]
+and, the univariate depth of a point $Y_i(x)$ is given by
+\[ D_n(Y_i(x)) = 1 - \left| \frac{1}{2} - F_{n,x} (Y_i (x)) \right| \]
+Then, the Fraiman and Muniz functional depth (FMD), of a curve $Y_i$ with respect the set $Y_1(x), \dots , Y_n(x)$ is given by 
+\begin{equation}
+\text{FMD}_n(Y_i) = \int\limits_a^b D_n(Y_i(x)) dx
+\label{eq:3_depth}
+\end{equation}
+In order to identify functional outliers we use the functional depth FMD. As mentioned in the introduction, depth and outlyingness are inverse notions, so that if an outlier is in the dataset, 
+the corresponding curve will have a significant low depth. Following is the procedure for functional outlier detection in a given dataset of functional curves like fluorescence intensity profiles
+$Y_1, \dots, Y_n$
+\begin{enumerate}
+\item Obtain the functional depths $D_n(Y_1), \dots, D_n(Y_n)$, for FMD
+\item Let $Y_{i1}, \dots, Y_{ik}$ be the $k$ curves such that $D_n(Y_{ik}) \leq C$, for a given cutoff $C$. Then, assume that $Y_{i1}, \dots, Y_{ik}$ are outliers and delete them from the sample.
+\item Then, come back to step 1 with the new dataset after deleting the outliers found in step 2. Repeat this until no more outliers are found.
+\end{enumerate}
+To ensure type-I error of detecting outliers is under some small threshold $\alpha$, we need to choose $C$ such that
+\[ \Prob(D_n(Y_i) \leq C) = \alpha,\ \ i = 1, \dots, n\]
+However, since the distribution of the functional depth statistic FMD is unknown, it is estimated here using a bootstrap procedure. For details, please refer to \cite{Febrero-Bande_etal_2007_Environmetrics} and \cite{Febrero-Bande_delaFuente_2012_JSS}. 
 
-\section{Curve Registration}
+In fig \ref{fig:Fig3_frag1058_outlier} we show the detection of outlier in the fluorescence intensity profiles of fragments of molecules aligned to human chr 13, interval 1058. Refer to figures \ref{fig:Fig3_frag1058_orig} and \ref{fig:Fig3_frag1058_norm}.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.5, page = 5]{Plots/chr13_frag1058.pdf}
+\end{center}
+\caption{Outlier detection in Intensity profiles of fragments of molecules aligned to human chr 13, interval 1058}
+\label{fig:Fig3_frag1058_outlier}
+\end{figure}
+
+
+\section{Curve Registration} \label{Ch3_Regist}
+Curve Registration
+
 \subsection{Ramsay-Silverman}
 \subsection{Sangalli, et al}
 \subsection{Srivastava, et al}
