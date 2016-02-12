@@ -4,13 +4,13 @@
 \noindent
 {\bf{Definition 3.1}} {\emph{A random variable $\Y$ is called a functional variable if it takes values in an infinite-dimensional space. An observation $Y$ of $\Y$ is called a functional data. \cite{Ferraty_Vieu_2006_Nonparametric}}}\\
 \noindent
-{\bf{Definition 3.2}} {\emph{A functional dataset $Y_1, \dots, Y_n$ is an observation of $n$ functional variables $\Y_1, \dots, \Y_n$ as $\Y$.}}\\
+{\bf{Definition 3.2}} {\emph{A functional dataset $y_1, \dots, y_n$ is an observation of $n$ functional variables $\Y_1, \dots, \Y_n$ as $\Y$.}}\\
 
 The basic philosophy of functional data analysis (FDA) is to think of observed data functions as single entities, rather than merely as a sequence of individual observations \cite{Ramsay_2006_Functional}. In
-practice, functional data are discrete observations as $p$ pairs $(x_j, y_j)$, and $y_j (\text{or } Y_{ij})$ is a snapshot of the function at position (or time) $x_j$, possibly blurred by measurement error. Pioneered by Ramsay and Silvermann \cite{Ramsay_2006_Functional}, there has been substantial progress in statistical approaches to FDA in recent past. Following are some important aspects FDA that are relevant to our dataset, pertaining to the goals of our research. 
+practice, functional data are discrete observations as $p$ pairs $(x_j, y_j)$, and $y_j (\text{or } y_{ij})$ is a snapshot of the function at position (or time) $x_j$, possibly blurred by measurement error. Pioneered by Ramsay and Silvermann \cite{Ramsay_2006_Functional}, there has been substantial progress in statistical approaches to FDA in recent past. Following are some important aspects FDA that are relevant to our dataset, pertaining to the goals of our research. 
 
 \subsection{Smoothing}
-In FDA, it is important that the underlying function $\Y$ is smooth, so that a pair of adjacent data values from replicate $i$, $Y_{i,j}$, and $Y_{i,j+1}$ are linked together to some extent and unlikely to be too different from each other. If this smoothness property did not apply, there would be nothing much to be gained by treating the data as functional rather than just multivariate. 
+In FDA, it is important that the underlying function $\Y$ is smooth, so that a pair of adjacent data values from replicate $i$, $y_{i,j}$, and $y_{i,j+1}$ are linked together to some extent and unlikely to be too different from each other. If this smoothness property did not apply, there would be nothing much to be gained by treating the data as functional rather than just multivariate. 
 
 In fluoroscanning, consider the image of a DNA molecule, as shown in \ref{fig:Fig3_NMap_Intensity}. The grey level of each pixel point of the image of a DNA molecule corresponds to approximately 200 bp of genomic sequence. The pixel intensity value is a result of superimposition of 
 \begin{wrapfigure}{l}{0.5\textwidth}
@@ -40,7 +40,7 @@ point spread functions of the fluorescent dye molecules intercalated between the
 \caption{Superimposition of point spread function}
 \label{fig:Fig3_Bivariate2}
 \end{figure}
-Based on the optical resolution of the camera, we estimate it to be around 600 bp. Hence, there is an inherent smoothness in the underlying fluorescence intensity profiles of the images of the DNA molecules. Fig \ref{fig:Fig3_frag1058_orig} is an example of fluorescence intensity profiles of fragments of DNA molecules that have been aligned to interval 1058 of chromosome 13, of the reference human genome. It is imperative to smooth the intensity profiles before any subsequent analysis. Another important aspect of the dataset is the different lengths of the molecular fragments, aligned to the same genomic location. As explained in \ref{Ch2_data}, there could be several possible reasons causing this. One of the goals of this research is to find consensus fluorescence intensity profiles of all genomic loci with large enough sample size. In order to estimate a consensus $\hat{\Y}$ from $n$ sample profiles $Y_1, \dots, Y_n$, each $Y_i$ need to be of the same length. This objective is achieved by smoothing each profile and evaluating the function at regular intervals, based on the length of the reference interval. 
+Based on the optical resolution of the camera, we estimate it to be around 600 bp. Hence, there is an inherent smoothness in the underlying fluorescence intensity profiles of the images of the DNA molecules. Fig \ref{fig:Fig3_frag1058_orig} is an example of fluorescence intensity profiles of fragments of DNA molecules that have been aligned to interval 1058 of chromosome 13, of the reference human genome. It is imperative to smooth the intensity profiles before any subsequent analysis. Another important aspect of the dataset is the different lengths of the molecular fragments, aligned to the same genomic location. As explained in \ref{Ch2_data}, there could be several possible reasons causing this. One of the goals of this research is to find consensus fluorescence intensity profiles of all genomic loci with large enough sample size. In order to estimate a consensus $\hat{\Y}$ from $n$ sample profiles $y_1, \dots, y_n$, each $y_i$ need to be of the same length. This objective is achieved by smoothing each profile and evaluating the function at regular intervals, based on the length of the reference interval. 
 
 \begin{figure}[H]
 \begin{center}
@@ -54,14 +54,14 @@ Below is the smoothing procedure applied to fluorescence intensity data, before 
 \item Normalizing:\\
 As can be seen in fig \ref{fig:Fig3_frag1058_orig} the intensity values range between 6,000 and 12,000. This is because these fragments are parts of molecules that have been imaged on different glass surfaces. Some surfaces appear brighter than others. In order to eliminate the surface ``effect'', each intensity profile was divided by the median value of that fragment. The normalization is done after chopping off 5 pixels from either end of the intensity profiles, as those values could be dampened (or amplified) by the presence of the red punctuates that separate the molecular fragments.
 \item Basis choice:\\
-We used B-spline \cite{deBoor_1978_Splines} to smooth each of intensity profile individually. For an intensity profile $Y_i$, with $p$ observed points $Y_{i,1}, \dots, Y_{i,p}$, we used $\frac{p}{2}$ breakpoints, with $4^{th}$ order basis functions. Since the number of basis functions and their orders have the following relationship, 
+We used B-spline \cite{deBoor_1978_Splines} to smooth each of intensity profile individually. For an intensity profile $y_i$, with $p$ observed points $y_{i,1}, \dots, y_{i,p}$, we used $\frac{p}{2}$ breakpoints, with $4^{th}$ order basis functions. Since the number of basis functions and their orders have the following relationship, 
 \begin{eqnarray*}
 n_{\text{basis}} &=& n_{\text{breakpoints}} + n_{\text{order}} - 2 \\
                  &=& \frac{p}{2} + 4 - 2\\ 
                  &=& \frac{p}{2} + 2
 \end{eqnarray*}
 \item Smoothing:\\
-We use {\emph{generalized cross validation}} (GCV) measure, developed by Craven and Wahba (1979) \cite{Craven_Wahba_1978_NumMath} to estimate the roughness penalty $\lambda_{i}$ for each intensity profile $Y_i$.  
+We use {\emph{generalized cross validation}} (GCV) measure, developed by Craven and Wahba (1979) \cite{Craven_Wahba_1978_NumMath} to estimate the roughness penalty $\lambda_{i}$ for each intensity profile $y_i$.  
 \[ \lambda_i = \argmin_{\lambda} \text{GCV}(\lambda), \ \ \text{for\ \ } e^{-5} \leq \lambda \leq e^5 \]
 
 \item Evaluation at regular intervals: \\
@@ -109,28 +109,28 @@ In addition to variability in the data introduced by different lengths of molecu
 \caption{Outliers}
 \label{fig:Fig3_OutlierImages}
 \end{figure}
-Using the intensity grey levels of up to three pixels both above and below a molecule, a ``quality score'' was developed to detect some of these outliers. However, more subtle reasons such has slight curvature in the molecule backbones, existence of surface noise underneath the molecule backbones, etc, could still be responsible for producing outlier observations. To address these cases, we used functional data depth measures, as proposed in \cite{Febrero-Bande_etal_2007_Environmetrics}. We use the Fraiman and Muniz depth, first to introduced in \cite{Fraiman_Muniz_2001_SEIO}. Let $F_{n,x} (Y_i (x))$ be the empirical cumulative distribution function of the values of the curves $Y_1(x), \dots , Y_n(x)$ at a given position $x \in [a, b]$, given by
-\[ F_{n,x} (Y_i (x)) = \frac{1}{n}\sum\limits_{k=1}^{n} \Ind\{ Y_k(x) \leq Y_i(x)\}\]
-and, the univariate depth of a point $Y_i(x)$ is given by
-\[ D_n(Y_i(x)) = 1 - \left| \frac{1}{2} - F_{n,x} (Y_i (x)) \right| \]
-Then, the Fraiman and Muniz functional depth (FMD), of a curve $Y_i$ with respect the set $Y_1(x), \dots , Y_n(x)$ is given by 
+Using the intensity grey levels of up to three pixels both above and below a molecule, a ``quality score'' was developed to detect some of these outliers. However, more subtle reasons such has slight curvature in the molecule backbones, existence of surface noise underneath the molecule backbones, etc, could still be responsible for producing outlier observations. To address these cases, we used functional data depth measures, as proposed in \cite{Febrero-Bande_etal_2007_Environmetrics}. We use the Fraiman and Muniz depth, introduced in \cite{Fraiman_Muniz_2001_SEIO}. Let $F_{n,x} (y_i (x))$ be the empirical cumulative distribution function of the values of the curves $y_1(x), \dots , y_n(x)$ at a given position $x \in [a, b]$, given by
+\[ F_{n,x} (y_i (x)) = \frac{1}{n}\sum\limits_{k=1}^{n} \Ind\{ y_k(x) \leq y_i(x)\}\]
+and, the univariate depth of a point $y_i(x)$ is given by
+\[ D_n(y_i(x)) = 1 - \left| \frac{1}{2} - F_{n,x} (y_i (x)) \right| \]
+Then, the Fraiman and Muniz functional depth (FMD), of a curve $y_i$ with respect the set $y_1(x), \dots , y_n(x)$ is given by 
 \begin{equation}
-\text{FMD}_n(Y_i) = \int\limits_a^b D_n(Y_i(x)) dx
+\text{FMD}_n(y_i) = \int\limits_a^b D_n(y_i(x)) dx
 \label{eq:3_depth}
 \end{equation}
 In order to identify functional outliers we use the functional depth FMD. As mentioned in the introduction, depth and outlyingness are inverse notions, so that if an outlier is in the dataset, 
 the corresponding curve will have a significant low depth. Following is the procedure for functional outlier detection in a given dataset of functional curves like fluorescence intensity profiles
-$Y_1, \dots, Y_n$
+$y_1, \dots, y_n$
 \begin{enumerate}
-\item Obtain the functional depths $D_n(Y_1), \dots, D_n(Y_n)$, for FMD
-\item Let $Y_{i1}, \dots, Y_{ik}$ be the $k$ curves such that $D_n(Y_{ik}) \leq C$, for a given cutoff $C$. Then, assume that $Y_{i1}, \dots, Y_{ik}$ are outliers and delete them from the sample.
+\item Obtain the functional depths $D_n(y_1), \dots, D_n(y_n)$, for FMD
+\item Let $y_{i1}, \dots, y_{ik}$ be the $k$ curves such that $D_n(y_{ik}) \leq C$, for a given cutoff $C$. Then, assume that $y_{i1}, \dots, y_{ik}$ are outliers and delete them from the sample.
 \item Then, come back to step 1 with the new dataset after deleting the outliers found in step 2. Repeat this until no more outliers are found.
 \end{enumerate}
 To ensure type-I error of detecting outliers is under some small threshold $\alpha$, we need to choose $C$ such that
-\[ \Prob(D_n(Y_i) \leq C) = \alpha,\ \ i = 1, \dots, n\]
+\[ \Prob(D_n(y_i) \leq C) = \alpha,\ \ i = 1, \dots, n\]
 However, since the distribution of the functional depth statistic FMD is unknown, it is estimated here using a bootstrap procedure. For details, please refer to \cite{Febrero-Bande_etal_2007_Environmetrics} and \cite{Febrero-Bande_delaFuente_2012_JSS}. 
 
-In fig \ref{fig:Fig3_frag1058_outlier} we show the detection of outlier in the fluorescence intensity profiles of fragments of molecules aligned to human chr 13, interval 1058. Refer to figures \ref{fig:Fig3_frag1058_orig} and \ref{fig:Fig3_frag1058_norm}.
+In fig \ref{fig:Fig3_frag1058_outlier} we show the detection of outlier in the fluorescence intensity profiles of fragments of molecules aligned to human chr 13, interval 1058. Refer to figures \ref{fig:Fig3_frag1058_orig} and \ref{fig:Fig3_frag1058_norm}. 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale = 0.5, page = 5]{Plots/chr13_frag1058.pdf}
@@ -138,10 +138,15 @@ In fig \ref{fig:Fig3_frag1058_outlier} we show the detection of outlier in the f
 \caption{Outlier detection in Intensity profiles of fragments of molecules aligned to human chr 13, interval 1058}
 \label{fig:Fig3_frag1058_outlier}
 \end{figure}
-
+The red curve in fig \ref{fig:Fig3_frag1058_outlier} is flagged as the outlier in this group of curves.
+\begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Work in progress] %green!40!black=40%green and 60%black
+Some recent work was published on outliers in functional data. We are working on comparing and contrasting the different methods to choose the most appropriate one for this dataset.
+\end{tcolorbox}
 
 \section{Curve Registration} \label{Ch3_Regist}
-Curve Registration
+\subsection{Distance metric}
+Before discussing the techniques of curve registration, it is important to establish the notion of ``distance'' or ``similarity'' between two smooth functions, or two curves. We use the {\emph{similarity index}} between two curves in $\Real$, introduced in \cite{Sangalli_etal_2009_JASA}. Let $y_i \in L^2(S_i \subset \Real; \Real)$ and $y_j \in L^2(S_j \subset \Real; \Real)$ be differentiable with $y^{'}_i \in L^2(S_i \subset \Real; \Real)$ and $y^{'}_j \in L^2(S_j \subset \Real; \Real)$, and let the domains $S_i \subset T$ and $S_j  \subset T$ be closed intervals in $\Real$ such that $S_{ij} = S_i \intersect S_j$ has a positive Lebesgue measure. Assuming that $\|y \|$
+
 
 \subsection{Ramsay-Silverman}
 \subsection{Sangalli, et al}
