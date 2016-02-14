@@ -9,7 +9,7 @@
 The basic philosophy of functional data analysis (FDA) is to think of observed data functions as single entities, rather than merely as a sequence of individual observations \cite{Ramsay_2006_Functional}. In
 practice, functional data are discrete observations as $p$ pairs $(x_j, y_j)$, and $y_j (\text{or } y_{ij})$ is a snapshot of the function at position (or time) $x_j$, possibly blurred by measurement error. Pioneered by Ramsay and Silvermann \cite{Ramsay_2006_Functional}, there has been substantial progress in statistical approaches to FDA in recent past. Following are some important aspects FDA that are relevant to our dataset, pertaining to the goals of our research. 
 
-\subsection{Smoothing}
+\subsection{Smoothing} \label{ch3_smooth}
 In FDA, it is important that the underlying function $\Y$ is smooth, so that a pair of adjacent data values from replicate $i$, $y_{i,j}$, and $y_{i,j+1}$ are linked together to some extent and unlikely to be too different from each other. If this smoothness property did not apply, there would be nothing much to be gained by treating the data as functional rather than just multivariate. 
 
 In fluoroscanning, consider the image of a DNA molecule, as shown in \ref{fig:Fig3_NMap_Intensity}. The grey level of each pixel point of the image of a DNA molecule corresponds to approximately 200 bp of genomic sequence. The pixel intensity value is a result of superimposition of 
@@ -130,7 +130,7 @@ Below are some commonly used publicly available datasets where phase variability
 
 We have observed substantial amount of phase variability in the fluorescence intensity dataset. Hence, before estimating the consensus fluorescence intensity profiles of genomic regions, it is imperative that we address this variability. Pioneered by Ramsay and Silverman \cite{Ramsay_2006_Functional}, \cite{Ramsay_Li_1998_JRSSB}, \cite{Ramsay_etal_2009_Functional_R}, {\emph{Curve Registration}} is a FDA technique to address the phase variability problem. We discuss it in more details in Sec \ref{Chr3_Regist}.
 
-\subsection{Functional outlier detection}
+\subsection{Functional outlier detection} \label{ch3_outlier}
 In addition to variability in the data introduced by different lengths of molecular fragments (aligned to the same genomic locus), and phase variability, there are several other reasons why some molecule could produce an ``outlier'' intensity profile. Below are some images (fig \cite{fig:Fig3_OutlierImages}) of the surfaces with DNA molecules that are examples of outlier intensity profiles. There could be some DNA fragments near the molecule under consideration. There could be molecules crossing each other. Each of those instances would result in some pixel intensity values that would not be appropriate to use in our analyses. 
 \begin{figure}[H]
 \begin{center}
@@ -244,15 +244,57 @@ This approach is quite intuitive and elegant. This is the first approach that de
 
 \noindent
 {\bf{Registration using the Fisher-Rao metric}} \\
+Registration using the {\emph{Fisher-Rao}} metric was developed by Srivastava et al., in \cite{Srivastava_etal_2011_v2_arXiv}. The space of functions considered here is
+\[ F = \left\{f: [0,1] \rightarrow \Real, f \text{ absolutely continuous}  \right\}\] and the space of warping functions:
+\[ \Gamma = \left\{\gamma: [0,1] \rightarrow [0,1], \gamma(0) = 0, \gamma(1) = 1, \gamma \text{ monotone increasing }, \gamma \text{ is a diffeomorphism}  \right\} \]
+The Fisher-Rao metric is defined on the space tangent to the variety of $F$ as:
+{\bf{Definition 3.3}} For $f \in F$ and $v_1, v_2 \in T_f(F)$, the Fisher-Rao metric is defined as: 
+\[ \langle\langle \cdot , \cdot \rangle \rangle_f: T_f(F) \times T_f(F) \rightarrow \Real; \langle\langle v_1 , v_2 \rangle \rangle_f = \frac{1}{4} \displaystyle \int \limits_0^1 \frac{\dot{v}_1(t) \dot{v}_2(t)}{|\dot{f}(t) |}dt \]
+To find this distance it requires the geodetic path which connect functions $f$ and $g$ with respect to the Fisher-Rao metric. The minimization of this quantity is therefore quite challenging. This is why a  new representation of the functions was introduced.
+{\bf{Definition 3.4}} The square-root velocity function (SRVF) of a function $f \in F$ is defined as
+\[ q:\Real \rightarrow \Real, \ q(x) = 
+  \begin{cases}
+    \frac{x}{\sqrt{\|x \|}}       & \|x\| \ne 0 \\
+    0 & \text{otherwise} \\
+  \end{cases} 
+\] 
+A fundamental property of this metric is that under the SRVF representation, the Fisher-Rao metric becomes the $L^2$ norm. In $L^2$ space the geodesic distance is simply the $L^2$ norm. They estimate the warping functions on this SRVF space, performing the following optimization:
+\[ \gamma_i^* = \argmin_{\gamma \in Gamma} \|\mu - (q_i \circ \gamma)\sqrt{\dot{\gamma}}  \|_{L^2} \]
+In the Fisher-Rao method they were able to include in the space of warping functions almost all kind of transformations, with the only constraint being diffeomorphism. This leads to a very large class of transformations and hence, generally, to a better result in aligning functional data. However, this is also its limitation \cite{Patriarca_2013_PhDThesis}. With this method it is possible to align almost any group of functions, however disparate they might be. In addition, the warping function loses interpretability. In many cases, including fluoroscanning data, the warping function plays an important role in analyzing the causes of phase variability. 
 
 \noindent
-{\bf{Bayesian approach}} \\
-Registration
+{\bf{Bayesian approach to registering and clustering}} \\
+Zhang and Inoue developed a bayesian hierarchical curve registration in \cite{Telesca_Inoue_2008_JASA}. Their approach provides a natural framework for assessing uncertainty in the estimated time-transformation and shape functions and allows derivation of exact inferences about a richer set of quantities of interest. Zhang and Telesca in \cite{Zhang_Telesca_2014_arXiv} extended it to a bayesian hierarchical approach to joint clustering and registration of functional data. They combined a Dirichlet process mixture model for clustering of common shapes, with a reproducing kernel representation of phase variability for registration. Earls and Hooker in \cite{Earls_Hooker_2015_arXiv} proposed an adapted variational Bayes algorithm for registering, smoothing and prediction for functional data. They model the registered 
+functions as Gaussian processes. They go beyond estimation, and inference and provide the framework of prediction of registered functions. 
 
-\section{Forumlation of iterated registration}
-Registration
+{\emph{Note: Not sure how I can compare and contrast these bayesian methods with the other approaches. Other than the computational time and resources, I am not yet in a position to comment on their relative performance!}}
 
-\section{Simulation Results}
+\section{Iterated registration with weighted average template}
+\subsection{Why iterated registration?}
+Enumerated below are some advantages and disadvantages of the above mentioned techniques, from the perspective of analyzing the fluoroscanning data.
+\begin{itemize}
+\item {\bf{Outlier}}: None of the above methods consider the possibility of presence of a functional outlier in their sample. Hence, their estimates of the warping functions might not be robust to possible outliers. In the fluoroscanning data, as a consequence of the experimental setup of dealing with DNA molecules on glass surfaces, there are multiple reasons why some intensity profiles could be outliers. 
+
+\item {\bf{Starting template}}: In most of the methods above, the cross-sectional mean of the curve sample is the starting template to which the rest of the curves are registered to. This approach works well if the noise to signal ratio is small, and the extent of abcissa warping is limited. However, in the fluoroscanning data, the signals are warped to a much larger extent and more often than not, the cross-sectional mean of intensity profiles is not representative of the true features of that sample of curves. We will develop a iterated registration scheme, similar to \cite{Sangalli_etal_2009_JASA}, but the estimation of our template at each ``expectation'' step of the E-M algorithm will be more sophisticated and robust.
+
+\item {\bf{Warping functions}}: Estimating the inverse of the warping functions are critical to registering out-of-phase functional data. These functions contain information about the reasons behind the phase variability in the first place. In fluoroscanning, it is important that the estimation of these warping functions are consistent even when sub-intervals of longer genomic intervals are analyzed. It is important to investigate if the warping functions have any sequence dependence, or if they result from experimental artifacts. Hence, it is critical that warping functions are smooth, and interpretable. However, at the same time, it is important for warping functions to contain higher order terms to contain information about sub-genomic-interval warping. Hence, warping functions cannot be as simple as affine transformations of the abcissa, as considered in \cite{Sangalli_etal_2009_JASA}. 
+
+\item {\bf{Quality of registration}}: As introduced in \cite{Sangalli_etal_2009_JASA}, it is important to evaluate the quality of the registratation procedure. 
+
+\item {\bf{Simultaneous clustering and registration}}: Our registration methods needs to be robust enough to be extended to simultaneous registration and clustering to address the question of detecting heterozygotes in diploid human genomes.  
+\end{itemize}
+
+\subsection{Iterated registration algorithm}
+Here,  re-define the registration problem with respect to the fluoroscanning data and introduce an ``Iterated registration with weighted average template'' scheme to register the fluoroscent intensity profiles.
+For any genomic location where there are $n$ molecular fragments are aligned, let the intensity profiles observed be represented as $z_{i,1}, \dots, z_{i, p_i},\ \ i = 1,\dots, n$, where curve $i$ has $p_i$ points. 
+\begin{itemize}
+\item {\bf{Step 1}} Normalize and smooth: As explained in section \ref{ch3_smooth}, we normalize all the intensity profiles, smooth them using B-splines, and evaluate at $p + 1$ equidistant points, where $p = \frac{Q}{206}$, where the genomic interval has $Q$ base pairs. Let these smooth functions be $y_{i,1}, \dots, y_{i,p},\ \ i = 1,\dots,n$. 
+\item {\bf{Step 2}} Detect outliers: As explained in \ref{ch3_outlier}, we detect functional outliers in the dataset. 
+\item {\bf{Step 3}} Template estimation: 
+\item {\bf{Step 4}} Registration with varying roughness penalty: 
+\end{itemize}
+
+\section{Simulation Study}
 Simulation
 \subsection{Permutation test for power of registration}
 Permutation
