@@ -203,6 +203,8 @@ As illustrated in \ref{Sec_AmpPhase}, it is often imperative to eliminate (or at
 The objective of curve registration is that the {\emph{registered}} functions $y_1(h_1(x)), \dots, y_n(h_n(x))$ will have no phase variability. 
 
 \subsection{Existing work on curve registration}
+Marker registration is often used in engineering, biology and other fields. It is the process of aligning curves by identifying the timing of certain salient features in the curves. Curves are then aligned by transforming time (or the abcissa) so that marker events occur at the same values of the transformed times. Comparisons between marker timings can also be made by using corresponding transformed times. Sakoe in Chiba in \cite{Sakoe_Chiba_1978_IEEE} estimated the warping function $h$ at marker timings by minimizing the sum of weighted distances of two speech patterns at the marker timings and imposing monotonicity and continuity on $h$. They solved for the discrete values of $h$ using a dynamic programming algorithm, which widely popularized as {\emph{dynamic time warping}}. Kneip and Gasser in \cite{Kneip_Gasser_1992_AnnStat} studies the statistical aspects, including the asymptotic properties of these estimators \cite{Kneip_etal_2000_CJS}. These methods, however, can be sensitive to errors in feature location, and the  required features may even be missing in some curves. Moreover,substantial phase variation may remain between widely separated markers. In \cite{Kneip_etal_2000_CJS}, they introduce a local nonlinear regression technique, but acknowledge that a lot of tuning parameters are left to user's experimentation and best guess. Following are some of the subsequent curve registration techniques that helped develop an iterated registration algorithm to analyze the fluoroscanning data. 
+
 \noindent
 {\bf{Penalized least square criterion}} \\
 Ramsay and Li in \cite{Ramsay_Li_1998_JRSSB} set it up as a penalized least square (PLS) fitting problem. When registering $y(x)$ to a template $y_0(x)$, they minimize the penalized squared error criterion
@@ -227,21 +229,36 @@ where, $\mu_2$ is the size of the second eigenvalue of its argument. When $\text
 \begin{equation}
 \text{MINEIG}_{\lambda}(h) = \text{MINEIG}(h) + \lambda \displaystyle \int \left\{ w^{(m)}(x) \right\}^2 dx
 \end{equation}
+When registering a sample of replicated curves, they \cite{Ramsay_etal_2009_Functional_R} recommended using the mean of the curves as the template and registering all of the curves to that template. 
 
 \noindent
-{\bf{Sangalli, et al}} \\
-Registration
+{\bf{Iterative registration using similarity index}} \\
+Sangalli, et al, in \cite{Sangalli_etal_2009_JASA} introduce an iterative registration (E-M) algorithm. Given the similarity index $\rho(y_i, y_0)$, defined in \ref{eq:3_similarity}, between two curves, registering a curve $y_i$ to a template curve $y_0$ means finding the function $h$ in a class of warping functions $W$ that maximizes 
+\[ \rho(y_i \circ h^{-1}, y_0)\]
+The consider $W$ as a group of strictly increasing affine transformations of the abcissa:
+\begin{equation}
+W = \{h:h(s) = as + b,\ \ a \in \Real^{+}, b \in \Real  \}
+\label{eq:3_affine}
+\end{equation}
+This approach is quite intuitive and elegant. This is the first approach that defines a metric to estimate the quality of a registration procedure and use it as a convergence criterion of the iterative E-M algorithm. Similar to local linear regression method in \cite{Kneip_etal_2000_CJS} and the MSE method in \cite{Ramsay_2006_Functional}, they start the registration procedure with the mean of the curves as the template and update the template at each ``Expectation'' step of the E-M algorithm. They successfully extend this algorithm to simultaneous clustering and registration of curves in \cite{Sangalli_etal_2010_CSDA} and \cite{Sangalli_etal_2014_EJS}. 
 
 \noindent
-{\bf{Srivastava, et al}} \\
-Registration
+{\bf{Registration using the Fisher-Rao metric}} \\
 
 \noindent
 {\bf{Bayesian approach}} \\
 Registration
 
 \section{Forumlation of iterated registration}
+Registration
 
 \section{Simulation Results}
+Simulation
+\subsection{Permutation test for power of registration}
+Permutation
+\subsection{Simulation set up}
+Simulation
+\subsection{Simulation results}
+
 
 
