@@ -1,11 +1,79 @@
 \chapter{Application to human genome}
 
-\section{Reproducible Fluorescence Intensity signals}
+We applied the iterated registration technique to fluoroscanning data from the human genome. From previous experiments conducted on this genome, we know that chromosome 13 of this genome is homozygous and we expect to find only one cluster of intensity of profiles. Below is a step-by-step application of the statistical techniques described in chapter 3, to interval 7491 of chromosome 13.
+\begin{itemize}
+\item There are 30 DNA molecular fragments that are aligned to this interval
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 2]{Plots/chr13_frag7491_registered.pdf}
+\end{center}
+\caption{30 fluorescence intensity profiles of DNA molecular fragments}
+\label{fig:Frag7491_Orig}
+\end{figure}
+
+\item After normalizing the fluorescence intensity profiles by the median values of each fragment
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 3]{Plots/chr13_frag7491_registered.pdf}
+\end{center}
+\caption{30 normalized fluorescence intensity profiles of DNA molecular fragments}
+\label{fig:Frag7491_Norm}
+\end{figure}
+
+\item After smoothing the normalized the fluorescence intensity profiles by B-spline and evaluating them at equidistant points
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 4]{Plots/chr13_frag7491_registered.pdf}
+\end{center}
+\caption{30 smoothed, normalized fluorescence intensity profiles of DNA molecular fragments}
+\label{fig:Frag7491_Smooth}
+\end{figure}
+
+\item After iterated registration
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 6]{Plots/chr13_frag7491_registered.pdf}
+\end{center}
+\caption{Registered values of fluorescence intensity profiles}
+\label{fig:Frag7491_Regist}
+\end{figure}
+
+\item Comparing final consensus intensity profile estimated by registration, with GCAT composition of the interval
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 7]{Plots/chr13_frag7491_registered.pdf}
+\end{center}
+\caption{Comparison of GCAT composition with consensus intensity profile of the interval}
+\label{fig:Frag7491_Compare}
+\end{figure}
+\end{itemize}
+
+\newpage
+Below is the application of the methodology to interval 9774 of chromosome 13
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.42, page = 2]{Plots/chr13_frag9774_registered.pdf}
+\includegraphics[scale = 0.42, page = 3]{Plots/chr13_frag9774_registered.pdf} \\
+\includegraphics[scale = 0.42, page = 6]{Plots/chr13_frag9774_registered.pdf} 
+\includegraphics[scale = 0.42, page = 7]{Plots/chr13_frag9774_registered.pdf}
+\end{center}
+\caption{Fragment 9774, of human chromosome 13}
+\label{fig:Frag9774_All}
+\end{figure}
 
 \section{Uniqueness of Fluorescence Intensity Profiles}
-Discuss the statistics of establishing uniqueness of consensus signals
+\begin{tcolorbox}[colback=red!5,colframe=red!40!black,title=Work in progress] %green!40!black=40%green and 60%black
+I am working on fitting the estimates of consensus profiles with GC compositions to prove that after registration, there is a clear association between sequence and signals. 
+\end{tcolorbox}
+
+\section{Reproducible Fluorescence Intensity signals}
+\begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Work in progress] %green!40!black=40%green and 60%black
+The human genome consists of Ribosomal repeat regions which have the same nucleotide composition. Currently, we are working on aquiring the data to test if intensity profiles aligned to intervals of those repeat regions exhibit similar structure.
+\end{tcolorbox}
+
 
 \section{Simultaneous clustering and registration}
+\subsection{Algorithm for simultaneous registration and clustering}
 
 
 

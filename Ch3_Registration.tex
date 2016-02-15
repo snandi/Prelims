@@ -4,10 +4,10 @@
 \noindent
 {\bf{Definition 3.1}} {\emph{A random variable $\Y$ is called a functional variable if it takes values in an infinite-dimensional space. An observation $Y$ of $\Y$ is called a functional data. \cite{Ferraty_Vieu_2006_Nonparametric}}}\\
 \noindent
-{\bf{Definition 3.2}} {\emph{A functional dataset $y_1, \dots, y_n$ is an observation of $n$ functional variables $\Y_1, \dots, \Y_n$ as $\Y$.}}\\
+{\bf{Definition 3.2}} {\emph{A functional data set $y_1, \dots, y_n$ is an observation of $n$ functional variables $\Y_1, \dots, \Y_n$ as $\Y$.}}\\
 
 The basic philosophy of functional data analysis (FDA) is to think of observed data functions as single entities, rather than merely as a sequence of individual observations \cite{Ramsay_2006_Functional}. In
-practice, functional data are discrete observations as $p$ pairs $(x_j, y_j)$, and $y_j (\text{or } y_{ij})$ is a snapshot of the function at position (or time) $x_j$, possibly blurred by measurement error. Pioneered by Ramsay and Silvermann \cite{Ramsay_2006_Functional}, there has been substantial progress in statistical approaches to FDA in recent past. Following are some important aspects FDA that are relevant to our dataset, pertaining to the goals of our research. 
+practice, functional data are discrete observations as $p$ pairs $(x_j, y_j)$, and $y_j (\text{or } y_{ij})$ is a snapshot of the function at position (or time) $x_j$, possibly blurred by measurement error. Pioneered by Ramsay and Silvermann \cite{Ramsay_2006_Functional}, there has been substantial progress in statistical approaches to FDA in recent past. Following are some important aspects FDA that are relevant to our data set, pertaining to the goals of our research. 
 
 \subsection{Smoothing} \label{ch3_smooth}
 In FDA, it is important that the underlying function $\Y$ is smooth, so that a pair of adjacent data values from replicate $i$, $y_{i,j}$, and $y_{i,j+1}$ are linked together to some extent and unlikely to be too different from each other. If this smoothness property did not apply, there would be nothing much to be gained by treating the data as functional rather than just multivariate. 
@@ -40,7 +40,7 @@ point spread functions of the fluorescent dye molecules intercalated between the
 \caption{Superimposition of point spread function}
 \label{fig:Fig3_Bivariate2}
 \end{figure}
-Based on the optical resolution of the camera, we estimate it to be around 600 bp. Hence, there is an inherent smoothness in the underlying fluorescence intensity profiles of the images of the DNA molecules. Fig \ref{fig:Fig3_frag1058_orig} is an example of fluorescence intensity profiles of fragments of DNA molecules that have been aligned to interval 1058 of chromosome 13, of the reference human genome. It is imperative to smooth the intensity profiles before any subsequent analysis. Another important aspect of the dataset is the different lengths of the molecular fragments, aligned to the same genomic location. As explained in \ref{Ch2_data}, there could be several possible reasons causing this. One of the goals of this research is to find consensus fluorescence intensity profiles of all genomic loci with large enough sample size. In order to estimate a consensus $\hat{\Y}$ from $n$ sample profiles $y_1, \dots, y_n$, each $y_i$ need to be of the same length. This objective is achieved by smoothing each profile and evaluating the function at regular intervals, based on the length of the reference interval. 
+Based on the optical resolution of the camera, we estimate it to be around 600 bp. Hence, there is an inherent smoothness in the underlying fluorescence intensity profiles of the images of the DNA molecules. Fig \ref{fig:Fig3_frag1058_orig} is an example of fluorescence intensity profiles of fragments of DNA molecules that have been aligned to interval 1058 of chromosome 13, of the reference human genome. It is imperative to smooth the intensity profiles before any subsequent analysis. Another important aspect of the data set is the different lengths of the molecular fragments, aligned to the same genomic location. As explained in \ref{Ch2_data}, there could be several possible reasons causing this. One of the goals of this research is to find consensus fluorescence intensity profiles of all genomic loci with large enough sample size. In order to estimate a consensus $\hat{\Y}$ from $n$ sample profiles $y_1, \dots, y_n$, each $y_i$ need to be of the same length. This objective is achieved by smoothing each profile and evaluating the function at regular intervals, based on the length of the reference interval. 
 
 \begin{figure}[H]
 \begin{center}
@@ -86,21 +86,21 @@ Below is a demonstration of applying the above mentioned data preparation proced
 %\end{figure}
 
 \subsection{Amplitude and Phase variability} \label{Sec_AmpPhase}
-A problem of critical importance in FDA is the presence of both amplitude and phase variability in functional observations. Even simple analysis like averaging of replicated curves will produce erroneous estimates if phase variability is not eliminated (or reduced) first. Fig \ref{fig:Fig3_AmpPhase} illustrates the two types of variabilities. 
+A problem of critical importance in FDA is the presence of both amplitude and phase variability in functional observations. Even simple analysis like averaging of replicated curves will produce erroneous estimates if phase variability is not eliminated (or reduced) first. Fig \ref{fig:Fig3_AmpPhase} illustrates the two types of variability. 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale = 0.42, page = 1]{Plots/AmpPhaseVar.pdf}
 \includegraphics[scale = 0.42, page = 2]{Plots/AmpPhaseVar.pdf}
 \end{center}
-\caption{Amplitude and Phase variabilities in FD}
+\caption{Amplitude and Phase variability in FD}
 \label{fig:Fig3_AmpPhase}
 \end{figure}
-Below are some commonly used publicly available datasets where phase variability needs to be eliminated before analyzing the curve samples. 
+Below are some commonly used publicly available data sets where phase variability needs to be eliminated before analyzing the curve samples. 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale = 0.4, page = 1]{Plots/PublicData.pdf}
 \end{center}
-\caption{Amplitude and Phase variabilities in FD}
+\caption{Amplitude and Phase variability in FD}
 \label{fig:Fig3_growthM}
 \end{figure}
 
@@ -108,7 +108,7 @@ Below are some commonly used publicly available datasets where phase variability
 \begin{center}
 \includegraphics[scale = 0.4, page = 2]{Plots/PublicData.pdf}
 \end{center}
-\caption{Amplitude and Phase variabilities in FD}
+\caption{Amplitude and Phase variability in FD}
 \label{fig:Fig3_growthF}
 \end{figure}
 
@@ -124,11 +124,11 @@ Below are some commonly used publicly available datasets where phase variability
 \begin{center}
 \includegraphics[scale = 0.4, page = 4]{Plots/PublicData.pdf}
 \end{center}
-\caption{Amplitude and Phase variabilities in FD}
+\caption{Amplitude and Phase variability in FD}
 \label{fig:Fig3_pinch}
 \end{figure}
 
-We have observed substantial amount of phase variability in the fluorescence intensity dataset. Hence, before estimating the consensus fluorescence intensity profiles of genomic regions, it is imperative that we address this variability. Pioneered by Ramsay and Silverman \cite{Ramsay_2006_Functional}, \cite{Ramsay_Li_1998_JRSSB}, \cite{Ramsay_etal_2009_Functional_R}, {\emph{Curve Registration}} is a FDA technique to address the phase variability problem. We discuss it in more details in Sec \ref{Chr3_Regist}.
+We have observed substantial amount of phase variability in the fluorescence intensity data set. Hence, before estimating the consensus fluorescence intensity profiles of genomic regions, it is imperative that we address this variability. Pioneered by Ramsay and Silverman \cite{Ramsay_2006_Functional}, \cite{Ramsay_Li_1998_JRSSB}, \cite{Ramsay_etal_2009_Functional_R}, {\emph{Curve Registration}} is a FDA technique to address the phase variability problem. We discuss it in more details in Sec \ref{Chr3_Regist}.
 
 \subsection{Functional outlier detection} \label{ch3_outlier}
 In addition to variability in the data introduced by different lengths of molecular fragments (aligned to the same genomic locus), and phase variability, there are several other reasons why some molecule could produce an ``outlier'' intensity profile. Below are some images (fig \cite{fig:Fig3_OutlierImages}) of the surfaces with DNA molecules that are examples of outlier intensity profiles. There could be some DNA fragments near the molecule under consideration. There could be molecules crossing each other. Each of those instances would result in some pixel intensity values that would not be appropriate to use in our analyses. 
@@ -151,13 +151,13 @@ Then, the Fraiman and Muniz functional depth (FMD), of a curve $y_i$ with respec
 \text{FMD}_n(y_i) = \int\limits_a^b D_n(y_i(x)) dx
 \label{eq:3_depth}
 \end{equation}
-In order to identify functional outliers we use the functional depth FMD. As mentioned in the introduction, depth and outlyingness are inverse notions, so that if an outlier is in the dataset, 
-the corresponding curve will have a significant low depth. Following is the procedure for functional outlier detection in a given dataset of functional curves like fluorescence intensity profiles
+In order to identify functional outliers we use the functional depth FMD. As mentioned in the introduction, depth and outlyingness are inverse notions, so that if an outlier is in the data set, 
+the corresponding curve will have a significant low depth. Following is the procedure for functional outlier detection in a given data set of functional curves like fluorescence intensity profiles
 $y_1, \dots, y_n$
 \begin{enumerate}
 \item Obtain the functional depths $D_n(y_1), \dots, D_n(y_n)$, for FMD
 \item Let $y_{i1}, \dots, y_{ik}$ be the $k$ curves such that $D_n(y_{ik}) \leq C$, for a given cutoff $C$. Then, assume that $y_{i1}, \dots, y_{ik}$ are outliers and delete them from the sample.
-\item Then, come back to step 1 with the new dataset after deleting the outliers found in step 2. Repeat this until no more outliers are found.
+\item Then, come back to step 1 with the new data set after deleting the outliers found in step 2. Repeat this until no more outliers are found.
 \end{enumerate}
 To ensure type-I error of detecting outliers is under some small threshold $\alpha$, we need to choose $C$ such that
 \[ \Prob(D_n(y_i) \leq C) = \alpha,\ \ i = 1, \dots, n\]
@@ -173,7 +173,7 @@ In fig \ref{fig:Fig3_frag1058_outlier} we show the detection of outlier in the f
 \end{figure}
 The red curve in fig \ref{fig:Fig3_frag1058_outlier} is flagged as the outlier in this group of curves.
 \begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Work in progress] %green!40!black=40%green and 60%black
-Some recent work was published on outliers in functional data. We are working on comparing and contrasting the different methods to choose the most appropriate one for this dataset.
+Some recent work was published on outliers in functional data. We are working on comparing and contrasting the different methods to choose the most appropriate one for this data set.
 \end{tcolorbox}
 
 \section{Curve Registration} \label{Ch3_Regist}
@@ -264,10 +264,10 @@ In the Fisher-Rao method they were able to include in the space of warping funct
 
 \noindent
 {\bf{Bayesian approach to registering and clustering}} \\
-Zhang and Inoue developed a bayesian hierarchical curve registration in \cite{Telesca_Inoue_2008_JASA}. Their approach provides a natural framework for assessing uncertainty in the estimated time-transformation and shape functions and allows derivation of exact inferences about a richer set of quantities of interest. Zhang and Telesca in \cite{Zhang_Telesca_2014_arXiv} extended it to a bayesian hierarchical approach to joint clustering and registration of functional data. They combined a Dirichlet process mixture model for clustering of common shapes, with a reproducing kernel representation of phase variability for registration. Earls and Hooker in \cite{Earls_Hooker_2015_arXiv} proposed an adapted variational Bayes algorithm for registering, smoothing and prediction for functional data. They model the registered 
+Zhang and Inoue developed a Bayesian hierarchical curve registration in \cite{Telesca_Inoue_2008_JASA}. Their approach provides a natural framework for assessing uncertainty in the estimated time-transformation and shape functions and allows derivation of exact inferences about a richer set of quantities of interest. Zhang and Telesca in \cite{Zhang_Telesca_2014_arXiv} extended it to a Bayesian hierarchical approach to joint clustering and registration of functional data. They combined a Dirichlet process mixture model for clustering of common shapes, with a reproducing kernel representation of phase variability for registration. Earls and Hooker in \cite{Earls_Hooker_2015_arXiv} proposed an adapted variational Bayes algorithm for registering, smoothing and prediction for functional data. They model the registered 
 functions as Gaussian processes. They go beyond estimation, and inference and provide the framework of prediction of registered functions. 
 
-{\emph{Note: Not sure how I can compare and contrast these bayesian methods with the other approaches. Other than the computational time and resources, I am not yet in a position to comment on their relative performance!}}
+{\emph{Note: Not sure how I can compare and contrast these Bayesian methods with the other approaches. Other than the computational time and resources, I am not yet in a position to comment on their relative performance!}}
 
 \section{Iterated registration with weighted average template}
 \subsection{Why iterated registration?}
@@ -279,17 +279,17 @@ Enumerated below are some advantages and disadvantages of the above mentioned te
 
 \item {\bf{Warping functions}}: Estimating the inverse of the warping functions are critical to registering out-of-phase functional data. These functions contain information about the reasons behind the phase variability in the first place. In fluoroscanning, it is important that the estimation of these warping functions are consistent even when sub-intervals of longer genomic intervals are analyzed. It is important to investigate if the warping functions have any sequence dependence, or if they result from experimental artifacts. Hence, it is critical that warping functions are smooth, and interpretable. However, at the same time, it is important for warping functions to contain higher order terms to contain information about sub-genomic-interval warping. Hence, warping functions cannot be as simple as affine transformations of the abcissa, as considered in \cite{Sangalli_etal_2009_JASA}. 
 
-\item {\bf{Quality of registration}}: As introduced in \cite{Sangalli_etal_2009_JASA}, it is important to evaluate the quality of the registratation procedure. 
+\item {\bf{Quality of registration}}: As introduced in \cite{Sangalli_etal_2009_JASA}, it is important to evaluate the quality of the registration procedure. 
 
 \item {\bf{Simultaneous clustering and registration}}: Our registration methods needs to be robust enough to be extended to simultaneous registration and clustering to address the question of detecting heterozygotes in diploid human genomes.  
 \end{itemize}
 
 \subsection{Iterated registration algorithm}
-Here,  re-define the registration problem with respect to the fluoroscanning data and introduce an ``Iterated registration with weighted average template'' scheme to register the fluoroscent intensity profiles.
+Here,  re-define the registration problem with respect to the fluoroscanning data and introduce an ``Iterated registration with weighted average template'' scheme to register the fluorescent intensity profiles.
 For any genomic location where there are $n$ molecular fragments are aligned, let the intensity profiles observed be represented as $z_{i,1}, \dots, z_{i, p_i},\ \ i = 1,\dots, n$, where curve $i$ has $p_i$ points. 
 \begin{itemize}
 \item {\bf{Step 1}} Normalize and smooth: As explained in section \ref{ch3_smooth}, we normalize all the intensity profiles, smooth them using B-splines, and evaluate at $p + 1$ equidistant points, where $p = \frac{Q}{206}$, where the genomic interval has $Q$ base pairs. Let these smooth functions be $y_{i,1}, \dots, y_{i,p},\ \ i = 1,\dots,n$. 
-\item {\bf{Step 2}} Detect outliers: As explained in section \ref{ch3_outlier}, we detect functional outliers in the dataset, using Fraiman and Muniz functional depth. 
+\item {\bf{Step 2}} Detect outliers: As explained in section \ref{ch3_outlier}, we detect functional outliers in the data set, using Fraiman and Muniz functional depth. 
 \item {\bf{Step 3}} Template estimation [{\emph{Expectation step}}]: To estimate the template to register the curves to, we employ a 2-step approach. 
 \begin{enumerate}
 \item {\emph{Median}}: Estimate $L_1-\text{Median}$ by the algorithm proposed by Vardi and Zhang in \cite{Vardi_Zhang_2000_PNAS}, where $L_1-\text{Median }$ $y_m$ is the minimizer of 
@@ -301,7 +301,7 @@ where $y_i \in \Real^p, \ i = 1,\dots,n$ and $\|u \| = \sqrt{\sum\limits_{j = 1}
 This 2-step process ensures that the template to register to has little influence from an outlier curve, at the same time giving higher weights to curves that have retained some similarity between their features, in spite of being warped. 
 \item {\bf{Step 4}} Registration with varying roughness penalty [{\emph{Maximization step}}]: We use the minimum second eigenvalue method to register the curves to the template $\phi$. As explained in \ref{ch3_registration}, the penalty parameter $\lambda$ plays an important role in registering nearby features of the curves. For a higher value of $\lambda$, even distant features will get registered, and for lower values of $\lambda$ only the features that are close by will be registered. We start the iterated process with $\lambda = 1$ and gradually lower the values every iteration. This ensures that we gradually increase our confidence in the template that we register to. 
 \begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Work in progress] %green!40!black=40%green and 60%black
-We want to quantify the choice of $\lambda$ to some measure of the phase variability, and it is currently under investigation. We believe this is an interesting contribution to the ``registration'' technique, particularly when applied to a complex dataset like fluoroscanning.
+We want to quantify the choice of $\lambda$ to some measure of the phase variability, and it is currently under investigation. We believe this is an interesting contribution to the ``registration'' technique, particularly when applied to a complex data set like fluoroscanning.
 \end{tcolorbox}
 \item {\bf{Step 5}} Convergence of iteration: The objective of iterated registration is to maximize the average similarity to the consensus, i.e., maximize 
 \[ \bar{\rho}_{\phi, n} = \frac{1}{n} \sum \limits_{i = 1}^{n} \rho(\phi, f_i)\]
@@ -318,7 +318,7 @@ We have implemented the iterated registered algorithm in a simulation to test if
 
 \item Randomly choose 3 locations $x_1, x_2, x_3 \in (0, 40)$ where the signals are going to have distinctive features.
 
-\item Generate a sigal by the following formula:
+\item Generate a signal by the following formula:
 \[ y = ae^{-\frac{(x - x_1)^2}{16}} - ae^{-\frac{(x - x_2)^2}{16}} + ae^{-\frac{(x - x_3)^2}{16}},\ \ a=0.04  \]
 \begin{figure}[H]
 \begin{center}
