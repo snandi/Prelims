@@ -24,3 +24,5 @@ derivs.m
 *.out
 Images
 Images/*
+Plots/
+Plots/*
