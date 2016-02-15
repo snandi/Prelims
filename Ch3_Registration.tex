@@ -202,7 +202,7 @@ As illustrated in \ref{Sec_AmpPhase}, it is often imperative to eliminate (or at
 \end{itemize}
 The objective of curve registration is that the {\emph{registered}} functions $y_1(h_1(x)), \dots, y_n(h_n(x))$ will have no phase variability. 
 
-\subsection{Existing work on curve registration}
+\subsection{Existing work on curve registration} \label{ch3_registration}
 Marker registration is often used in engineering, biology and other fields. It is the process of aligning curves by identifying the timing of certain salient features in the curves. Curves are then aligned by transforming time (or the abcissa) so that marker events occur at the same values of the transformed times. Comparisons between marker timings can also be made by using corresponding transformed times. Sakoe in Chiba in \cite{Sakoe_Chiba_1978_IEEE} estimated the warping function $h$ at marker timings by minimizing the sum of weighted distances of two speech patterns at the marker timings and imposing monotonicity and continuity on $h$. They solved for the discrete values of $h$ using a dynamic programming algorithm, which widely popularized as {\emph{dynamic time warping}}. Kneip and Gasser in \cite{Kneip_Gasser_1992_AnnStat} studies the statistical aspects, including the asymptotic properties of these estimators \cite{Kneip_etal_2000_CJS}. These methods, however, can be sensitive to errors in feature location, and the  required features may even be missing in some curves. Moreover,substantial phase variation may remain between widely separated markers. In \cite{Kneip_etal_2000_CJS}, they introduce a local nonlinear regression technique, but acknowledge that a lot of tuning parameters are left to user's experimentation and best guess. Following are some of the subsequent curve registration techniques that helped develop an iterated registration algorithm to analyze the fluoroscanning data. 
 
 \noindent
@@ -289,17 +289,93 @@ Here,  re-define the registration problem with respect to the fluoroscanning dat
 For any genomic location where there are $n$ molecular fragments are aligned, let the intensity profiles observed be represented as $z_{i,1}, \dots, z_{i, p_i},\ \ i = 1,\dots, n$, where curve $i$ has $p_i$ points. 
 \begin{itemize}
 \item {\bf{Step 1}} Normalize and smooth: As explained in section \ref{ch3_smooth}, we normalize all the intensity profiles, smooth them using B-splines, and evaluate at $p + 1$ equidistant points, where $p = \frac{Q}{206}$, where the genomic interval has $Q$ base pairs. Let these smooth functions be $y_{i,1}, \dots, y_{i,p},\ \ i = 1,\dots,n$. 
-\item {\bf{Step 2}} Detect outliers: As explained in \ref{ch3_outlier}, we detect functional outliers in the dataset. 
-\item {\bf{Step 3}} Template estimation: 
-\item {\bf{Step 4}} Registration with varying roughness penalty: 
+\item {\bf{Step 2}} Detect outliers: As explained in section \ref{ch3_outlier}, we detect functional outliers in the dataset, using Fraiman and Muniz functional depth. 
+\item {\bf{Step 3}} Template estimation [{\emph{Expectation step}}]: To estimate the template to register the curves to, we employ a 2-step approach. 
+\begin{enumerate}
+\item {\emph{Median}}: Estimate $L_1-\text{Median}$ by the algorithm proposed by Vardi and Zhang in \cite{Vardi_Zhang_2000_PNAS}, where $L_1-\text{Median }$ $y_m$ is the minimizer of 
+\[ \sum\limits_{i = 1}^n \|y_i - y_m \| \]
+where $y_i \in \Real^p, \ i = 1,\dots,n$ and $\|u \| = \sqrt{\sum\limits_{j = 1}^p u_j^2}$. Here we ensure that the median is estimated only from the curves not deemed as ``functional outliers'' in Step 2. 
+\item {\emph{Weighted mean}}: Estimate the similarity index between the curves and the median $\rho(y_i, y_m), \ i = 1,\dots,n$ and estimate the template $\phi$ as the weighted average of the curves, with the weights being these similarity indices. 
+\[ \phi = \frac{1}{n}\sum\limits_{i = 1}^n \rho(y_i, y_m) y_i \]
+\end{enumerate}
+This 2-step process ensures that the template to register to has little influence from an outlier curve, at the same time giving higher weights to curves that have retained some similarity between their features, in spite of being warped. 
+\item {\bf{Step 4}} Registration with varying roughness penalty [{\emph{Maximization step}}]: We use the minimum second eigenvalue method to register the curves to the template $\phi$. As explained in \ref{ch3_registration}, the penalty parameter $\lambda$ plays an important role in registering nearby features of the curves. For a higher value of $\lambda$, even distant features will get registered, and for lower values of $\lambda$ only the features that are close by will be registered. We start the iterated process with $\lambda = 1$ and gradually lower the values every iteration. This ensures that we gradually increase our confidence in the template that we register to. 
+\begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Work in progress] %green!40!black=40%green and 60%black
+We want to quantify the choice of $\lambda$ to some measure of the phase variability, and it is currently under investigation. We believe this is an interesting contribution to the ``registration'' technique, particularly when applied to a complex dataset like fluoroscanning.
+\end{tcolorbox}
+\item {\bf{Step 5}} Convergence of iteration: The objective of iterated registration is to maximize the average similarity to the consensus, i.e., maximize 
+\[ \bar{\rho}_{\phi, n} = \frac{1}{n} \sum \limits_{i = 1}^{n} \rho(\phi, f_i)\]
+Hence, we iterate steps 3 and 4, until
+\[ |\bar{\rho}_{\phi_{(t+1)}, n}^{\ (t+1)} - \bar{\rho}_{\phi_{(t)}, n}^{ \ (t)} | < \epsilon \]
+where $t$ denotes iteration number, for some predetermined $\epsilon$
 \end{itemize}
 
 \section{Simulation Study}
-Simulation
+We have implemented the iterated registered algorithm in a simulation to test if this procedure improves power. 
+\subsection{Simulation set up}
+\begin{enumerate}
+\item Set up the abcissa $x$ from $0$ to $40$.
+
+\item Randomly choose 3 locations $x_1, x_2, x_3 \in (0, 40)$ where the signals are going to have distinctive features.
+
+\item Generate a sigal by the following formula:
+\[ y = ae^{-\frac{(x - x_1)^2}{16}} - ae^{-\frac{(x - x_2)^2}{16}} + ae^{-\frac{(x - x_3)^2}{16}},\ \ a=0.04  \]
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 1]{Plots/SimData_Seed67_Plots.pdf}
+\end{center}
+\caption{Simulation: True Signal, Seed 67}
+\label{fig:FigSim_True}
+\end{figure}
+The vertical line in fig \ref{fig:FigSim_True} are the signal locations.
+
+\item Adding smooth noise at the signal locations and two more randomly chosen locations $x_{12} \subset (x_1, x_2) \ \& \ x_{23} \subset (x_2, x_3) $, the resulting curves are of the form:
+\[ y = (a + \epsilon_1)e^{-\frac{(x - x_1)^2}{16}} + \epsilon_2e^{-\frac{(x - x_12)^2}{16}} - (a + \epsilon_3)e^{-\frac{(x - x_2)^2}{16}} + \epsilon_4e^{-\frac{(x - x_23)^2}{16}} + (a + \epsilon_5)e^{-\frac{(x - x_5)^2}{16}}\]
+where, $\epsilon_i \sim \mathcal{N}(0, 0.05)$
+The 40 noisy curves are plotted below:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 2]{Plots/SimData_Seed67_Plots.pdf}
+\end{center}
+\caption{Simulation: Noisy Curves, Seed 67}
+\label{fig:FigSim_Noisy}
+\end{figure}
+The red broken line in fig \ref{fig:FigSim_Noisy} is the average of the noisy curves, which is not too far off from the true signal. 
+
+\item Warp the noisy curves by the following operation on the abcissa: Let $x_1$ and $x_p$ be the end points of the abcissa. Randomly choose a location $x^*$ at which the warping direction will change from positive to negative or vice-versa. Note that at any $x$ if $h(x) > x$, then the abcissa has been stretched outward and if $h(x) < x$, it has been squeezed inward. 
+\begin{eqnarray*}
+h_1(x) &=& x_1 + (x^* - x_1) \frac{e^{\frac{u_i(x - x_1)}{x^* - x_1}} - 1}{e^{u_i} - 1} \\
+h_2(x) &=& x_* + (x_p - x^*) \frac{e^{\frac{v_i(x - x^*)}{x_p - x^*}} - 1}{e^{v_i} - 1} \\
+h(x) &=& \Ind_{\{ x \le x^*\}} h_1(x) + \Ind_{\{ x > x^*\}} h_2(x) \\
+  \ u_i, v_i \sim \mathcal{N}(0, 1)  &;& i = 1, \dots, 40
+\end{eqnarray*}
+Below is a plot of the warping functions and the warped, noisy curves.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 3]{Plots/SimData_Seed67_Plots.pdf}
+\includegraphics[scale = 0.4, page = 4]{Plots/SimData_Seed67_Plots.pdf}
+\end{center}
+\caption{Simulation: Warped Noisy Curves, Seed 67}
+\label{fig:FigSim_Warped}
+\end{figure}
+The green line in fig \ref{fig:FigSim_Warped} is the cross-sectional mean of the noisy, warped curves. Notice that it shows substantial deviation from the true signal and illustrates the need for registering them to retrieve the true signal.
+
+\item 2 groups: To test the performance of the registration procedure under the null distribution, we randomly separate the 40 noisy curves into two groups of 20 each. We will register these groups separately and test if they produce different consensus signals. 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 5]{Plots/SimData_Seed67_Plots.pdf}
+\includegraphics[scale = 0.4, page = 6]{Plots/SimData_Seed67_Plots.pdf}
+\end{center}
+\caption{Simulation: 2 groups of curves, Seed 67}
+\label{fig:FigSim_2groups}
+\end{figure}
+
+\end{enumerate}
+
+
 \subsection{Permutation test for power of registration}
 Permutation
-\subsection{Simulation set up}
-Simulation
+
 \subsection{Simulation results}
 
 
