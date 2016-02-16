@@ -11,11 +11,11 @@ Nanocoding \cite{Jo_etal_2007_PNAS}, \cite{Jo_etal_2009}, invented in LMCG, is a
 \end{wrapfigure}
 The nanoslits are 1000 nm wide, 100 nm deep and 10 $\mu$m apart. DNA molecules are inherently negatively charged. Hence, they electrokinetically move through the micro-channels as relaxed coils until approaching a nanoslit entrance. Then, as one of a molecule enters the nanoslit, it transiently elongates. This is aided by the low-ionic-strength buffers containing the DNA molecules. The DNA molecules are then deposited onto positively charged glass surface. The surface with DNA are then stained with YOYO-I dye, so they can be imaged by fluorescence microscopy. An argon ion laser-illuminated inverted Zeiss 135M microscope was used to image the DNA molecules. An integrated image acquisition and machine vision system was developed in LMCG to automatically detect and analyze molecule within the collected image data. Details of the image processing steps can be found in \cite{Dimalanta_etal_2004_AnalChem}, \cite{Jo_etal_2007_PNAS}, \cite{Ravindran_Gupta_2015_GigaScience}. 
 
-The image processing softwares scans through images of surfaces presented with DNA molecules, as shown below in fig \ref{fig:Fig2_FrameImage}. It shows images of multiple straight DNA molecules which are stained with the YOYO-I dye which fluoresces when excited by the laser-illuminated microscope.  
-\begin{figure}[h!]
+The image processing softwares scans through images of surfaces presented with DNA molecules, as shown below in fig \ref{fig:Fig2_FrameImage}. It shows images of multiple straight DNA molecules which are stained with the YOYO-I dye which fluoresce when excited by the laser-illuminated microscope.  
+\begin{figure}[H]
 \begin{center}
 %\includegraphics[width=0.55\textwidth, bb=0 0 700 350]{Images/Image4_FrameImage.png}
-\includegraphics[scale = 0.45, bb=0 0 1000 600]{Images/Image4_FrameImage.pdf}
+\includegraphics[scale = 0.45]{Images/Image4_FrameImage.pdf}
 \end{center}
 \caption{Image of a surface with stained DNA molecules}
 \label{fig:Fig2_FrameImage}
@@ -25,21 +25,20 @@ The labeled molecules are imaged by microscopes equipped with two CCD cameras, t
 
 \begin{figure}[H]
 \begin{center}
-%\includegraphics[scale=1, bb=0 0 300 150]{Images/Image5_NMap.png}
 \includegraphics[scale=1]{Images/Image5_NMap.png}
 \end{center}
 \caption{5 DNA molecules aligned to reference}
 \label{fig:Fig2_NMap}
 \end{figure}
 
-These Nmaps are used to align the molecules to an {\emph{in silicon}} reference map of a reference genome. Fig \ref{fig:Fig2_NMap} shows how five DNA molecules are nanocoded and aligned to a reference genome. \\
+These Nmaps are used to align the molecules to an {\emph{in silicon}} reference map of a reference genome. Fig \ref{fig:Fig2_NMap} shows how five DNA molecules are nanocoded and aligned to a reference genome. Notice that intervals 5 and 6 (from the left) of the reference genome have a depth of 5, i.e., 5 molecular fragments are aligned to that interval. However, interval 4 has a depth of 4. \\
 
-The YOYO-I dye, used to stain the DNA molecules, belongs to the family of mon
-omethine cyanine dyes. Cyanine dyes have a rich history of applications in the photographic industry. Cationic cyanine dyes exhibit very large degrees of fluorescence enhancement on binding to nucleic acids \cite{Rye_etal_1992_NAR}, \cite{Lee_etal_1986_Cytometry}. These characteristics of fluorescence enhancement and high binding affinity are crucial for nanocoding. Netzel, et al, 1995 \cite{Netzel_etal_1995_JPC} observed that there are differences in emission quantum yield between dyes with pyridinium and quinolinium structural components, such as YOYO-1, when bound to $(\text{dAdT})_{10}$ and $(\text{dGdC})_6$ duplexes. In fact, they observed a 2-fold quantum yield increase when switching from AT-rich regions to GC-rich regions. Larsson, et al, 1994, (\cite{Larsson_etal_1994_JACS}) also observed that the fluorescence intensity of YO depends on the base sequence. In fact, they suggested that the quantum yield and fluorescence lifetime for YO complexed with GC-rich DNA sequences are about twice as large as for YO complexed with AT-rich sequences. This is the foundation behind the discovery of {\bf{fluoroscanning: The system of inferring about genomic sequence compositions from the observed fluorescence intensity profiles of DNA molecules.}} 
+The YOYO-I dye, used to stain the DNA molecules, belongs to the family of monomethine cyanine dyes. Cyanine dyes have a rich history of applications in the photographic industry. Cationic cyanine dyes exhibit very large degrees of fluorescence enhancement on binding to nucleic acids \cite{Rye_etal_1992_NAR}, \cite{Lee_etal_1986_Cytometry}. These characteristics of fluorescence enhancement and high binding affinity are crucial for nanocoding. Netzel, et al, 1995 \cite{Netzel_etal_1995_JPC} observed that there are differences in emission quantum yield between dyes with pyridinium and quinolinium structural components, such as YOYO-1, when bound to $(\text{dAdT})_{10}$ and $(\text{dGdC})_6$ duplexes. In fact, they observed a 2-fold quantum yield increase when switching from AT-rich regions to GC-rich regions. Larsson, et al, 1994, (\cite{Larsson_etal_1994_JACS}) also observed that the fluorescence intensity of YO depends on the base sequence. In fact, they suggested that the quantum yield and fluorescence lifetime for YO complexed with GC-rich DNA sequences are about twice as large as for YO complexed with AT-rich sequences. This is the foundation behind the discovery of fluoroscanning.  
 
 \subsection{Data description} \label{Ch2_data}
-Throughout this thesis, we will use images collected during nanocoding {\emph{Mesoplasma florum (M. florum)}} genome and a multiple myeloma (MM) genome. Multiple myeloma is the malignancy of B lymphocytes
-that terminally differentiate into long-lived, antibody-producing plasma cells. {\emph{M. florums}} are members of the class Mollicutes, a large group of bacteria that lack a cell wall and have a characteristically low GC content (\cite{Razin_etal_1998_MMBR}). These diverse organisms are parasites in a wide range of hosts, including humans, animals, insects, plants, and cells grown in tissue culture (\cite{Razin_etal_1998_MMBR}). Aside from their role as potential pathogens, {\emph{M. florums}} are of interest because of their extremely small genome size. The {\emph{M. florum}} has only one chromosome, and its NMap consists of 39 intervals. This implies, the reference genome has 38 restriction sites. The whole genome is approximately 793kb long. The intervals are between 2.111kb and 81.621kb. One of the goals of fluoroscanning it to analyze how similar the fluorescence intensity profiles of segments of different molecules aligned to the same location on a genome are. 
+Throughout this thesis, we will use images collected during nanocoding {\emph{Mesoplasma florum (M. florum)}} genome and a multiple myeloma (MM) genome. Below are brief data descriptions of the two datasets.
+\subsubsection{\emph{Mesoplasma florum (M. florum)}}
+{\emph{M. florums}} are members of the class Mollicutes, a large group of bacteria that lack a cell wall and have a characteristically low GC content (\cite{Razin_etal_1998_MMBR}). These diverse organisms are parasites in a wide range of hosts, including humans, animals, insects, plants, and cells grown in tissue culture (\cite{Razin_etal_1998_MMBR}). Aside from their role as potential pathogens, {\emph{M. florums}} are of interest because of their extremely small genome size. The {\emph{M. florum}} has only one chromosome, and its NMap consists of 39 intervals. This implies, the reference genome has 38 restriction sites. The whole genome is approximately 793kb long. The intervals are between 2.111kb and 81.621kb. One of the goals of fluoroscanning it to analyze how similar the fluorescence intensity profiles of segments of different molecules aligned to the same location on a genome are. 
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.42,page=1]{Plots/MF_Frag15.pdf}
@@ -50,6 +49,81 @@ that terminally differentiate into long-lived, antibody-producing plasma cells. 
 \end{figure}
 
 Fig \ref{fig:Fig2_MF_Frag15} shows fluorescence intensity profiles of fragments of 12 DNA molecules that have been aligned to interval 15 of {\emph{M. florum}} genome. The interval is 11.119kb long and each pixel of the captured images correspond to around 209 base pairs on the genome. So, under perfect experimental conditions, each of these fragments should be 53 ($\frac{11119}{209} = 53.2$) pixels long. However, due to several reasons the molecule lengths do not perfectly align with that of the reference. As the dye molecules intercalate between the bases of the DNA molecules, there could be local deformation of the molecules, resulting in more dye molecules to seep in. This could result in slight elongation of the DNA molecule and hence it captures more pixels in the image. This phenomenon of ``stretching'' of molecules is hard to control experimentally, as it involves meticulous measurement of dye and DNA molecule concentrations. Furthermore, when one end of a negatively charged DNA molecule attaches to the positively charged glass surface and the rest of the molecule elongates in the direction of the analyte flow, it also causes differential stretching. 
+
+In the {\emph{M. florum}} dataset, we have molecular fragments aligned to 39 intervals on the reference genome. The lengths of these intervals vary from 2.111kb - 81.620kb, with the average lengths of these intervals being 20.34kb. 
+% latex table generated in R 3.2.2 by xtable 1.8-0 package
+% Tue Feb 16 15:11:00 2016
+\begin{table}[H]
+\centering
+%\begin{tabular}{l*{7}{c}}
+\begin{tabular}{lrrr|rrr}
+  \hline
+  \hline
+  \multicolumn{4}{c}{Reference Interval} & \multicolumn{3}{c}{Molecular Fragment lengths} \\
+  \hline
+   Int  & molecules & pixels & length(kb) & min (kb) & avg (kb) & max (kb)\\ 
+  \hline
+  \hline
+    0 &  66 & 391 & 81.62 & 65.67 & 81.07 & 92.79 \\ 
+    1 & 208 & 89 & 18.68 & 13.27 & 18.64 & 21.55 \\ 
+    2 & 467 & 284 & 59.40 & 43.92 & 59.24 & 69.39 \\ 
+    3 & 734 & 67 & 13.94 & 9.59 & 13.86 & 17.34 \\ 
+    4 & 895 & 43 & 9.03 & 6.47 & 8.99 & 11.48 \\ 
+    5 & 849 & 24 & 5.04 & 2.14 & 5.02 & 5.90 \\ 
+    6 & 939 & 59 & 12.34 & 6.58 & 12.29 & 15.55 \\ 
+    7 & 1200 & 49 & 10.24 & 6.74 & 10.20 & 12.22 \\ 
+    8 & 965 & 72 & 15.02 & 11.13 & 15.00 & 19.48 \\ 
+    9 & 751 & 122 & 25.45 & 20.52 & 25.45 & 30.91 \\ 
+   10 & 784 & 19 & 3.89 & 2.40 & 3.90 & 4.94 \\ 
+   11 & 898 & 100 & 20.89 & 14.35 & 20.83 & 26.42 \\ 
+   12 & 883 & 75 & 15.57 & 9.97 & 15.43 & 19.24 \\ 
+   13 & 855 & 49 & 10.21 & 6.21 & 9.98 & 13.72 \\ 
+   14 & 731 & 45 & 9.47 & 6.84 & 9.19 & 12.79 \\ 
+   15 & 631 & 53 & 11.12 & 5.69 & 10.42 & 13.94 \\ 
+   16 & 203 & 24 & 4.99 & 1.46 & 4.24 & 7.99 \\ 
+   17 & 151 & 66 & 13.73 & 8.29 & 12.97 & 16.76 \\ 
+   18 & 377 & 126 & 26.28 & 21.17 & 25.66 & 31.02 \\ 
+   19 & 551 & 183 & 38.28 & 29.91 & 38.14 & 43.33 \\ 
+   20 & 488 & 10 & 2.11 & 1.46 & 2.14 & 3.18 \\ 
+   21 & 572 & 148 & 31.02 & 18.48 & 31.12 & 35.62 \\ 
+   22 & 712 & 91 & 19.10 & 14.66 & 19.12 & 24.44 \\ 
+   23 & 918 & 17 & 3.62 & 1.04 & 3.61 & 6.37 \\ 
+   24 & 947 & 154 & 32.19 & 25.89 & 32.24 & 37.16 \\ 
+   25 & 876 & 198 & 41.30 & 30.39 & 41.20 & 48.77 \\ 
+   26 & 824 & 47 & 9.76 & 4.62 & 9.74 & 13.15 \\ 
+   27 & 835 & 78 & 16.38 & 10.50 & 16.34 & 20.35 \\ 
+   28 & 666 & 75 & 15.69 & 11.18 & 15.96 & 18.90 \\ 
+   29 & 653 & 30 & 6.28 & 4.07 & 5.86 & 7.36 \\ 
+   30 & 881 & 175 & 36.50 & 29.11 & 36.34 & 42.61 \\ 
+   31 & 795 & 88 & 18.31 & 12.95 & 18.24 & 21.90 \\ 
+   32 & 668 & 153 & 32.07 & 25.75 & 31.81 & 38.11 \\ 
+   33 & 431 & 100 & 20.95 & 15.15 & 20.86 & 23.97 \\ 
+   34 & 334 & 16 & 3.28 & 1.25 & 3.03 & 4.60 \\ 
+   35 & 295 & 68 & 14.26 & 11.32 & 14.16 & 16.37 \\ 
+   36 & 191 & 245 & 51.31 & 36.60 & 50.81 & 59.52 \\ 
+   37 & 103 & 77 & 15.99 & 12.06 & 15.90 & 18.12 \\ 
+   38 &  68 & 86 & 17.88 & 15.04 & 17.68 & 20.14 \\ 
+  \hline
+  \hline
+\end{tabular}
+\caption{Coverage of {\emph{M.florum}} data}
+\label{tab:mftable}
+\end{table}
+
+Table \ref{tab:mftable} lists the coverage of the {\emph{M.florum}} data. For example, interval 7 has 1200 molecular fragments aligned to it. Ideally, all of them should be of length 10.24 kb, but in reality the lengths of these fragments lie between 6.74 kb and 12.22 kb, the average being 10.20 kb. 
+
+\subsubsection{Human genome - multiple myeloma}
+Multiple myeloma is the malignancy of B lymphocytes that terminally differentiate into long-lived, antibody-producing plasma cells. DNA samples were prepared from purified CD138 plasma cells
+(MM-S and MM-R sample) and paired cultured stromal cells (normal) from a 58-y-old male MM patient with International Staging System (ISS) Stage IIIb disease. 
+
+\subsection*{Research question}
+\begin{enumerate}
+\item {\bf{Reproducibility}}: How reproducible are the fluorescence intensity profiles? Are the profiles of intervals aligned to the same location on the reference genome, similar to the consensus intensity profile?
+\item {\bf{Detect structural variation}}: If there is an change in the underlying sequence, is the change in its fluorescence intensity profile detectable?
+\item {\bf{Uniqueness}}: Are the profiles from different regions on the genome distinguishable? 
+\item {\bf{Heterozygosity}}: Is it possible to detect heterozygotes - two clusters of profiles from the same region on the genome?
+\item {\bf{Quantify Intensity from Sequence Composition}}: Could we estimate the relationship between sequence composition and fluorescence profiles?
+\end{enumerate}
 
 \subsection{Preliminary Analysis}
 \begin{tcolorbox}[colback=red!5,colframe=red!40!black,title=Work in progress] %green!40!black=40%green and 60%black
