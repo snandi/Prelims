@@ -1,0 +1,458 @@
+\section{Statistical Methodology}
+
+\subsection{Functional Data Analysis}
+\noindent
+{\bf{Definition 3.1}} {\emph{A random variable $\Y$ is called a functional variable if it takes values in an infinite-dimensional space. An observation $Y$ of $\Y$ is called a functional data. \cite{Ferraty_Vieu_2006_Nonparametric}}}\\
+\noindent
+{\bf{Definition 3.2}} {\emph{A functional data set $y_1, \dots, y_n$ is an observation of $n$ functional variables $\Y_1, \dots, \Y_n$ as $\Y$.}}\\
+
+The basic philosophy of functional data analysis (FDA) is to think of observed data functions as single entities, rather than merely as a sequence of individual observations \cite{Ramsay_2006_Functional}. In
+practice, functional data are discrete observations as $p$ pairs $(x_j, y_j)$, and $y_j (\text{or } y_{ij})$ is a snapshot of the function at position (or time) $x_j$, possibly blurred by measurement error. Pioneered by Ramsay and Silvermann \cite{Ramsay_2006_Functional}, there has been substantial progress in statistical approaches to FDA in recent past. Following are some important aspects FDA that are relevant to our data set, pertaining to the goals of our research. 
+
+\subsubsection{Smoothing} \label{ch3_smooth}
+In FDA, it is important that the underlying function $\Y$ is smooth, so that a pair of adjacent data values from replicate $i$, $y_{i,j}$, and $y_{i,j+1}$ are linked together to some extent and unlikely to be too different from each other. If this smoothness property did not apply, there would be nothing much to be gained by treating the data as functional rather than just multivariate. 
+
+In fluoroscanning, consider the image of a DNA molecule, as shown in \ref{fig:Fig3_NMap_Intensity}. The grey level of each pixel point of the image of a DNA molecule corresponds to approximately 200 bp of genomic sequence. The pixel intensity value is a result of superimposition of 
+\begin{wrapfigure}{l}{0.5\textwidth}
+\begin{center}
+%\includegraphics[scale=1]{Images/Image6_NMap_Intensity.pdf}
+\includegraphics[scale=0.6]{Images/Image6_NMap_Intensity.pdf}
+\end{center}
+\caption{Image of DNA molecule}
+\label{fig:Fig3_NMap_Intensity}
+\end{wrapfigure}
+point spread functions of the fluorescent dye molecules intercalated between the nucleotide bases. As demonstrated in fig \ref{fig:Fig3_Bivariate1} and \ref{fig:Fig3_Bivariate2} below, the intensity value of each pixel is a result of neighboring bases as well. Fig \ref{fig:Fig3_Bivariate2} is a superimposition of the point spread functions in fig \ref{fig:Fig3_Bivariate1}.  
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.27, page = 2]{Plots/BivariatePlots.pdf}
+\includegraphics[scale = 0.27, page = 1]{Plots/BivariatePlots.pdf}
+\includegraphics[scale = 0.27, page = 3]{Plots/BivariatePlots.pdf}
+\end{center}
+\caption{Point spread functions of 3 adjacent fluorescent sources}
+\label{fig:Fig3_Bivariate1}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.5, page = 4]{Plots/BivariatePlots.pdf}
+\end{center}
+\caption{Superimposition of point spread function}
+\label{fig:Fig3_Bivariate2}
+\end{figure}
+Based on the optical resolution of the camera, we estimate it to be around 600 bp. Hence, there is an inherent smoothness in the underlying fluorescence intensity profiles of the images of the DNA molecules. Fig \ref{fig:Fig3_frag1058_orig} is an example of fluorescence intensity profiles of fragments of DNA molecules that have been aligned to interval 1058 of chromosome 13, of the reference human genome. It is imperative to smooth the intensity profiles before any subsequent analysis. Another important aspect of the data set is the different lengths of the molecular fragments, aligned to the same genomic location. As explained in \ref{Ch2_data}, there could be several possible reasons causing this. One of the goals of this research is to find consensus fluorescence intensity profiles of all genomic loci with large enough sample size. In order to estimate a consensus $\hat{\Y}$ from $n$ sample profiles $y_1, \dots, y_n$, each $y_i$ need to be of the same length. This objective is achieved by smoothing each profile and evaluating the function at regular intervals, based on the length of the reference interval. 
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.5, page = 2]{Plots/chr13_frag1058.pdf}
+\end{center}
+\caption{Intensity profiles of fragments of molecules aligned to human chr 13, interval 1058}
+\label{fig:Fig3_frag1058_orig}
+\end{figure}
+Below is the smoothing procedure applied to fluorescence intensity data, before any further analysis:
+\begin{enumerate}
+\item Normalizing:\\
+As can be seen in fig \ref{fig:Fig3_frag1058_orig} the intensity values range between 6,000 and 12,000. This is because these fragments are parts of molecules that have been imaged on different glass surfaces. Some surfaces appear brighter than others. In order to eliminate the surface ``effect'', each intensity profile was divided by the median value of that fragment. The normalization is done after chopping off 5 pixels from either end of the intensity profiles, as those values could be dampened (or amplified) by the presence of the red punctuates that separate the molecular fragments.
+\item Basis choice:\\
+We used B-spline \cite{deBoor_1978_Splines} to smooth each of intensity profile individually. For an intensity profile $y_i$, with $p$ observed points $y_{i,1}, \dots, y_{i,p}$, we used $\frac{p}{2}$ breakpoints, with $4^{th}$ order basis functions. Since the number of basis functions and their orders have the following relationship, 
+\begin{eqnarray*}
+n_{\text{basis}} &=& n_{\text{breakpoints}} + n_{\text{order}} - 2 \\
+                 &=& \frac{p}{2} + 4 - 2\\ 
+                 &=& \frac{p}{2} + 2
+\end{eqnarray*}
+\item Smoothing:\\
+We use {\emph{generalized cross validation}} (GCV) measure, developed by Craven and Wahba (1979) \cite{Craven_Wahba_1978_NumMath} to estimate the roughness penalty $\lambda_{i}$ for each intensity profile $y_i$.  
+\[ \lambda_i = \argmin_{\lambda} \text{GCV}(\lambda), \ \ \text{for\ \ } e^{-5} \leq \lambda \leq e^5 \]
+
+\item Evaluation at regular intervals: \\
+For a genomic interval with $Q$ bp, since each pixel in the image accounts for 206 bp, ideally each molecular fragment that aligns to that location should be $\frac{Q}{206}$ pixels long. After smoothing the intensity profiles the smooth functions are evaluated at $\frac{Q}{206} + 1$ equidistant points. 
+\end{enumerate}
+Below is a demonstration of applying the above mentioned data preparation procedure to the intensity profiles of fragments of DNA molecules that have been aligned to interval 1058 of chromosome 13, of the reference human genome, as in fig \ref{fig:Fig3_frag1058_orig}.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.42, page = 3]{Plots/chr13_frag1058.pdf}
+\includegraphics[scale = 0.42, page = 4]{Plots/chr13_frag1058.pdf}
+\end{center}
+\caption{Normalized and Smoothed Intensity profiles of fragments of molecules aligned to human chr 13, interval 1058}
+\label{fig:Fig3_frag1058_norm}
+\end{figure}
+
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[scale = 0.4, page = 4]{Plots/chr13_frag1058.pdf}
+%\end{center}
+%\caption{Smoothed}
+%\label{fig:Fig3_frag1058_smooth}
+%\end{figure}
+
+\subsubsection{Amplitude and Phase variability} \label{Sec_AmpPhase}
+A problem of critical importance in FDA is the presence of both amplitude and phase variability in functional observations. Even simple analysis like averaging of replicated curves will produce erroneous estimates if phase variability is not eliminated (or reduced) first. Fig \ref{fig:Fig3_AmpPhase} illustrates the two types of variability. 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.42, page = 1]{Plots/AmpPhaseVar.pdf}
+\includegraphics[scale = 0.42, page = 2]{Plots/AmpPhaseVar.pdf}
+\end{center}
+\caption{Amplitude and Phase variability in FD}
+\label{fig:Fig3_AmpPhase}
+\end{figure}
+Below are some commonly used publicly available data sets where phase variability needs to be eliminated before analyzing the curve samples. 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 1]{Plots/PublicData.pdf}
+\end{center}
+\caption{Amplitude and Phase variability in FD}
+\label{fig:Fig3_growthM}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 2]{Plots/PublicData.pdf}
+\end{center}
+\caption{Amplitude and Phase variability in FD}
+\label{fig:Fig3_growthF}
+\end{figure}
+
+%\begin{figure}[H]
+%\begin{center}
+%\includegraphics[scale = 0.4, page = 3]{Plots/PublicData.pdf}
+%\end{center}
+%\caption{Amplitude and Phase variabilities in FD}
+%\label{fig:Fig3_handwrit}
+%\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 4]{Plots/PublicData.pdf}
+\end{center}
+\caption{Amplitude and Phase variability in FD}
+\label{fig:Fig3_pinch}
+\end{figure}
+
+We have observed substantial amount of phase variability in the fluorescence intensity data set. Hence, before estimating the consensus fluorescence intensity profiles of genomic regions, it is imperative that we address this variability. Pioneered by Ramsay and Silverman \cite{Ramsay_2006_Functional}, \cite{Ramsay_Li_1998_JRSSB}, \cite{Ramsay_etal_2009_Functional_R}, {\emph{Curve Registration}} is a FDA technique to address the phase variability problem. We discuss it in more details in Sec \ref{Chr3_Regist}.
+
+\subsubsection{Functional outlier detection} \label{ch3_outlier}
+In addition to variability in the data introduced by different lengths of molecular fragments (aligned to the same genomic locus), and phase variability, there are several other reasons why some molecule could produce an ``outlier'' intensity profile. Below are some images (fig \cite{fig:Fig3_OutlierImages}) of the surfaces with DNA molecules that are examples of outlier intensity profiles. There could be some DNA fragments near the molecule under consideration. There could be molecules crossing each other. Each of those instances would result in some pixel intensity values that would not be appropriate to use in our analyses. 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.5]{Images/Outlier_1.png}
+\includegraphics[scale = 0.3]{Images/Outlier_2.png}
+\includegraphics[scale = 0.35]{Images/Outlier_3.png}
+\includegraphics[scale = 0.45]{Images/Outlier_4.png}
+\end{center}
+\caption{Outliers}
+\label{fig:Fig3_OutlierImages}
+\end{figure}
+Using the intensity grey levels of up to three pixels both above and below a molecule, a ``quality score'' was developed to detect some of these outliers. However, more subtle reasons such has slight curvature in the molecule backbones, existence of surface noise underneath the molecule backbones, etc, could still be responsible for producing outlier observations. To address these cases, we used functional data depth measures, as proposed in \cite{Febrero-Bande_etal_2007_Environmetrics}. We use the Fraiman and Muniz depth, introduced in \cite{Fraiman_Muniz_2001_SEIO}. Let $F_{n,x} (y_i (x))$ be the empirical cumulative distribution function of the values of the curves $y_1(x), \dots , y_n(x)$ at a given position $x \in [a, b]$, given by
+\[ F_{n,x} (y_i (x)) = \frac{1}{n}\sum\limits_{k=1}^{n} \Ind\{ y_k(x) \leq y_i(x)\}\]
+and, the univariate depth of a point $y_i(x)$ is given by
+\[ D_n(y_i(x)) = 1 - \left| \frac{1}{2} - F_{n,x} (y_i (x)) \right| \]
+Then, the Fraiman and Muniz functional depth (FMD), of a curve $y_i$ with respect the set $y_1(x), \dots , y_n(x)$ is given by 
+\begin{equation}
+\text{FMD}_n(y_i) = \int\limits_a^b D_n(y_i(x)) dx
+\label{eq:3_depth}
+\end{equation}
+In order to identify functional outliers we use the functional depth FMD. As mentioned in the introduction, depth and outlyingness are inverse notions, so that if an outlier is in the data set, 
+the corresponding curve will have a significant low depth. Following is the procedure for functional outlier detection in a given data set of functional curves like fluorescence intensity profiles
+$y_1, \dots, y_n$
+\begin{enumerate}
+\item Obtain the functional depths $D_n(y_1), \dots, D_n(y_n)$, for FMD
+\item Let $y_{i1}, \dots, y_{ik}$ be the $k$ curves such that $D_n(y_{ik}) \leq C$, for a given cutoff $C$. Then, assume that $y_{i1}, \dots, y_{ik}$ are outliers and delete them from the sample.
+\item Then, come back to step 1 with the new data set after deleting the outliers found in step 2. Repeat this until no more outliers are found.
+\end{enumerate}
+To ensure type-I error of detecting outliers is under some small threshold $\alpha$, we need to choose $C$ such that
+\[ \Prob(D_n(y_i) \leq C) = \alpha,\ \ i = 1, \dots, n\]
+However, since the distribution of the functional depth statistic FMD is unknown, it is estimated here using a bootstrap procedure. For details, please refer to \cite{Febrero-Bande_etal_2007_Environmetrics} and \cite{Febrero-Bande_delaFuente_2012_JSS}. 
+
+In fig \ref{fig:Fig3_frag1058_outlier} we show the detection of outlier in the fluorescence intensity profiles of fragments of molecules aligned to human chr 13, interval 1058. Refer to figures \ref{fig:Fig3_frag1058_orig} and \ref{fig:Fig3_frag1058_norm}. 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.5, page = 5]{Plots/chr13_frag1058.pdf}
+\end{center}
+\caption{Outlier detection in Intensity profiles of fragments of molecules aligned to human chr 13, interval 1058}
+\label{fig:Fig3_frag1058_outlier}
+\end{figure}
+The red curve in fig \ref{fig:Fig3_frag1058_outlier} is flagged as the outlier in this group of curves.
+\begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Work in progress] %green!40!black=40%green and 60%black
+Some recent work was published on outliers in functional data. We are working on comparing and contrasting the different methods to choose the most appropriate one for this data set.
+\end{tcolorbox}
+
+\subsection{Curve Registration} \label{Ch3_Regist}
+\subsubsection{Distance metric}
+Before discussing the techniques of curve registration, it is important to establish the notion of ``distance'' or ``similarity'' between two smooth functions, or two curves. We use the {\emph{similarity index}} between two curves in $\Real$, introduced in \cite{Sangalli_etal_2009_JASA}. Let $y_i \in L^2(S_i \subset \Real; \Real)$ and $y_j \in L^2(S_j \subset \Real; \Real)$ be differentiable with $y'_i \in L^2(S_i \subset \Real; \Real)$ and $y'_j \in L^2(S_j \subset \Real; \Real)$, and let the domains $S_i \subset T$ and $S_j  \subset T$ be closed intervals in $\Real$ such that $S_{ij} = S_i \intersect S_j$ has a positive Lebesgue measure. $S_{(.)}$ are Sobolev spaces. Assuming that $\|y'_i\|_{L^2(S_{ij})} \ne 0$ and $\|y'_j\|_{L^2(S_{ij})} \ne 0$, the similarity index between $y_i$ and $y_j$ is defined as
+\begin{equation}
+\rho(y_i, y_j) = \frac{\int _{S_{ij}}y'_i(x)y'_j(x) dx}{\sqrt{\int _{S_{ij}}y'_i(x)^2 ds}\sqrt{ \int _{S_{ij}} y'_j(x)^2 dx}}
+\label{eq:3_similarity}
+\end{equation}
+This is the cosine of the angle $\theta_{ij}$ between first derivatives of the functions $y_i$ and $y_j$, with the inner product $\int _{S_{ij}}y'_i(x)y'_j(x) dx$.  $\rho(y_i, y_j)$ can also be interpreted as a continuous version of Pearson’s uncentered correlation coefficient for first derivatives. Following are some useful properties of $\rho(y_i, y_j)$:
+\begin{enumerate}
+\item[(i)] From Cauchy-Schwartz inequality it follows that $|\rho(y_i, y_j)| \leq 1$
+\item[(ii)] $\rho(y_i, y_j) = 1 \ \Leftrightarrow \ \exists \ a \in \Real^{+}, b \in \Real, \ni y_i = ay_j + b $
+\item[(iii)] For all invertible affine transformations of $y_i$ and $y_j$, say $t_1 \circ y_i = a_1y_i + b_2$ and $t_2 \circ y_j = a_2y_j + b_2$, with $a_1, a_2 \ne 0$, 
+\[ \rho(y_i, y_j) = \text{sign}(a_1 a_2)\rho(t_1 \circ y_i, t_2 \circ y_j)\]
+\item[(iv)] For all invertible affine transformations of the abscissa $x$, say $h_1(x) = a_1 x + b_1$ and $h_2(x) = a_2 x + b_2$, with $a_1, a_2 > 0$, we have
+\[ \rho(y_i \circ h_1, y_j \circ h_2) = \rho(y_i \circ h_1 \circ h_2^{-1}, y_j) = \rho(y_i , y_j \circ h_2 \circ h_1^{-1}) \]
+\end{enumerate}
+
+\subsubsection{The registration problem}
+As illustrated in \ref{Sec_AmpPhase}, it is often imperative to eliminate (or at least, reduce) phase variability between  replicated curves before further analysis. Pioneered by Silverman in \cite{Silverman_1995_JRSSB}, Ramsay and Li in \cite{Ramsay_Li_1998_JRSSB} and further advanced by Ramsay and Silverman in \cite{Ramsay_2006_Functional}, {\emph{curve registration}} is the technique that address this problem. Let $n$ functions (or curves) $y_1, \dots, y_n$ be defined on a closed real interval $[0, X]$. Let $h_i(x)$ be a transformation of the abcissa $x$ for curve $i$. The warping function is often referred to as ``time warping'' as time is a common abcissa in problems with phase variability. In the context of fluoroscanning, the abcissa is genomic location. The warping function should satisfy the following
+\begin{itemize}
+\item $h(0) = 0$ and $h(X) = X$, $0$ and $X$ being the endpoints of the interval on which the functions are defined.
+\item The timings of events remain in the same order regardless of the timescale entails that $h_i$, the time-warping function, should be strictly increasing, i.e. $h_i(x_1) > h_i(x_2)$ for $x_1 > x_2$. 
+\item $h^{-1}[h(x)] = x$
+\end{itemize}
+The objective of curve registration is that the {\emph{registered}} functions $y_1(h_1(x)), \dots, y_n(h_n(x))$ will have no phase variability. 
+
+\subsubsection{Existing work on curve registration} \label{ch3_registration}
+Marker registration is often used in engineering, biology and other fields. It is the process of aligning curves by identifying the timing of certain salient features in the curves. Curves are then aligned by transforming time (or the abcissa) so that marker events occur at the same values of the transformed times. Comparisons between marker timings can also be made by using corresponding transformed times. Sakoe in Chiba in \cite{Sakoe_Chiba_1978_IEEE} estimated the warping function $h$ at marker timings by minimizing the sum of weighted distances of two speech patterns at the marker timings and imposing monotonicity and continuity on $h$. They solved for the discrete values of $h$ using a dynamic programming algorithm, which widely popularized as {\emph{dynamic time warping}}. Kneip and Gasser in \cite{Kneip_Gasser_1992_AnnStat} studies the statistical aspects, including the asymptotic properties of these estimators \cite{Kneip_etal_2000_CJS}. These methods, however, can be sensitive to errors in feature location, and the  required features may even be missing in some curves. Moreover,substantial phase variation may remain between widely separated markers. In \cite{Kneip_etal_2000_CJS}, they introduce a local nonlinear regression technique, but acknowledge that a lot of tuning parameters are left to user's experimentation and best guess. Following are some of the subsequent curve registration techniques that helped develop an iterated registration algorithm to analyze the fluoroscanning data. 
+
+\noindent
+{\bf{Penalized least square criterion}} \\
+Ramsay and Li in \cite{Ramsay_Li_1998_JRSSB} set it up as a penalized least square (PLS) fitting problem. When registering $y(x)$ to a template $y_0(x)$, they minimize the penalized squared error criterion
+\[ F_{\lambda}(y_0, y|h) = \displaystyle \int \| y_0(x) - y\{h(x)\} \|^2 dx + \lambda \displaystyle \int w^2(x)dx\]
+where, $w(x) = \frac{D^2h}{Dh},\ \ D = \frac{\partial}{\partial x}$. $w(x)$ is the relative curvature of the warping function.
+
+\noindent
+{\bf{Minimum second eigenvalue method}} \\
+Ramsay and Silverman in \cite{Ramsay_2006_Functional} argued the PSL technique addressed more of the amplitude variability and not as much of the phase variability. They suggested the following continuous registration technique. Suppose two curves $y_0(x)$ and $y_1(x)$ differ only in amplitude but not in phase. Then, if we plot the function values against each other, we will see a straight line. Amplitude
+differences will then be reflected in the slope of the line, a line at $45^{\circ}$ corresponding to no amplitude differences. To evaluate both the target function $y_0(x)$ and the registered function 
+$y*$ at a fine mesh of $n$ values of $x$ to obtain the pairs of values $(y_0(x), y\{h(x) \}$. Let the $n$ x $2$ matrix $\mathbf{X}$ contain these pairs of values. Then, to analyze the principal components, we would analyze the functional analog of the cross product matrix $\mathbf{X'X}$. 
+\begin{equation}
+C(h) = 
+\begin{bmatrix}
+\int \{y_0(x) \}^2dx & \int y_0(x) y[h(x)]dx \vspace{0.5cm} \\ 
+\int y_0(x) y[h(x)]dx & \int \{y[h(x)]\}^2dx
+\end{bmatrix}
+\end{equation}
+Then, PCA of $C(h)$ should reveal essentially one component (smallest eigen value $\approx 0$). Now, the objective function for curve registration between a template $y_0(x)$ and a sample curve $y(x)$ becomes
+\[ \text{MINEIG}(h) = \mu_2[C(h)]\]
+where, $\mu_2$ is the size of the second eigenvalue of its argument. When $\text{MINEIG}(h)=0$, registration is achieved, and $h$ is the warping function that does the job. Including the penalty term on the relative curvature of the warping function, the Minimum second eigenvalue (MSE) fitting criterion is
+\begin{equation}
+\text{MINEIG}_{\lambda}(h) = \text{MINEIG}(h) + \lambda \displaystyle \int \left\{ w^{(m)}(x) \right\}^2 dx
+\end{equation}
+When registering a sample of replicated curves, they \cite{Ramsay_etal_2009_Functional_R} recommended using the mean of the curves as the template and registering all of the curves to that template. 
+
+\noindent
+{\bf{Iterative registration using similarity index}} \\
+Sangalli, et al, in \cite{Sangalli_etal_2009_JASA} introduce an iterative registration (E-M) algorithm. Given the similarity index $\rho(y_i, y_0)$, defined in \ref{eq:3_similarity}, between two curves, registering a curve $y_i$ to a template curve $y_0$ means finding the function $h$ in a class of warping functions $W$ that maximizes 
+\[ \rho(y_i \circ h^{-1}, y_0)\]
+The consider $W$ as a group of strictly increasing affine transformations of the abcissa:
+\begin{equation}
+W = \{h:h(s) = as + b,\ \ a \in \Real^{+}, b \in \Real  \}
+\label{eq:3_affine}
+\end{equation}
+This approach is quite intuitive and elegant. This is the first approach that defines a metric to estimate the quality of a registration procedure and use it as a convergence criterion of the iterative E-M algorithm. Similar to local linear regression method in \cite{Kneip_etal_2000_CJS} and the MSE method in \cite{Ramsay_2006_Functional}, they start the registration procedure with the mean of the curves as the template and update the template at each ``Expectation'' step of the E-M algorithm. They successfully extend this algorithm to simultaneous clustering and registration of curves in \cite{Sangalli_etal_2010_CSDA} and \cite{Sangalli_etal_2014_EJS}. 
+
+\noindent
+{\bf{Registration using the Fisher-Rao metric}} \\
+Registration using the {\emph{Fisher-Rao}} metric was developed by Srivastava et al., in \cite{Srivastava_etal_2011_v2_arXiv}. The space of functions considered here is
+\[ F = \left\{f: [0,1] \rightarrow \Real, f \text{ absolutely continuous}  \right\}\] and the space of warping functions:
+\[ \Gamma = \left\{\gamma: [0,1] \rightarrow [0,1], \gamma(0) = 0, \gamma(1) = 1, \gamma \text{ monotone increasing }, \gamma \text{ is a diffeomorphism}  \right\} \]
+The Fisher-Rao metric is defined on the space tangent to the variety of $F$ as:
+{\bf{Definition 3.3}} For $f \in F$ and $v_1, v_2 \in T_f(F)$, the Fisher-Rao metric is defined as: 
+\[ \langle\langle \cdot , \cdot \rangle \rangle_f: T_f(F) \times T_f(F) \rightarrow \Real; \langle\langle v_1 , v_2 \rangle \rangle_f = \frac{1}{4} \displaystyle \int \limits_0^1 \frac{\dot{v}_1(t) \dot{v}_2(t)}{|\dot{f}(t) |}dt \]
+To find this distance it requires the geodetic path which connect functions $f$ and $g$ with respect to the Fisher-Rao metric. The minimization of this quantity is therefore quite challenging. This is why a  new representation of the functions was introduced.
+{\bf{Definition 3.4}} The square-root velocity function (SRVF) of a function $f \in F$ is defined as
+\[ q:\Real \rightarrow \Real, \ q(x) = 
+  \begin{cases}
+    \frac{x}{\sqrt{\|x \|}}       & \|x\| \ne 0 \\
+    0 & \text{otherwise} \\
+  \end{cases} 
+\] 
+A fundamental property of this metric is that under the SRVF representation, the Fisher-Rao metric becomes the $L^2$ norm. In $L^2$ space the geodesic distance is simply the $L^2$ norm. They estimate the warping functions on this SRVF space, performing the following optimization:
+\[ \gamma_i^* = \argmin_{\gamma \in Gamma} \|\mu - (q_i \circ \gamma)\sqrt{\dot{\gamma}}  \|_{L^2} \]
+In the Fisher-Rao method they were able to include in the space of warping functions almost all kind of transformations, with the only constraint being diffeomorphism. This leads to a very large class of transformations and hence, generally, to a better result in aligning functional data. However, this is also its limitation \cite{Patriarca_2013_PhDThesis}. With this method it is possible to align almost any group of functions, however disparate they might be. In addition, the warping function loses interpretability. In many cases, including fluoroscanning data, the warping function plays an important role in analyzing the causes of phase variability. 
+
+\noindent
+{\bf{Bayesian approach to registering and clustering}} \\
+Zhang and Inoue developed a Bayesian hierarchical curve registration in \cite{Telesca_Inoue_2008_JASA}. Their approach provides a natural framework for assessing uncertainty in the estimated time-transformation and shape functions and allows derivation of exact inferences about a richer set of quantities of interest. Zhang and Telesca in \cite{Zhang_Telesca_2014_arXiv} extended it to a Bayesian hierarchical approach to joint clustering and registration of functional data. They combined a Dirichlet process mixture model for clustering of common shapes, with a reproducing kernel representation of phase variability for registration. Earls and Hooker in \cite{Earls_Hooker_2015_arXiv} proposed an adapted variational Bayes algorithm for registering, smoothing and prediction for functional data. They model the registered 
+functions as Gaussian processes. They go beyond estimation, and inference and provide the framework of prediction of registered functions. 
+
+{\emph{Note: Not sure how I can compare and contrast these Bayesian methods with the other approaches. Other than the computational time and resources, I am not yet in a position to comment on their relative performance!}}
+
+\subsection{Iterated registration with weighted average template}
+\subsubsection{Why iterated registration?}
+Enumerated below are some advantages and disadvantages of the above mentioned techniques, from the perspective of analyzing the fluoroscanning data.
+\begin{itemize}
+\item {\bf{Outlier}}: None of the above methods consider the possibility of presence of a functional outlier in their sample. Hence, their estimates of the warping functions might not be robust to possible outliers. In the fluoroscanning data, as a consequence of the experimental setup of dealing with DNA molecules on glass surfaces, there are multiple reasons why some intensity profiles could be outliers. 
+
+\item {\bf{Starting template}}: In most of the methods above, the cross-sectional mean of the curve sample is the starting template to which the rest of the curves are registered to. This approach works well if the noise to signal ratio is small, and the extent of abcissa warping is limited. However, in the fluoroscanning data, the signals are warped to a much larger extent and more often than not, the cross-sectional mean of intensity profiles is not representative of the true features of that sample of curves. We will develop a iterated registration scheme, similar to \cite{Sangalli_etal_2009_JASA}, but the estimation of our template at each ``expectation'' step of the E-M algorithm will be more sophisticated and robust.
+
+\item {\bf{Warping functions}}: Estimating the inverse of the warping functions are critical to registering out-of-phase functional data. These functions contain information about the reasons behind the phase variability in the first place. In fluoroscanning, it is important that the estimation of these warping functions are consistent even when sub-intervals of longer genomic intervals are analyzed. It is important to investigate if the warping functions have any sequence dependence, or if they result from experimental artifacts. Hence, it is critical that warping functions are smooth, and interpretable. However, at the same time, it is important for warping functions to contain higher order terms to contain information about sub-genomic-interval warping. Hence, warping functions cannot be as simple as affine transformations of the abcissa, as considered in \cite{Sangalli_etal_2009_JASA}. 
+
+\item {\bf{Quality of registration}}: As introduced in \cite{Sangalli_etal_2009_JASA}, it is important to evaluate the quality of the registration procedure. 
+
+\item {\bf{Simultaneous clustering and registration}}: Our registration methods needs to be robust enough to be extended to simultaneous registration and clustering to address the question of detecting heterozygotes in diploid human genomes.  
+\end{itemize}
+
+\subsubsection{Iterated registration algorithm}
+Here,  re-define the registration problem with respect to the fluoroscanning data and introduce an ``Iterated registration with weighted average template'' scheme to register the fluorescent intensity profiles.
+For any genomic location where there are $n$ molecular fragments are aligned, let the intensity profiles observed be represented as $z_{i,1}, \dots, z_{i, p_i},\ \ i = 1,\dots, n$, where curve $i$ has $p_i$ points. 
+\begin{itemize}
+\item {\bf{Step 1}} Normalize and smooth: As explained in section \ref{ch3_smooth}, we normalize all the intensity profiles, smooth them using B-splines, and evaluate at $p + 1$ equidistant points, where $p = \frac{Q}{206}$, where the genomic interval has $Q$ base pairs. Let these smooth functions be $y_{i,1}, \dots, y_{i,p},\ \ i = 1,\dots,n$. 
+\item {\bf{Step 2}} Detect outliers: As explained in section \ref{ch3_outlier}, we detect functional outliers in the data set, using Fraiman and Muniz functional depth. 
+\item {\bf{Step 3}} Template estimation [{\emph{Expectation step}}]: To estimate the template to register the curves to, we employ a 2-step approach. 
+\begin{enumerate}
+\item {\emph{Median}}: Estimate $L_1-\text{Median}$ by the algorithm proposed by Vardi and Zhang in \cite{Vardi_Zhang_2000_PNAS}, where $L_1-\text{Median }$ $y_m$ is the minimizer of 
+\[ \sum\limits_{i = 1}^n \|y_i - y_m \| \]
+where $y_i \in \Real^p, \ i = 1,\dots,n$ and $\|u \| = \sqrt{\sum\limits_{j = 1}^p u_j^2}$. Here we ensure that the median is estimated only from the curves not deemed as ``functional outliers'' in Step 2. 
+\item {\emph{Weighted mean}}: Estimate the similarity index between the curves and the median $\rho(y_i, y_m), \ i = 1,\dots,n$ and estimate the template $\phi$ as the weighted average of the curves, with the weights being these similarity indices. 
+\[ \phi = \frac{1}{n}\sum\limits_{i = 1}^n \rho(y_i, y_m) y_i \]
+\end{enumerate}
+This 2-step process ensures that the template to register to has little influence from an outlier curve, at the same time giving higher weights to curves that have retained some similarity between their features, in spite of being warped. 
+\item {\bf{Step 4}} Registration with varying roughness penalty [{\emph{Maximization step}}]: We use the minimum second eigenvalue method to register the curves to the template $\phi$. As explained in \ref{ch3_registration}, the penalty parameter $\lambda$ plays an important role in registering nearby features of the curves. For a higher value of $\lambda$, even distant features will get registered, and for lower values of $\lambda$ only the features that are close by will be registered. We start the iterated process with $\lambda = 1$ and gradually lower the values every iteration. This ensures that we gradually increase our confidence in the template that we register to. 
+\begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Work in progress] %green!40!black=40%green and 60%black
+We want to quantify the choice of $\lambda$ to some measure of the phase variability, and it is currently under investigation. We believe this is an interesting contribution to the ``registration'' technique, particularly when applied to a complex data set like fluoroscanning.
+\end{tcolorbox}
+\item {\bf{Step 5}} Convergence of iteration: The objective of iterated registration is to maximize the average similarity to the consensus, i.e., maximize 
+\[ \bar{\rho}_{\phi, n} = \frac{1}{n} \sum \limits_{i = 1}^{n} \rho(\phi, f_i)\]
+Hence, we iterate steps 3 and 4, until
+\[ |\bar{\rho}_{\phi_{(t+1)}, n}^{\ (t+1)} - \bar{\rho}_{\phi_{(t)}, n}^{ \ (t)} | < \epsilon \]
+where $t$ denotes iteration number, for some predetermined $\epsilon$
+\end{itemize}
+
+\subsection{Simulation Study}
+We have implemented the iterated registered algorithm in a simulation to test if this procedure improves power. 
+\subsubsection{Simulation set up}
+\begin{enumerate}
+\item Set up the abcissa $x$ from $0$ to $40$.
+
+\item Randomly choose 3 locations $x_1, x_2, x_3 \in (0, 40)$ where the signals are going to have distinctive features.
+
+\item Generate a signal by the following formula:
+\[ y = ae^{-\frac{(x - x_1)^2}{16}} - ae^{-\frac{(x - x_2)^2}{16}} + ae^{-\frac{(x - x_3)^2}{16}},\ \ a=0.04  \]
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 1]{Plots/SimData_Seed67_Plots.pdf}
+\end{center}
+\caption{Simulation: True Signal, Seed 67}
+\label{fig:FigSim_True}
+\end{figure}
+The vertical line in fig \ref{fig:FigSim_True} are the signal locations.
+
+\item Adding smooth noise at the signal locations and two more randomly chosen locations $x_{12} \subset (x_1, x_2) \ \& \ x_{23} \subset (x_2, x_3) $, the resulting curves are of the form:
+\[ y = (a + \epsilon_1)e^{-\frac{(x - x_1)^2}{16}} + \epsilon_2e^{-\frac{(x - x_12)^2}{16}} - (a + \epsilon_3)e^{-\frac{(x - x_2)^2}{16}} + \epsilon_4e^{-\frac{(x - x_23)^2}{16}} + (a + \epsilon_5)e^{-\frac{(x - x_5)^2}{16}}\]
+where, $\epsilon_i \sim \mathcal{N}(0, 0.05)$
+The 40 noisy curves are plotted below:
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 2]{Plots/SimData_Seed67_Plots.pdf}
+\end{center}
+\caption{Simulation: Noisy Curves, Seed 67}
+\label{fig:FigSim_Noisy}
+\end{figure}
+The red broken line in fig \ref{fig:FigSim_Noisy} is the average of the noisy curves, which is not too far off from the true signal. 
+
+\item Warp the noisy curves by the following operation on the abcissa: Let $x_1$ and $x_p$ be the end points of the abcissa. Randomly choose a location $x^*$ at which the warping direction will change from positive to negative or vice-versa. Note that at any $x$ if $h(x) > x$, then the abcissa has been stretched outward and if $h(x) < x$, it has been squeezed inward. 
+\begin{eqnarray*}
+h_1(x) &=& x_1 + (x^* - x_1) \frac{e^{\frac{u_i(x - x_1)}{x^* - x_1}} - 1}{e^{u_i} - 1} \\
+h_2(x) &=& x_* + (x_p - x^*) \frac{e^{\frac{v_i(x - x^*)}{x_p - x^*}} - 1}{e^{v_i} - 1} \\
+h(x) &=& \Ind_{\{ x \le x^*\}} h_1(x) + \Ind_{\{ x > x^*\}} h_2(x) \\
+  \ u_i, v_i \sim \mathcal{N}(0, 1)  &;& i = 1, \dots, 40
+\end{eqnarray*}
+Below is a plot of the warping functions and the warped, noisy curves.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 3]{Plots/SimData_Seed67_Plots.pdf}
+\includegraphics[scale = 0.4, page = 4]{Plots/SimData_Seed67_Plots.pdf}
+\end{center}
+\caption{Simulation: Warped Noisy Curves, Seed 67}
+\label{fig:FigSim_Warped}
+\end{figure}
+The green line in fig \ref{fig:FigSim_Warped} is the cross-sectional mean of the noisy, warped curves. Notice that it shows substantial deviation from the true signal and illustrates the need for registering them to retrieve the true signal.
+
+\item 2 groups: To test the performance of the registration procedure under the null distribution, we randomly separate the 40 noisy curves into two groups of 20 each. We will register these groups separately and test if they produce different consensus signals. 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 5]{Plots/SimData_Seed67_Plots.pdf}
+\includegraphics[scale = 0.4, page = 6]{Plots/SimData_Seed67_Plots.pdf}
+\end{center}
+\caption{Simulation: 2 groups of curves, Seed 67}
+\label{fig:FigSim_2groups}
+\end{figure}
+
+\end{enumerate}
+
+
+\subsubsection{Permutation test for power of registration}
+We describe a permutation t-type test for two groups of functional data objects. We will extend this test to verify that the iterated registration method improves power. \\
+Let $Y_{1,1}, \dots, Y_{1,n_1}$ and $Y_{2,1}, \dots, Y_{2,n_2}$ be two sets of $n_1$ and $n_2$ curves respectively. Without making any distributional assumptions we want to test if they are from the same distribution.
+Assume 
+\begin{itemize}
+\item $Y_{1,.}\  \stackrel{iid}{\sim} \ \Y_1$
+\item $Y_{2,.}\  \stackrel{iid}{\sim} \ \Y_2$
+\item $Y_{1,i}\  \indep \ Y_{2,j}, \ \ \forall i, j$
+\item Each curve $Y_{1,.}, Y_{2,.}$ have the same number of data points
+\end{itemize}
+\[ H_0: \Y_1 \ \stackrel{\mathcal{D}}{=} \ \Y_2 \ \ vs \ \ H_a: \Y_1 \ \stackrel{\mathcal{D}}{\ne} \ \Y_2 \]
+\begin{enumerate}
+\item Let $\bar{Y}_1(x): $ Pointwise mean of curves of group 1
+\item Let $\bar{Y}_2(x): $ Pointwise mean of curves of group 2
+\item Let $\Var[Y_1(x)]: $ Variance of curves of group 1 at each point $x$ 
+\item Let $\Var[Y_2(x)]: $ Variance of curves of group 2 at each point $x$ 
+\item $T(x) = \frac{|\bar{Y}_1(x) - \bar{Y}_2(x)|}{\sqrt{\frac{1}{n_1}\Var[Y_1(x)] + 
+\frac{1}{n_2}\Var[Y_2(x)]}}$: Absolute value of t-statistic at each point
+\item $T_{\text{sup}}:  \sup\limits_{x} T(x)$ is our Test statistic (measure of difference of two sets of curves)
+\item To get a null distribution of $T_{\text{sup}}$, permute the curves between the two groups, and repeat steps 1 through 6. \\
+\[  \text{p-value} = \frac{1}{N}\sum\limits_{j = 1}^{N}\Ind\{T_{\text{sup, obs}} > T_{\text{sup, permute}} \} \]
+where, $N:$ number of permutations
+\end{enumerate}
+We apply this test to the two groups of simulated data produced from seed 25. There are 20 curves in each group and all of them are noisy, warped version of the same curve. Below are the two groups
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 5]{Plots/SimData_Seed25_Plots.pdf}
+\includegraphics[scale = 0.4, page = 6]{Plots/SimData_Seed25_Plots.pdf}
+\end{center}
+\caption{Simulation: 2 groups of curves, Seed 25}
+\label{fig:FigSim_2groupsSeed25}
+\end{figure}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.5]{Plots/PermTest_Seed25.pdf}
+\end{center}
+\caption{Permutation test between two groups of Seed 25 curves}
+\label{fig:Permtest_2groupsSeed25}
+\end{figure}
+Fig \ref{fig:Permtest_2groupsSeed25} shows the result of the permutation test between two groups of curves generated by seed 25. As expected, there is no significant different between the two sets. The p-value is $0.576$. Now, testing for differences between two sets of curves, one generated by seed 25 and the other by seed 30, we have
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.4, page = 4]{Plots/SimData_Seed25_Plots.pdf}
+\includegraphics[scale = 0.4, page = 4]{Plots/SimData_Seed30_Plots.pdf}
+\end{center}
+\caption{Simulated curves, seed 25 and seed 30}
+\label{fig:FigSim_Seed25and30}
+\end{figure}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.5, page = 1]{Plots/PermTest_Seed25_Seed30.pdf}
+\end{center}
+\caption{Permutation test between seed 25 and seed 30 curves}
+\label{fig:Permtest_Seed25and30}
+\end{figure}
+The permutation test rejects the $H_0$ of equality of distributions of the two sets of curves, p-value = 0.019. 
+
+\subsubsection{Simulation results}
+To test that iterated registration improves power when detecting differences between two groups of curves, we did the following:
+\begin{itemize}
+\item Estimated the permutation p-value (as above) between 1200 seed combinations. The distribution of these p-values is under the alternative hypothesis, since the curves from distinct seeds are being compared.
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.6, page = 2]{Plots/pValue_Comparison_Run08_6.pdf}
+\end{center}
+\caption{Distribution of p-values under the alternative hypothesis, before registration}
+\label{fig:BeforeRegist}
+\end{figure}
+
+\item Took a seed pair, and registered their curves using the iterated registration algorithm, and estimated $T_{\text{sup, obs}}$. Then, permuted the two groups of curves $N = 1000$ times to obtain the permutation distribution from  $T_{\text{sup, permute}}$. Then, we estimated the permutation p-value. 
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.6, page = 3]{Plots/pValue_Comparison_Run08_6.pdf}
+\end{center}
+\caption{Distribution of p-values under the alternative hypothesis, after registration}
+\label{fig:AfterRegist}
+\end{figure}
+
+Fig \ref{fig:AfterRegist} indicates a power improvement as a result of using the iterated registration method. 
+
+\end{itemize} 
+
+
