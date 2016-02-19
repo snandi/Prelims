@@ -128,23 +128,40 @@ Although there are many more intervals in the MM dataset, the coverage is not as
 
 Notice in fig \ref{fig:Coverage_mm1} that in chromosome 1, out of 26,069 intervals, only 12,701 are at least 6kb long, and on an average have a coverage of 30 molecules per interval.
 
+\subsection{Sources of noise in the data} \label{sec_noise}
+Following are some sources of noise that at least need to be controlled for, if eliminating them is not feasible
+\begin{itemize}
+\item When the molecules are stretched on the glass surfaces, different portions of the molecules experience different amount of stretch. Consequently, the features of the intensity profiles could get warped. 
+\item In regions where the molecules are stretched too much, more dye molecules could intercalate, resulting in a brighter image. The quantum yield of the dye molecules is sequence dependent. However, that dependence could reduce where there is a higher density of dye molecules. 
+\item The DNA molecules might not be straight. This could result in inaccurate intensity profiles. There could be other DNA fragments overlapping longer molecules, resulting in local brightness in the image. Some examples of images which would result in noisy observations are shown below
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.5]{Images/Outlier_1.png}
+\includegraphics[scale = 0.3]{Images/Outlier_2.png} \\
+\includegraphics[scale = 0.35]{Images/Outlier_3.png}
+\includegraphics[scale = 0.45]{Images/Outlier_4.png}
+\end{center}
+\caption{Image 1: Molecules too close to each other; \\ Image 2: Too much overlap, and curves molecules; \\Image 3: Fragments overlapping DNA molecules; \\Image 4: Molecules not straight}
+\label{fig:Fig2_OutlierImages}
+\end{figure}
+
+\end{itemize}
+
 \section{Research questions}
-{\bf{Uniqueness}}: The features of the fluorescence intensity profiles of imaged DNA molecules are believed to be influenced by the nucleotide composition of the genome. Hence, molecules aligned to the same location of the genome should exhibit ``similar'' fluorescence intensity profiles. And, consequently, molecules aligned to different regions of the genome, with distinct sequence composition should exhibit discernible fluorescence intensity profiles. This will have significant impact on the future of whole genome analysis using single molecule techniques. For example, the nanocoding system could give way to the fluoroscanning system, by obviating the punctuates chemistry and hence improving the throughput. Using nanocoding and fluoroscanning information, a whole genome could be represented by its fluorescence intensity profile. This is similar to representing a melody in mp3 version. It will not have the exact nucleotide sequence, but will contain enough important information to analyze whole genomes in an extremely economically and swiftly. This technique promises to be the future of precision genomics, if every human being's genome is to be analyzed multiple times over the course of their lives. Just like the mp3 file format revolutionized the music industry, fluoroscanning will do the same to precision genomics. 
+\noindent
+{\bf{Aim 1}}: We want to establish that usable signals with information about genomic sequences could be extracted from the features of the fluorescence intensity profiles of imaged DNA molecules. \\
+\noindent
+{\bf{Aim 2}}: A diploid organism (like human being) is ``heterozygous'' at a genomic locus when its cells contain two different alleles of that locus. We want to extract two sets of fluorescence intensity profiles in regions heterozygous regions, in the human genome. \\
+\noindent
+{\bf{Aim 3}}: We want to relate features in fluorescence intensity profiles to nucleotide sequence compositions. \\
 
-\begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Statistical challenge] %green!40!black=40%green and 60%black
-The primary challenge is to analyze the fluorescence intensity profiles of different regions on both {\emph{M. florum}} and MM genomes. Since the molecular fragments are differentially stretched the features of their intensity profiles are misaligned. Before comparing and contrasting intensity profiles between different regions on the genomes, it is critical that these profiles are aligned to each other. 
-\end{tcolorbox}
-
-{\bf{Heterozygosity}}: A diploid organism (like human being) is ``heterozygous'' at a genomic locus when its cells contain two different alleles of that locus. Two different alleles would mean the same region on the genome will have two distint nucleotide sequence composition, and consequently (fluoroscanning) two distint sets of fluorescence intensity profiles. By nanocoding, the molecules can be aligned to these loci, and by fluoroscanning we would like to detect heterozygous regions on the MM genome. 
-
-\begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Statistical challenge] %green!40!black=40%green and 60%black
-This will entail simultaneously aligning the curve features and testing the presence of multiple clusters in the fluorescence intensity profiles of molecules aligned to the same location on a genome.
-\end{tcolorbox}
-
-{\bf{Quantify Intensity from Sequence Composition}}: We would like to quantify the relationship between sequence composition and fluorescence profiles.
-
-\begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Statistical challenge] %green!40!black=40%green and 60%black
-This will entail creating a probabilistic model between nucleotide sequence composition and the features of the fluorescence intensity profiles.
+\begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Statistical challenges] %green!40!black=40%green and 60%black
+The primary challenge of is to build statistical tools to enable fluoroscanning data analysis. This involves
+\begin{itemize}
+\item Preprocessing the data by understanding the different sources of noise, and appropriately reducing or controlling for them
+\item Estimating a consensus fluorescence intensity profile for each genomic interval
+\item Setting up a hypothesis testing framework where intensity profiles from different genomic regions could be tested for similarity
+\end{itemize}
 \end{tcolorbox}
 
 %\section{Preliminary Analysis}
