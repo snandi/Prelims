@@ -1,0 +1,63 @@
+%=====================================================================
+% Document Style
+%=====================================================================
+% Choose only one of the following document classes:
+%
+% for a 12 Point UW PhD Thesis without Margin Check
+\documentclass[12pt]{article}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Usepackages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexDocs}
+
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+\geometry{left=1.0in, right=1.0in, top=1.0in, bottom=1.0in}
+%\setlength{\voffset}{0.5in}
+%\setlength{\hoffset}{-0.4in}
+%\setlength{\textwidth}{7.6in}
+%\setlength{\textheight}{10in}
+%%%%%%%%%%%%%%%%%%% To change the margins and stuff %%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{Statistical methods for analyzing images of fluorochrome stained DNA molecules}
+\author{Subhrangshu Nandi}
+\date{Mar 1, 2016}
+
+\maketitle
+
+%\begin{abstract}
+%One of the most important components of precision medicine is analysis and use of an individual's genomic information and development of targeted intervention, tailored to the individual. This will entail %building systems that will allow researchers and practitioners to extract important information from a genome, in a parsimonious manner. Next generation sequencing (NGS) systems are enhancing molecular biology in the right direction, but show little promise towards sequencing every human being's genome. In addition, NGS still have difficulty inferring repetitive structures and duplications \cite{Lander_etal_2001_Nature}, further complicated by gaps and errors in the reference genome. Pioneered by laboratory of computational genomics (LMCG) at UW-Madison, {\emph{Fluoroscanning}} is a single-molecule-based whole genome analysis system that can glean extract important information out of a genome in a swift, economical manner. The aim of this project is to develop statistical methods for fluoroscanning - analysis of intensity profiles measured from imaged fluorochrome stained DNA molecules. Aim 1 is to establish that fluorescence intensity profiles measured at different regions have discernible differences if the underlying sequence compositions are distinct. Aim 2 is to detect two sets of fluorescence intensity profiles in heterozygous genomic loci. Aim 3 is to relate features of fluorescence intensity profiles to nucleotide sequence composition. These analyses will be performed on experiments conducted at LMCG, on both ${\emph{M. florum}}$ and a human genome. 
+%\end{abstract}
+
+% Choose your bibliography style
+% plain is the basic style, others include ieeetr, siam, asm, etc
+\bibliographystyle{apalike}
+
+\newpage
+%\include{prelude}                % Title page, abstract, table of contents, etc
+\include{Sec1_Intro}              % Chapter 1
+\include{Sec2_Intensity}          % Chapter 2
+\include{Sec3_Registration}       % Chapter 3
+\include{Sec4_Application}        % Chapter 4
+\include{Sec5_Ongoing}            % Chapter 5
+\include{Sec6_Appendix}           % Chapter 6
+
+%\include{essentials}            % Edited ``Essential LaTeX'' by Jon Warbrick
+%\include{figs}                  % Chapter 3 Edited from UW Math Dept's Sample Thesis
+%\include{bibs}                  % Chapter 4 From PU Thesis styles, by J.D. McCauley
+%\include{usage}                 % Chapter 5 Strongly based on similar by J.D. McCauley
+
+%\bibliography{refs}             % Make the bibliography
+\bibliography{bibTex_Reference}  % Make the bibliography
+
+%\begin{appendices}              % Start of the Appendix Chapters.  If there is only
+                                 % one Appendix Chapter, then use \begin{appendix}
+%\include{code}                  % Including computer code listings
+%\include{bibref}                % a BibTeX reference
+%\include{math}                  % Complex Equations from the UW Math Department
+%\include{acro}                  % A discussion on generating PDF files.
+%\end{appendices}                % End of the Appendix Chapters.  ibid on \end{appendix}
+%\include{vita}                  % Optional Vita, use \begin{vita} vita text \end{vita}
+\end{document}

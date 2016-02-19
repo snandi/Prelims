@@ -9,7 +9,7 @@
 The basic philosophy of functional data analysis (FDA) is to think of observed data functions as single entities, rather than merely as a string of individual observations \cite{Ramsay_2006_Functional}. In
 practice, functional data are discrete observations as $p$ pairs $(x_j, y_j)$, and $y_j (\text{or } y_{ij})$ is a snapshot of the function at position (or time) $x_j$, possibly blurred by measurement error. Pioneered by Ramsay and Silvermann \cite{Ramsay_2006_Functional}, there has been substantial progress in statistical approaches to FDA in recent past. Following are some important aspects FDA that are relevant to our data set, pertaining to the goals of our research. 
 
-\subsubsection{Smoothing} \label{ch3_smooth}
+\subsubsection*{Smoothing} \label{ch3_smooth}
 In fluoroscanning, consider the image of a DNA molecule, as shown in \ref{fig:Fig3_NMap_Intensity}. The grey level of each pixel point of the image of a DNA molecule corresponds to approximately 200 bp of genomic sequence. 
 \begin{figure}[H]
 \begin{center}
@@ -70,7 +70,7 @@ Below is a demonstration of applying the above mentioned data preparation proced
 \label{fig:Fig3_frag1058_norm}
 \end{figure}
 
-\subsubsection{Functional outlier detection} \label{ch3_outlier}
+\subsubsection*{Functional outlier detection} \label{ch3_outlier}
 In addition to variability in the data introduced by different lengths of molecular fragments (aligned to the same genomic locus), and phase variability, there are several other reasons why some molecule could produce an ``outlier'' intensity profile. Below are some images (fig \ref{fig:Fig3_OutlierImages}) of the surfaces with DNA molecules that are examples of outlier intensity profiles. There could be some DNA fragments near the molecule under consideration. There could be molecules crossing each other. Each of those instances would result in some pixel intensity values that would not be appropriate to use in our analyses. 
 
 Using the intensity grey levels of up to three pixels both above and below a molecule, a ``quality score'' was developed to detect some of these outliers. However, more subtle reasons such has slight curvature in the molecule backbones, existence of surface noise underneath the molecule backbones, etc, could still be responsible for producing outlier observations. To address these cases, we used functional data depth measures, as proposed in \cite{Febrero-Bande_etal_2007_Environmetrics}. We use the Fraiman and Muniz depth, introduced in \cite{Fraiman_Muniz_2001_SEIO}. Let $F_{n,x} (y_i (x))$ be the empirical cumulative distribution function of the values of the curves $y_1(x), \dots , y_n(x)$ at a given position $x \in [a, b]$, given by
@@ -111,7 +111,7 @@ Some recent work was published on outliers in functional data. We are working on
 
 We have observed substantial amount of phase variability in the fluorescence intensity data set. Hence, before estimating the consensus fluorescence intensity profiles of genomic regions, it is imperative that we address this variability. Pioneered by Ramsay and Silverman \cite{Ramsay_2006_Functional}, \cite{Ramsay_Li_1998_JRSSB}, \cite{Ramsay_etal_2009_Functional_R}, {\emph{Curve Registration}} is a FDA technique to address the phase variability problem. Section \ref{App_Phase} in Appendix lists some common examples from publicly available datasets that exhibit phase variability in functional data.
 
-\subsubsection{Distance metric}
+\subsubsection*{Distance metric}
 Before discussing the techniques of curve registration, it is important to establish the notion of ``distance'' or ``similarity'' between two smooth functions, or two curves. We use the {\emph{similarity index}} between two curves in $\Real$, introduced in \cite{Sangalli_etal_2009_JASA}. Let $y_i \in L^2(S_i \subset \Real; \Real)$ and $y_j \in L^2(S_j \subset \Real; \Real)$ be differentiable with $y'_i \in L^2(S_i \subset \Real; \Real)$ and $y'_j \in L^2(S_j \subset \Real; \Real)$, and let the domains $S_i \subset T$ and $S_j  \subset T$ be closed intervals in $\Real$ such that $S_{ij} = S_i \intersect S_j$ has a positive Lebesgue measure. $S_{(.)}$ are Sobolev spaces. Assuming that $\|y'_i\|_{L^2(S_{ij})} \ne 0$ and $\|y'_j\|_{L^2(S_{ij})} \ne 0$, the similarity index between $y_i$ and $y_j$ is defined as
 \begin{equation}
 \rho(y_i, y_j) = \frac{\int _{S_{ij}}y'_i(x)y'_j(x) dx}{\sqrt{\int _{S_{ij}}y'_i(x)^2 ds}\sqrt{ \int _{S_{ij}} y'_j(x)^2 dx}}
@@ -127,7 +127,7 @@ This is the cosine of the angle $\theta_{ij}$ between first derivatives of the f
 \[ \rho(y_i \circ h_1, y_j \circ h_2) = \rho(y_i \circ h_1 \circ h_2^{-1}, y_j) = \rho(y_i , y_j \circ h_2 \circ h_1^{-1}) \]
 \end{enumerate}
 
-\subsubsection{The registration problem}
+\subsubsection*{The registration problem}
 It is imperative to eliminate (or at least, reduce) phase variability between replicated curves before further analysis. Pioneered by Silverman in \cite{Silverman_1995_JRSSB}, Ramsay and Li in \cite{Ramsay_Li_1998_JRSSB} and further advanced by Ramsay and Silverman in \cite{Ramsay_2006_Functional}, {\emph{curve registration}} is the technique that address this problem. Let $n$ functions (or curves) $y_1, \dots, y_n$ be defined on a closed real interval $[0, X]$. Let $h_i(x)$ be a transformation of the abcissa $x$ for curve $i$. The warping function is often referred to as ``time warping'' as time is a common abcissa in problems with phase variability. In the context of fluoroscanning, the abcissa is genomic location. The warping function should satisfy the following
 \begin{itemize}
 \item $h(0) = 0$ and $h(X) = X$, $0$ and $X$ being the endpoints of the interval on which the functions are defined.
@@ -136,7 +136,7 @@ It is imperative to eliminate (or at least, reduce) phase variability between re
 \end{itemize}
 The objective of curve registration is that the {\emph{registered}} functions $y_1(h_1(x)), \dots, y_n(h_n(x))$ will have no phase variability. 
 
-\subsubsection{Existing work on curve registration} \label{ch3_registration}
+\subsubsection*{Existing work on curve registration} \label{ch3_registration}
 Marker registration is often used in engineering, biology and other fields. It is the process of aligning curves by identifying the timing of certain salient features in the curves. Curves are then aligned by transforming time (or the abcissa) so that marker events occur at the same values of the transformed times. Comparisons between marker timings can also be made by using corresponding transformed times. Sakoe in Chiba in \cite{Sakoe_Chiba_1978_IEEE} estimated the warping function $h$ at marker timings by minimizing the sum of weighted distances of two speech patterns at the marker timings and imposing monotonicity and continuity on $h$. They solved for the discrete values of $h$ using a dynamic programming algorithm, which widely popularized as {\emph{dynamic time warping}}. Kneip and Gasser in \cite{Kneip_Gasser_1992_AnnStat} studies the statistical aspects, including the asymptotic properties of these estimators \cite{Kneip_etal_2000_CJS}. These methods, however, can be sensitive to errors in feature location, and the  required features may even be missing in some curves. Moreover,substantial phase variation may remain between widely separated markers. In \cite{Kneip_etal_2000_CJS}, they introduce a local nonlinear regression technique, but acknowledge that a lot of tuning parameters are left to user's experimentation and best guess. Following are some of the subsequent curve registration techniques that helped develop an iterated registration algorithm to analyze the fluoroscanning data. \\
 
 \noindent
@@ -203,7 +203,7 @@ functions as Gaussian processes. They go beyond estimation, and inference and pr
 
 {\emph{Note: Not sure how I can compare and contrast these Bayesian methods with the other approaches. Other than the computational time and resources, I am not yet in a position to comment on their relative performance!}}
 
-\subsubsection{Why iterated registration?}
+\subsubsection*{Why iterated registration?}
 Enumerated below are some advantages and disadvantages of the above mentioned techniques, from the perspective of analyzing the fluoroscanning data.
 \begin{itemize}
 \item {\bf{Outlier}}: None of the above methods consider the possibility of presence of a functional outlier in their sample. Hence, their estimates of the warping functions might not be robust to possible outliers. In the fluoroscanning data, as a consequence of the experimental setup of dealing with DNA molecules on glass surfaces, there are multiple reasons why some intensity profiles could be outliers. 
@@ -217,7 +217,7 @@ Enumerated below are some advantages and disadvantages of the above mentioned te
 \item {\bf{Simultaneous clustering and registration}}: Our registration methods needs to be robust enough to be extended to simultaneous registration and clustering to address the question of detecting heterozygotes in diploid human genomes.  
 \end{itemize}
 
-\subsubsection{Iterated registration algorithm}
+\subsubsection*{Iterated registration algorithm}
 Here,  re-define the registration problem with respect to the fluoroscanning data and introduce an ``Iterated registration with weighted average template'' scheme to register the fluorescent intensity profiles.
 For any genomic location where there are $n$ molecular fragments are aligned, let the intensity profiles observed be represented as $z_{i,1}, \dots, z_{i, p_i},\ \ i = 1,\dots, n$, where curve $i$ has $p_i$ points. 
 \begin{itemize}
@@ -244,7 +244,7 @@ where $t$ denotes iteration number, for some predetermined $\epsilon$
 \end{itemize}
 
 \subsection{Hypothesis Testing}
-\subsubsection{Permutation test for power of registration}
+\subsubsection*{Permutation test for power of registration}
 We describe a permutation t-type test for two groups of functional data objects. We will extend this test to verify that the iterated registration method improves power. \\
 Let $Y_{1,1}, \dots, Y_{1,n_1}$ and $Y_{2,1}, \dots, Y_{2,n_2}$ be two sets of $n_1$ and $n_2$ curves respectively. Without making any distributional assumptions we want to test if they are from the same distribution.
 Assume 
@@ -269,7 +269,7 @@ where, $N:$ number of permutations
 \end{enumerate}
 
 We have implemented the iterated registered algorithm in a simulation and used the above mentioned permutation test to verify improvement of power. 
-\subsubsection{Simulation set up}
+\subsubsection*{Simulation set up}
 This simulation set up is considerably more complex than all the simulation studies used to test different curve registration techniques in \cite{Kneip_Ramsay_2008_JASA}, \cite{Srivastava_etal_2011_v2_arXiv}, etc. The goal was to generate data more representative of the noise structure observed in the fluoroscanning dataset. 
 \begin{enumerate}
 \item Set up the abcissa $x$ from $1$ to $40$.
@@ -364,7 +364,7 @@ Fig \ref{fig:Permtest_2groupsSeed25} shows the result of the permutation test be
 \end{figure}
 The permutation test rejects the $H_0$ of equality of distributions of the two sets of curves, p-value = 0.019. 
 
-\subsubsection{Simulation results}
+\subsubsection*{Simulation results}
 To test that iterated registration improves power when detecting differences between two groups of curves, we did the following:
 \begin{itemize}
 \item Estimated the permutation p-value (as above) between 1200 seed combinations. The distribution of these p-values is under the alternative hypothesis, since the curves from distinct seeds are being compared.
