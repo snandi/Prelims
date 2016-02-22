@@ -16,10 +16,10 @@ In fluoroscanning, consider the image of a DNA molecule, as shown in \ref{fig:Fi
 %\includegraphics[scale=1]{Images/Image6_NMap_Intensity.pdf}
 \includegraphics[scale=0.7]{Images/Image6_NMap_Intensity.pdf}
 \end{center}
-\caption{Image of DNA molecule}
+\caption{Image of DNA molecule \cite{Kounovsky_etal_2013_Macromolecules}}
 \label{fig:Fig3_NMap_Intensity}
 \end{figure}
-The pixel intensity value is a result of superimposition of point spread functions of the fluorescent dye molecules intercalated between the nucleotide bases. As demonstrated in fig \ref{fig:Fig3_Bivariate} and \ref{fig:Fig3_Bivariate} below, the intensity value of each pixel is a result of neighboring bases as well. Fig \ref{fig:Fig3_Bivariate} is a superimposition of the point spread functions in fig \ref{fig:Fig3_Bivariate}.  
+The pixel intensity value is a result of superimposition of point spread functions of the fluorescent dye molecules intercalated between the nucleotide bases. As demonstrated in fig \ref{fig:Fig3_Bivariate} and \ref{fig:Fig3_Bivariate} below, the intensity value of each pixel is a result of neighboring bases as well. Fig \ref{fig:Fig3_Bivariate} is a superimposition of the point spread functions in fig \ref{fig:Fig3_Bivariate}. \footnote{These images were generated on the computer to illustrate point spread functions and the gray levels of intensity profiles. These do not represent any fluoroscanning data or analysis.}  
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale = 0.27, page = 2]{Plots/BivariatePlots.pdf}
@@ -33,7 +33,7 @@ The pixel intensity value is a result of superimposition of point spread functio
 
 Hence, there is an inherent smoothness in the underlying fluorescence intensity profiles of the images of the DNA molecules. Fig \ref{fig:Fig3_frag1058_orig} is an example of fluorescence intensity profiles of fragments of DNA molecules that have been aligned to interval 1058 of chromosome 13, of the reference human genome. 
 
-Another important aspect of the data set is the different lengths of the molecular fragments, aligned to the same genomic location. As explained in \ref{sec_noise}, there could be several possible reasons causing this. Aim 1 of this research is to estimate consensus fluorescence intensity profiles of all genomic loci with large enough sample size. In order to estimate a consensus $\hat{\Y}$ from $n$ sample profiles $y_1, \dots, y_n$, each $y_i$ need to be of the same length. This is achieved by smoothing each profile and evaluating the function at regular intervals, based on the length of the reference interval. 
+Another important aspect of the data set is the different lengths of the molecular fragments, aligned to the same genomic interval. As explained in \ref{sec_noise}, there could be several possible reasons causing this. Part of Aim 1 of this research is to estimate consensus fluorescence intensity profiles of all genomic intervals with large enough sample size. In order to estimate a consensus $\hat{\Y}$ from $n$ sample profiles $y_1, \dots, y_n$, each $y_i$ need to be of the same length. This is achieved by smoothing each profile and evaluating the function at regular intervals, based on the length of the reference interval. 
 
 \begin{figure}[H]
 \begin{center}
@@ -45,11 +45,12 @@ Another important aspect of the data set is the different lengths of the molecul
 Below is the smoothing procedure applied to fluorescence intensity data, before any further analysis:
 \begin{enumerate}
 \item Normalizing:\\
-As can be seen in fig \ref{fig:Fig3_frag1058_orig} the intensity values range between 6,000 and 12,000. This is because these fragments are parts of molecules that have been imaged on different glass surfaces. Some surfaces appear brighter than others. In order to eliminate the surface ``effect'', each intensity profile was divided by the median value of that fragment. The normalization is done after chopping off 5 pixels from either end of the intensity profiles, as those values could be dampened (or amplified) by the presence of the red punctuates that separate the molecular fragments.
+As can be seen in fig \ref{fig:Fig3_frag1058_orig} the intensity values range between 6,000 and 12,000. This is because these fragments are parts of molecules that have been imaged on different glass surfaces. Some surfaces appear brighter than others. In order to eliminate the surface ``effect'', each intensity profile was divided by the median value of that fragment. The normalization is done after truncating 5 pixels from either end of the intensity profiles, as those values could be dampened (or amplified) by the presence of the red punctuates that separate the molecular fragments.
+
 \item Basis choice:\\
 We used B-spline \cite{deBoor_1978_Splines} to smooth each of intensity profile individually. For an intensity profile $y_i$, with $p$ observed points $y_{i,1}, \dots, y_{i,p}$, we used $\frac{p}{2}$ breakpoints, with $4^{th}$ order basis functions. Since the number of basis functions and their orders have the following relationship, 
 \begin{eqnarray*}
-n_{\text{basis}} &=& n_{\text{breakpoints}} + n_{\text{order}} - 2 \\
+n_{\text{basis}} &=& n_{\text{knots}} + n_{\text{order}} - 2 \\
                  &=& \frac{p}{2} + 4 - 2\\ 
                  &=& \frac{p}{2} + 2
 \end{eqnarray*}
@@ -66,7 +67,7 @@ Below is a demonstration of applying the above mentioned data preparation proced
 \includegraphics[scale = 0.42, page = 3]{Plots/chr13_frag1058.pdf}
 \includegraphics[scale = 0.42, page = 4]{Plots/chr13_frag1058.pdf}
 \end{center}
-\caption{Normalized and Smoothed Intensity profiles of fragments of molecules aligned to human chr 13, interval 1058}
+\caption{Normalized and Smoothed Intensity profiles of fragments of molecules aligned to human chr 13, interval 1058, evaluated at 22 equidistant points. $(p = 22)$}
 \label{fig:Fig3_frag1058_norm}
 \end{figure}
 
@@ -174,7 +175,7 @@ The consider $W$ as a group of strictly increasing affine transformations of the
 W = \{h:h(s) = as + b,\ \ a \in \Real^{+}, b \in \Real  \}
 \label{eq:3_affine}
 \end{equation}
-This approach is quite intuitive and elegant. This is the first approach that defines a metric to estimate the quality of a registration procedure and use it as a convergence criterion of the iterative E-M algorithm. Similar to local linear regression method in \cite{Kneip_etal_2000_CJS} and the MSE method in \cite{Ramsay_2006_Functional}, they start the registration procedure with the mean of the curves as the template and update the template at each ``Expectation'' step of the E-M algorithm. They successfully extend this algorithm to simultaneous clustering and registration of curves in \cite{Sangalli_etal_2010_CSDA} and \cite{Sangalli_etal_2014_EJS}. 
+This approach is quite intuitive and elegant. This is the first approach that defines a metric to estimate the quality of a registration procedure and use it as a convergence criterion of the iterative E-M algorithm. Similar to local linear regression method in \cite{Kneip_etal_2000_CJS} and the MSE method in \cite{Ramsay_2006_Functional}, they start the registration procedure with the mean of the curves as the template and update the template at each ``Expectation'' step of the E-M algorithm. They successfully extend this algorithm to simultaneous clustering and registration of curves in \cite{Sangalli_etal_2010_CSDA} and \cite{Sangalli_etal_2014_EJS}. \\
 
 \noindent
 {\bf{Registration using the Fisher-Rao metric}} \\
@@ -201,16 +202,16 @@ In the Fisher-Rao method they were able to include in the space of warping funct
 Zhang and Inoue developed a Bayesian hierarchical curve registration in \cite{Telesca_Inoue_2008_JASA}. Their approach provides a natural framework for assessing uncertainty in the estimated time-transformation and shape functions and allows derivation of exact inferences about a richer set of quantities of interest. Zhang and Telesca in \cite{Zhang_Telesca_2014_arXiv} extended it to a Bayesian hierarchical approach to joint clustering and registration of functional data. They combined a Dirichlet process mixture model for clustering of common shapes, with a reproducing kernel representation of phase variability for registration. Earls and Hooker in \cite{Earls_Hooker_2015_arXiv} proposed an adapted variational Bayes algorithm for registering, smoothing and prediction for functional data. They model the registered 
 functions as Gaussian processes. They go beyond estimation, and inference and provide the framework of prediction of registered functions. 
 
-{\emph{Note: Not sure how I can compare and contrast these Bayesian methods with the other approaches. Other than the computational time and resources, I am not yet in a position to comment on their relative performance!}}
+%{\emph{Note: Not sure how I can compare and contrast these Bayesian methods with the other approaches. Other than the computational time and resources, I am not yet in a position to comment on their relative performance!}}
 
 \subsubsection*{Why iterated registration?}
-Enumerated below are some advantages and disadvantages of the above mentioned techniques, from the perspective of analyzing the fluoroscanning data.
+Enumerated below are the reasons why iterated registration is necessary for fluoroscanning analysis. 
 \begin{itemize}
-\item {\bf{Outlier}}: None of the above methods consider the possibility of presence of a functional outlier in their sample. Hence, their estimates of the warping functions might not be robust to possible outliers. In the fluoroscanning data, as a consequence of the experimental setup of dealing with DNA molecules on glass surfaces, there are multiple reasons why some intensity profiles could be outliers. 
+\item {\bf{Outlier}}: None of the above methods consider the possibility of presence of a functional outlier in their sample. Hence, their estimates of the warping functions might not be robust to possible outliers. In the fluoroscanning data, as a consequence of the experimental setup of presenting DNA molecules on glass surfaces, there are multiple reasons why some intensity profiles could be outliers. It is important to detect, but not necessarily discard, intensity profiles with unusual features.
 
-\item {\bf{Starting template}}: In most of the methods above, the cross-sectional mean of the curve sample is the starting template to which the rest of the curves are registered to. This approach works well if the noise to signal ratio is small, and the extent of abcissa warping is limited. However, in the fluoroscanning data, the signals are warped to a much larger extent and more often than not, the cross-sectional mean of intensity profiles is not representative of the true features of that sample of curves. We will develop a iterated registration scheme, similar to \cite{Sangalli_etal_2009_JASA}, but the estimation of our template at each ``expectation'' step of the E-M algorithm will be more sophisticated and robust.
+\item {\bf{Starting template}}: In most of the methods above, the cross-sectional mean of the curve sample is the starting template to which the rest of the curves are registered to. This approach works well if the noise to signal ratio is small, and the extent of abcissa warping is limited. However, in the fluoroscanning data, the signals are warped to a much larger extent and consequently, the cross-sectional mean of intensity profiles is not representative of the true features of that sample of curves. We present an iterated registration scheme, similar to \cite{Sangalli_etal_2009_JASA}, but the estimation of our template at each ``expectation'' step of the E-M algorithm will be more sophisticated and robust.
 
-\item {\bf{Warping functions}}: Estimating the inverse of the warping functions are critical to registering out-of-phase functional data. These functions contain information about the reasons behind the phase variability in the first place. In fluoroscanning, it is important that the estimation of these warping functions are consistent even when sub-intervals of longer genomic intervals are analyzed. It is important to investigate if the warping functions have any sequence dependence, or if they result from experimental artifacts. Hence, it is critical that warping functions are smooth, and interpretable. However, at the same time, it is important for warping functions to contain higher order terms to contain information about sub-genomic-interval warping. Hence, warping functions cannot be as simple as affine transformations of the abcissa, as considered in \cite{Sangalli_etal_2009_JASA}. 
+\item {\bf{Warping functions}}: Estimating the inverse of the warping functions are critical to registering out-of-phase functional data. These functions contain information about the phase variability. In fluoroscanning, it is important that the estimation of these warping functions are consistent even when sub-intervals of longer genomic intervals are analyzed. It is important to investigate if the warping functions have any sequence dependence, or if they result from experimental artifacts. Hence, it is critical that warping functions are smooth, and interpretable. However, at the same time, it is important for warping functions to contain higher order terms to contain information about sub-genomic-interval warping. Hence, warping functions cannot be as simple as affine transformations of the abcissa, as considered in \cite{Sangalli_etal_2009_JASA}. Neither could they be as complex and uninterpretable as in \cite{Srivastava_etal_2011_v2_arXiv}. 
 
 \item {\bf{Quality of registration}}: As introduced in \cite{Sangalli_etal_2009_JASA}, it is important to evaluate the quality of the registration procedure. 
 
@@ -218,8 +219,8 @@ Enumerated below are some advantages and disadvantages of the above mentioned te
 \end{itemize}
 
 \subsubsection*{Iterated registration algorithm}
-Here,  re-define the registration problem with respect to the fluoroscanning data and introduce an ``Iterated registration with weighted average template'' scheme to register the fluorescent intensity profiles.
-For any genomic location where there are $n$ molecular fragments are aligned, let the intensity profiles observed be represented as $z_{i,1}, \dots, z_{i, p_i},\ \ i = 1,\dots, n$, where curve $i$ has $p_i$ points. 
+Here, we re-define the registration problem with respect to the fluoroscanning data and introduce an ``Iterated registration with weighted average template'' scheme to register the fluorescent intensity profiles.
+For any genomic interval where there are $n$ molecular fragments aligned, let the intensity profiles observed be represented as $z_{i,1}, \dots, z_{i, p_i},\ \ i = 1,\dots, n$, where curve $i$ has $p_i$ points. 
 \begin{itemize}
 \item {\bf{Step 1}} Normalize and smooth: As explained in section \ref{ch3_smooth}, we normalize all the intensity profiles, smooth them using B-splines, and evaluate at $p + 1$ equidistant points, where $p = \frac{Q}{206}$, where the genomic interval has $Q$ base pairs. Let these smooth functions be $y_{i,1}, \dots, y_{i,p},\ \ i = 1,\dots,n$. 
 \item {\bf{Step 2}} Detect outliers: As explained in section \ref{ch3_outlier}, we detect functional outliers in the data set, using Fraiman and Muniz functional depth. 
@@ -232,7 +233,7 @@ where $y_i \in \Real^p, \ i = 1,\dots,n$ and $\|u \| = \sqrt{\sum\limits_{j = 1}
 \[ \phi = \frac{1}{n}\sum\limits_{i = 1}^n \rho(y_i, y_m) y_i \]
 \end{enumerate}
 This 2-step process ensures that the template to register to has little influence from an outlier curve, at the same time giving higher weights to curves that have retained some similarity between their features, in spite of being warped. 
-\item {\bf{Step 4}} Registration with varying roughness penalty [{\emph{Maximization step}}]: We use the minimum second eigenvalue method to register the curves to the template $\phi$. As explained in \ref{ch3_registration}, the penalty parameter $\lambda$ plays an important role in registering nearby features of the curves. For a higher value of $\lambda$, even distant features will get registered, and for lower values of $\lambda$ only the features that are close by will be registered. We start the iterated process with $\lambda = 1$ and gradually lower the values every iteration. This ensures that we gradually increase our confidence in the template that we register to. 
+\item {\bf{Step 4}} Registration with varying roughness penalty [{\emph{Maximization step}}]: We use the minimum second eigenvalue method to register the curves to the template $\phi$. As explained in \ref{ch3_registration}, the penalty parameter $\lambda$ plays an important role in registering nearby features of the curves. For a higher value of $\lambda$, even distant features will get registered, and for lower values of $\lambda$ only the features that are close by will be registered. We start the iterated process with $\lambda = 1$ and gradually lower the values every iteration. This ensures that we gradually increase our confidence in the template that we register to. \\
 \begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Work in progress] %green!40!black=40%green and 60%black
 We want to quantify the choice of $\lambda$ to some measure of the phase variability, and it is currently under investigation. We believe this is an interesting contribution to the ``registration'' technique, particularly when applied to a complex data set like fluoroscanning.
 \end{tcolorbox}

@@ -1,17 +1,8 @@
 \section{Data Structure} \label{Ch2}
 
 \subsection{Fluorescence Intensity Profiles}
-Nanocoding \cite{Jo_etal_2007_PNAS}, \cite{Jo_etal_2009}, invented in LMCG, is a more advanced DNA barcoding technique, to obtain genome-wide restriction maps. In nanocoding, molecules are labeled with the restriction enzyme Nb.BbvCI, which cleaves the sequence GC\^\ TGAGG on single strands of double-stranded DNA molecules. The cleaved sites are made detectable by nick translation using fluorochrome-labeled nucleotides. The cleaved sites are called punctuates. The labeling is done in test tubes and then presented on nanoscale tubes (fig \ref{fig:Fig2_NanoSlit}) for imaging and subsequent measurements. 
-%\begin{wrapfigure}{l}{0.5\textwidth}
-%\includegraphics[width=0.9\linewidth]{Images/Image_Nanoslit.jpg} 
-\begin{figure}[H]
-\begin{center}
-\includegraphics[scale = 0.3]{Images/Image_Nanoslit.pdf}
-\end{center}
-\caption{Nanoslits where DNA molecules are presented}
-\label{fig:Fig2_NanoSlit}
-\end{figure}
-The negatively charged DNA molecules are deposited onto positively charged glass surface. The surface with DNA are then stained with YOYO-I dye, so they can be imaged by fluorescence microscopy. An integrated image acquisition and machine vision system was developed in LMCG to automatically detect and analyze molecule within the collected image data. Details of the image processing steps can be found in \cite{Dimalanta_etal_2004_AnalChem}, \cite{Jo_etal_2007_PNAS}, \cite{Ravindran_Gupta_2015_GigaScience}. The image processing softwares scans through images of surfaces presented with DNA molecules, as shown below in fig \ref{fig:Fig2_FrameImage}. It shows images of multiple straight DNA molecules which are stained with the YOYO-I dye which fluoresce when excited by the laser-illuminated microscope.  
+An integrated image acquisition and machine vision system was developed in LMCG to automatically detect and analyze molecule within the collected image data. Details of the image processing steps can be found in \cite{Dimalanta_etal_2004_AnalChem}, \cite{Jo_etal_2007_PNAS}, \cite{Ravindran_Gupta_2015_GigaScience}. INCA (not published) is machine vision software developed by Dr. Prabu Ravindran that considers two color, Nanocoding image datsaets and extracts restriction maps from individual molecules to create larges files of Nmaps (1 Nmap = one restriction mapped DNA molecule). Fig \ref{fig:Fig2_FrameImage} below shows images of multiple straight DNA molecules which are stained with the YOYO-I dye which fluoresce when excited by the laser-illuminated microscope.
+
 \begin{figure}[H]
 \begin{center}
 %\includegraphics[width=0.55\textwidth, bb=0 0 700 350]{Images/Image4_FrameImage.png}
@@ -20,23 +11,25 @@ The negatively charged DNA molecules are deposited onto positively charged glass
 \caption{Image of a surface with stained DNA molecules}
 \label{fig:Fig2_FrameImage}
 \end{figure}
+
 The restriction maps (named Nmaps, for ``nanocoded'' maps) are obtained by meticulous image processing software that analyze the images, to measure the lengths between two consecutive punctuates. 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=1]{Images/Image5_NMap.png}
+\includegraphics[scale=0.8]{Images/Image5_NMap.png}
 \end{center}
-\caption{5 DNA molecules aligned to reference}
+\caption{5 DNA molecules aligned to reference \cite{Kounovsky_etal_2013_Macromolecules}}
 \label{fig:Fig2_NMap}
 \end{figure}
 
-These Nmaps are used to align the molecules to an {\emph{in silicon}} reference map of a reference genome. Fig \ref{fig:Fig2_NMap} shows how five DNA molecules are nanocoded and aligned to a reference genome. Notice that intervals 5 and 6 (from the left) of the reference genome have a depth of 5, i.e., 5 molecular fragments are aligned to that interval. However, interval 4 has a depth of 4. \\
-
-The YOYO-I dye, used to stain the DNA molecules. The dyes exhibit very large degrees of fluorescence enhancement on binding to nucleic acids \cite{Rye_etal_1992_NAR}, \cite{Lee_etal_1986_Cytometry}. These characteristics of fluorescence enhancement and high binding affinity are crucial for nanocoding. Netzel, et al, 1995 \cite{Netzel_etal_1995_JPC} observed a 2-fold quantum yield increase when switching from AT-rich regions to GC-rich regions. Larsson, et al, 1994, (\cite{Larsson_etal_1994_JACS}) also observed that the fluorescence intensity of YO depends on the base sequence. This is fundamental to fluoroscanning.  
+These Nmaps are used to align the molecules to an {\emph{in silico}} reference map of a reference genome. Fig \ref{fig:Fig2_NMap} shows how five DNA molecules are nanocoded and aligned to a reference genome. Notice that intervals 5 and 6 (from the left) of the reference genome have a depth of 5, i.e., 5 molecular fragments are aligned to that interval. However, interval 4 has a depth of 4. \\
 
 \subsection{Data description} \label{Ch2_data}
 Throughout this thesis, we will use images collected during nanocoding {\emph{Mesoplasma florum (M. florum)}} genome and a multiple myeloma (MM) genome. Below are brief data descriptions of the two datasets.
 \subsubsection*{\emph{Mesoplasma florum (M. florum)}}
-{\emph{M. florums}} are members of the class Mollicutes, a large group of bacteria that lack a cell wall and have a characteristically low GC content (\cite{Razin_etal_1998_MMBR}). These diverse organisms are parasites in a wide range of hosts, including humans, animals, insects, plants, and cells grown in tissue culture (\cite{Razin_etal_1998_MMBR}). Aside from their role as potential pathogens, {\emph{M. florums}} are of interest because of their extremely small genome size. The {\emph{M. florum}} has only one chromosome, and its NMap consists of 39 intervals. This implies, the reference genome has 38 restriction sites. The whole genome is approximately 793kb long. The intervals are between 2.111kb and 81.621kb. One of the goals of fluoroscanning it to analyze how similar the fluorescence intensity profiles of segments of different molecules aligned to the same location on a genome are. 
+{\emph{M. florums}} are members of the class Mollicutes, a large group of bacteria that lack a cell wall and have a characteristically low GC content (\cite{Razin_etal_1998_MMBR}). These diverse organisms are parasites in a wide range of hosts, including humans, animals, insects, plants, and cells grown in tissue culture (\cite{Razin_etal_1998_MMBR}). Aside from their role as potential pathogens, {\emph{M. florums}} are of interest because of their extremely small genome size. The {\emph{M. florum's}} NMap consists of 39 intervals. This implies, the reference genome has 38 restriction sites. The whole genome is approximately 793 kb long. The intervals are between 2.111 kb and 81.621 kb. 
+
+One natural consequence of fluoroscanning is that the fluorescence intensity profiles of molecular fragments aligned to the same reference interval will have similar features, since the underlying sequence composition is the same. This will be tested as part of Aim 1 \ref{Aims}. 
+
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.42,page=1]{Plots/MF_Frag15.pdf}
@@ -48,7 +41,7 @@ Throughout this thesis, we will use images collected during nanocoding {\emph{Me
 
 Fig \ref{fig:Fig2_MF_Frag15} shows fluorescence intensity profiles of fragments of 12 DNA molecules that have been aligned to interval 15 of {\emph{M. florum}} genome. The interval is 11.119kb long and each pixel of the captured images correspond to around 209 base pairs on the genome. So, under perfect experimental conditions, each of these fragments should be 53 ($\frac{11119}{209} = 53.2$) pixels long. However, due to several reasons the molecule lengths do not perfectly align with that of the reference. As the dye molecules intercalate between the bases of the DNA molecules, there could be local deformation of the molecules, resulting in more dye molecules to seep in. This could result in slight elongation of the DNA molecule and hence it captures more pixels in the image. This phenomenon of ``stretching'' of molecules is hard to control experimentally, as it involves meticulous measurement of dye and DNA molecule concentrations. Furthermore, when one end of a negatively charged DNA molecule attaches to the positively charged glass surface and the rest of the molecule elongates in the direction of the analyte flow, it also causes differential stretching. 
 
-In the {\emph{M. florum}} dataset, we have molecular fragments aligned to 39 intervals on the reference genome. The lengths of these intervals vary from 2.111kb - 81.620kb, with the average lengths of these intervals being 20.34kb. 
+In the {\emph{M. florum}} dataset, we have molecular fragments aligned to 39 intervals on the reference genome. The lengths of these intervals vary from 2.111 kb - 81.620 kb, with the average lengths of these intervals being 20.34 kb. 
 % latex table generated in R 3.2.2 by xtable 1.8-0 package
 % Tue Feb 16 15:11:00 2016
 \begin{table}[H]
@@ -73,14 +66,14 @@ In the {\emph{M. florum}} dataset, we have molecular fragments aligned to 39 int
   \hline
   \hline
 \end{tabular}
-\caption{Coverage of {\emph{M.florum}} data}
+\caption{Coverage of {\emph{M. florum}} data}
 \label{tab:mftable}
 \end{table}
 
-Table \ref{tab:mftable} lists the coverage of the {\emph{M.florum}} data from interval 0 - 7. The rest of the intervals are in \ref{tab:App_mftable}. For example, interval 7 has 1200 molecular fragments aligned to it. Ideally, all of them should be of length 10.24 kb, but in reality the lengths of these fragments lie between 6.74 kb and 12.22 kb, the average being 10.20 kb. 
+Table \ref{tab:mftable} lists the coverage of the {\emph{M. florum}} data from interval 0 - 7. The rest of the intervals are in \ref{tab:App_mftable}. For example, interval 7 has 1200 molecular fragments aligned to it. Ideally, all of them should be of length 10.24 kb, but in reality the lengths of these fragments lie between 6.74 kb and 12.22 kb, the average being 10.20 kb. 
 
 \subsubsection*{Human genome - multiple myeloma}
-We have nanocoded data of a human genome from DNA samples were prepared from purified CD138 plasma cells (MM-S and MM-R sample) and paired cultured stromal cells (normal) from a 58-y-old male MM patient with International Staging System (ISS) Stage IIIb disease. Multiple myeloma is the malignancy of B lymphocytes that terminally differentiate into long-lived, antibody-producing plasma cells. Although it is a cancer genome, substantial portions of it are still identical to the reference human genome. This genome has been comprehensively analyzed to characterize its genome structure and variation by integrating findings from optical mapping with those from DNA sequencing-based genomic analysis \cite{Gupta_etal_2015_PNAS}. While the {\emph{M. florum}} genome only had 39 intervals, the table below (table \ref{tab:mm52intervals})lists the number of intervals each chromosome of the human genome contains.
+We have nanocoded data of a human genome from DNA samples were prepared from purified CD138 plasma cells (MM-S and MM-R sample) and paired cultured stromal cells (normal) from a 58-y-old male MM patient with International Staging System (ISS) Stage IIIb disease. Multiple myeloma is the malignancy of B lymphocytes that terminally differentiate into long-lived, antibody-producing plasma cells. Although it is a cancer genome, substantial portions of it are still identical to the reference human genome. This genome has been comprehensively analyzed to characterize its genome structure and variation by integrating findings from optical mapping with those from DNA sequencing-based genomic analysis \cite{Gupta_etal_2015_PNAS}. While the {\emph{M. florum}} genome only had 39 intervals, the table below (table \ref{tab:mm52intervals}) lists the number of intervals each chromosome of the human genome contains.
 
 \begin{table}[H]
 \centering
@@ -126,7 +119,7 @@ Although there are many more intervals in the MM dataset, the coverage is not as
 \label{fig:Coverage_mm2}
 \end{figure}
 
-Notice in fig \ref{fig:Coverage_mm1} that in chromosome 1, out of 26,069 intervals, only 12,701 are at least 6kb long, and on an average have a coverage of 30 molecules per interval.
+Notice in fig \ref{fig:Coverage_mm1} that in chromosome 1, out of 26,069 intervals, only 12,701 are at least 6kb long, and on an average have a coverage of 30 molecules (NMaps) per interval.
 
 \subsection{Sources of noise in the data} \label{sec_noise}
 Following are some sources of noise that at least need to be controlled for, if eliminating them is not feasible
@@ -151,22 +144,15 @@ Following are some sources of noise that at least need to be controlled for, if 
 \noindent
 {\bf{Aim 1}}: We want to establish that usable signals with information about genomic sequences could be extracted from the features of the fluorescence intensity profiles of imaged DNA molecules. \\
 \noindent
-{\bf{Aim 2}}: A diploid organism (like human being) is ``heterozygous'' at a genomic locus when its cells contain two different alleles of that locus. We want to extract two sets of fluorescence intensity profiles in regions heterozygous regions, in the human genome. \\
-\noindent
-{\bf{Aim 3}}: We want to relate features in fluorescence intensity profiles to nucleotide sequence compositions. \\
+{\bf{Aim 2}}: A diploid organism (like human being) is ``heterozygous'' at a genomic locus when there are multiple genotypes at that locus. To extract two sets of fluorescence intensity profiles in heterozygous regions we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is transalated to detectable dissimilarity in the fluorescence intensity profiles?
 
 \begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Statistical challenges] %green!40!black=40%green and 60%black
 The primary challenge of is to build statistical tools to enable fluoroscanning data analysis. This involves
 \begin{itemize}
 \item Preprocessing the data by understanding the different sources of noise, and appropriately reducing or controlling for them
 \item Estimating a consensus fluorescence intensity profile for each genomic interval
-\item Setting up a hypothesis testing framework where intensity profiles from different genomic regions could be tested for similarity
+\item Setting up a hypothesis testing framework where intensity profiles from different genomic intervals could be tested for similarity
 \end{itemize}
 \end{tcolorbox}
-
-%\section{Preliminary Analysis}
-%\begin{tcolorbox}[colback=red!5,colframe=red!40!black,title=Work in progress] %green!40!black=40%green and 60%black
-%I feel like I should revisit the ANOVA, and post-hoc tests that I had done with {\emph{M.florum}} data, and use the quality scores to eliminate outliers detected by analyzing the morphological features.
-%\end{tcolorbox}
 
 
