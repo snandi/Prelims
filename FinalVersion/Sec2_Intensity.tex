@@ -1,7 +1,7 @@
 \section{Data Structure} \label{Ch2}
 
 \subsection{Fluorescence Intensity Profiles}
-An integrated image acquisition and machine vision system was developed in LMCG to automatically detect and analyze molecule within the collected image data. Details of the image processing steps can be found in \cite{Dimalanta_etal_2004_AnalChem}, \cite{Jo_etal_2007_PNAS}, \cite{Ravindran_Gupta_2015_GigaScience}. INCA (not published) is machine vision software developed by Dr. Prabu Ravindran that considers two color, Nanocoding image datsaets and extracts restriction maps from individual molecules to create larges files of Nmaps (1 Nmap = one restriction mapped DNA molecule). Fig \ref{fig:Fig2_FrameImage} below shows images of multiple straight DNA molecules which are stained with the YOYO-I dye which fluoresce when excited by the laser-illuminated microscope.
+An integrated image acquisition and machine vision system was developed in LMCG to automatically detect and analyze molecule within the collected image data. Details of the image processing steps can be found in \cite{Dimalanta_etal_2004_AnalChem}, \cite{Jo_etal_2007_PNAS}, \cite{Ravindran_Gupta_2015_GigaScience}. INCA (not published) is machine vision software developed by Dr. Prabu Ravindran that considers two color, Nanocoding image data-sets and extracts restriction maps from individual molecules to create larges files of Nmaps (1 Nmap = one restriction mapped DNA molecule). Fig \ref{fig:Fig2_FrameImage} below shows images of multiple straight DNA molecules which are stained with the YOYO-I dye which fluoresce when excited by the laser-illuminated microscope.
 
 \begin{figure}[H]
 \begin{center}
@@ -24,7 +24,7 @@ The restriction maps (named Nmaps, for ``nanocoded'' maps) are obtained by metic
 These Nmaps are used to align the molecules to an {\emph{in silico}} reference map of a reference genome. Fig \ref{fig:Fig2_NMap} shows how five DNA molecules are nanocoded and aligned to a reference genome. Notice that intervals 5 and 6 (from the left) of the reference genome have a depth of 5, i.e., 5 molecular fragments are aligned to that interval. However, interval 4 has a depth of 4. \\
 
 \subsection{Data description} \label{Ch2_data}
-Throughout this thesis, we will use images collected during nanocoding {\emph{Mesoplasma florum (M. florum)}} genome and a multiple myeloma (MM) genome. Below are brief data descriptions of the two datasets.
+Throughout this thesis, we will use images collected during nanocoding {\emph{Mesoplasma florum (M. florum)}} genome and a multiple myeloma (MM) genome. Below are brief data descriptions of the two data-sets.
 \subsubsection*{\emph{Mesoplasma florum (M. florum)}}
 {\emph{M. florums}} are members of the class Mollicutes, a large group of bacteria that lack a cell wall and have a characteristically low GC content (\cite{Razin_etal_1998_MMBR}). These diverse organisms are parasites in a wide range of hosts, including humans, animals, insects, plants, and cells grown in tissue culture (\cite{Razin_etal_1998_MMBR}). Aside from their role as potential pathogens, {\emph{M. florums}} are of interest because of their extremely small genome size. The {\emph{M. florum's}} NMap consists of 39 intervals. This implies, the reference genome has 38 restriction sites. The whole genome is approximately 793 kb long. The intervals are between 2.111 kb and 81.621 kb. 
 
@@ -41,7 +41,7 @@ One natural consequence of fluoroscanning is that the fluorescence intensity pro
 
 Fig \ref{fig:Fig2_MF_Frag15} shows fluorescence intensity profiles of fragments of 12 DNA molecules that have been aligned to interval 15 of {\emph{M. florum}} genome. The interval is 11.119kb long and each pixel of the captured images correspond to around 209 base pairs on the genome. So, under perfect experimental conditions, each of these fragments should be 53 ($\frac{11119}{209} = 53.2$) pixels long. However, due to several reasons the molecule lengths do not perfectly align with that of the reference. As the dye molecules intercalate between the bases of the DNA molecules, there could be local deformation of the molecules, resulting in more dye molecules to seep in. This could result in slight elongation of the DNA molecule and hence it captures more pixels in the image. This phenomenon of ``stretching'' of molecules is hard to control experimentally, as it involves meticulous measurement of dye and DNA molecule concentrations. Furthermore, when one end of a negatively charged DNA molecule attaches to the positively charged glass surface and the rest of the molecule elongates in the direction of the analyte flow, it also causes differential stretching. 
 
-In the {\emph{M. florum}} dataset, we have molecular fragments aligned to 39 intervals on the reference genome. The lengths of these intervals vary from 2.111 kb - 81.620 kb, with the average lengths of these intervals being 20.34 kb. 
+In the {\emph{M. florum}} data-set, we have molecular fragments aligned to 39 intervals on the reference genome. The lengths of these intervals vary from 2.111 kb - 81.620 kb, with the average lengths of these intervals being 20.34 kb. 
 % latex table generated in R 3.2.2 by xtable 1.8-0 package
 % Tue Feb 16 15:11:00 2016
 \begin{table}[H]
@@ -100,7 +100,7 @@ We have nanocoded data of a human genome from DNA samples were prepared from pur
 \caption{Number of intervals in each human chromosome}
 \label{tab:mm52intervals}
 \end{table}
-Although there are many more intervals in the MM dataset, the coverage is not as deep as that of the {\emph{M. florum}} dataset. Below are some plots of the coverage of 4 of the chromosomes
+Although there are many more intervals in the MM data-set, the coverage is not as deep as that of the {\emph{M. florum}} data-set. Below are some plots of the coverage of 4 of the chromosomes
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale = 0.46, page = 1]{Plots/mm52_Coverage.pdf}
@@ -144,7 +144,7 @@ Following are some sources of noise that at least need to be controlled for, if 
 \noindent
 {\bf{Aim 1}}: We want to establish that usable signals with information about genomic sequences could be extracted from the features of the fluorescence intensity profiles of imaged DNA molecules. \\
 \noindent
-{\bf{Aim 2}}: A diploid organism (like human being) is ``heterozygous'' at a genomic locus when there are multiple genotypes at that locus. To extract two sets of fluorescence intensity profiles in heterozygous regions we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is transalated to detectable dissimilarity in the fluorescence intensity profiles?
+{\bf{Aim 2}}: A diploid organism (like human being) is ``heterozygous'' at a genomic locus when there are multiple genotypes at that locus. To extract two sets of fluorescence intensity profiles in heterozygous regions we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
 
 \begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Statistical challenges] %green!40!black=40%green and 60%black
 The primary challenge of is to build statistical tools to enable fluoroscanning data analysis. This involves

@@ -110,7 +110,7 @@ Some recent work was published on outliers in functional data. We are working on
 
 \subsection{Estimation of consensus} \label{Ch3_Regist}
 
-We have observed substantial amount of phase variability in the fluorescence intensity data set. Hence, before estimating the consensus fluorescence intensity profiles of genomic regions, it is imperative that we address this variability. Pioneered by Ramsay and Silverman \cite{Ramsay_2006_Functional}, \cite{Ramsay_Li_1998_JRSSB}, \cite{Ramsay_etal_2009_Functional_R}, {\emph{Curve Registration}} is a FDA technique to address the phase variability problem. Section \ref{App_Phase} in Appendix lists some common examples from publicly available datasets that exhibit phase variability in functional data.
+We have observed substantial amount of phase variability in the fluorescence intensity data set. Hence, before estimating the consensus fluorescence intensity profiles of genomic regions, it is imperative that we address this variability. Pioneered by Ramsay and Silverman \cite{Ramsay_2006_Functional}, \cite{Ramsay_Li_1998_JRSSB}, \cite{Ramsay_etal_2009_Functional_R}, {\emph{Curve Registration}} is a FDA technique to address the phase variability problem. Section \ref{App_Phase} in Appendix lists some common examples from publicly available data-sets that exhibit phase variability in functional data.
 
 \subsubsection*{Distance metric}
 Before discussing the techniques of curve registration, it is important to establish the notion of ``distance'' or ``similarity'' between two smooth functions, or two curves. We use the {\emph{similarity index}} between two curves in $\Real$, introduced in \cite{Sangalli_etal_2009_JASA}. Let $y_i \in L^2(S_i \subset \Real; \Real)$ and $y_j \in L^2(S_j \subset \Real; \Real)$ be differentiable with $y'_i \in L^2(S_i \subset \Real; \Real)$ and $y'_j \in L^2(S_j \subset \Real; \Real)$, and let the domains $S_i \subset T$ and $S_j  \subset T$ be closed intervals in $\Real$ such that $S_{ij} = S_i \intersect S_j$ has a positive Lebesgue measure. $S_{(.)}$ are Sobolev spaces. Assuming that $\|y'_i\|_{L^2(S_{ij})} \ne 0$ and $\|y'_j\|_{L^2(S_{ij})} \ne 0$, the similarity index between $y_i$ and $y_j$ is defined as
@@ -271,7 +271,7 @@ where, $N:$ number of permutations
 
 We have implemented the iterated registered algorithm in a simulation and used the above mentioned permutation test to verify improvement of power. 
 \subsubsection*{Simulation set up}
-This simulation set up is considerably more complex than all the simulation studies used to test different curve registration techniques in \cite{Kneip_Ramsay_2008_JASA}, \cite{Srivastava_etal_2011_v2_arXiv}, etc. The goal was to generate data more representative of the noise structure observed in the fluoroscanning dataset. 
+This simulation set up is considerably more complex than all the simulation studies used to test different curve registration techniques in \cite{Kneip_Ramsay_2008_JASA}, \cite{Srivastava_etal_2011_v2_arXiv}, etc. The goal was to generate data more representative of the noise structure observed in the fluoroscanning data-set. 
 \begin{enumerate}
 \item Set up the abcissa $x$ from $1$ to $40$.
 
@@ -377,16 +377,26 @@ To test that iterated registration improves power when detecting differences bet
 \label{fig:BeforeRegist}
 \end{figure}
 
-\item Took a seed pair, and registered their curves using the iterated registration algorithm, and estimated $T_{\text{sup, obs}}$. Then, permuted the two groups of curves $N = 1000$ times to obtain the permutation distribution from  $T_{\text{sup, permute}}$. Then, we estimated the permutation p-value. 
+\item Took a seed pair, and registered their curves using the iterated registration algorithm, and estimated $T_{\text{sup, obs}}$. Then, permuted the two groups of curves $N = 1000$ times to obtain the permutation distribution from  $T_{\text{sup, permute}}$. Then, we estimated the permutation p-value. Below are the distributions of the p-values after single iteration (using minimum second eigen value method) and after the proposed iterated registration. Fig \ref{fig:AfterRegist} indicates a power improvement as a result of using the iterated registration method from 19\% to 47\%, whereas, only up to 36\% using single iteration registration. 
+
+\vspace{-1cm}
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale = 0.6, page = 3]{Plots/pValue_Comparison_Run08_6.pdf}
+\includegraphics[scale = 0.5, page = 3]{Plots/pValue_Comparison_forPrelims.pdf}
 \end{center}
-\caption{Distribution of p-values under the alternative hypothesis, after registration}
+\caption{Distribution of p-values under the alternative hypothesis, after {\underline{single iteration}}}
+\label{fig:AfterSingleIter}
+\end{figure}
+
+\vspace{-1cm}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.55, page = 3]{Plots/pValue_Comparison_Run08_6.pdf}
+\end{center}
+\caption{Distribution of p-values under the alternative hypothesis, after {\underline{iterated}} registration}
 \label{fig:AfterRegist}
 \end{figure}
 
-Fig \ref{fig:AfterRegist} indicates a power improvement as a result of using the iterated registration method. 
 
 \end{itemize} 
 
