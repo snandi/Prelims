@@ -148,9 +148,7 @@ where, $w(x) = \frac{D^2h}{Dh},\ \ D = \frac{\partial}{\partial x}$. $w(x)$ is t
 
 \noindent
 {\bf{Minimum second eigenvalue method}} \\
-Ramsay and Silverman in \cite{Ramsay_2006_Functional} argued the PSL technique addressed more of the amplitude variability and not as much of the phase variability. They suggested the following continuous registration technique. Suppose two curves $y_0(x)$ and $y_1(x)$ differ only in amplitude but not in phase. Then, if we plot the function values against each other, we will see a straight line. Amplitude
-differences will then be reflected in the slope of the line, a line at $45^{\circ}$ corresponding to no amplitude differences. To evaluate both the target function $y_0(x)$ and the registered function 
-$y*$ at a fine mesh of $n$ values of $x$ to obtain the pairs of values $(y_0(x), y\{h(x) \}$. Let the $n$ x $2$ matrix $\mathbf{X}$ contain these pairs of values. Then, to analyze the principal components, we would analyze the functional analog of the cross product matrix $\mathbf{X'X}$. 
+Ramsay and Silverman in \cite{Ramsay_2006_Functional} argued the PLS technique addressed more of the amplitude variability and not as much of the phase variability. They suggested the following continuous registration technique. Suppose two curves $y_0(x)$ and $y_1(x)$ differ only in amplitude but not in phase. Then, if we plot the function values against each other, we will see a straight line. Amplitude differences will then be reflected in the slope of the line, a line at $45^{\circ}$ corresponding to no amplitude differences. To evaluate both the target function $y_0(x)$ and the registered function $y*$ at a fine mesh of $n$ values of $x$ to obtain the pairs of values $(y_0(x), y\{h(x) \}$. Let the $n$ x $2$ matrix $\mathbf{X}$ contain these pairs of values. Then, to analyze the principal components, we would analyze the functional analog of the cross product matrix $\mathbf{X'X}$. 
 \begin{equation}
 C(h) = 
 \begin{bmatrix}
@@ -269,7 +267,7 @@ Assume
 where, $N:$ number of permutations
 \end{enumerate}
 
-We have implemented the iterated registered algorithm in a simulation and used the above mentioned permutation test to verify improvement of power. 
+We have implemented the iterated registered algorithm in a simulation and used this permutation test to verify improvement of power. 
 \subsubsection*{Simulation set up}
 This simulation set up is considerably more complex than all the simulation studies used to test different curve registration techniques in \cite{Kneip_Ramsay_2008_JASA}, \cite{Srivastava_etal_2011_v2_arXiv}, etc. The goal was to generate data more representative of the noise structure observed in the fluoroscanning data-set. 
 \begin{enumerate}

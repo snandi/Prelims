@@ -144,13 +144,13 @@ Following are some sources of noise that at least need to be controlled for, if 
 \noindent
 {\bf{Aim 1}}: We want to establish that usable signals with information about genomic sequences could be extracted from the features of the fluorescence intensity profiles of imaged DNA molecules. \\
 \noindent
-{\bf{Aim 2}}: A diploid organism (like human being) is ``heterozygous'' at a genomic locus when there are multiple genotypes at that locus. To extract two sets of fluorescence intensity profiles in heterozygous regions we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
+{\bf{Aim 2}}: A diploid organism (like human being) is ``heterozygous'' at a genomic locus when there are multiple genotypes at that locus. To extract two sets of fluorescence intensity profiles in heterozygous regions we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles? \\
 
 \begin{tcolorbox}[colback=green!5,colframe=green!40!black,title=Statistical challenges] %green!40!black=40%green and 60%black
 The primary challenge of is to build statistical tools to enable fluoroscanning data analysis. This involves
 \begin{itemize}
-\item Preprocessing the data by understanding the different sources of noise, and appropriately reducing or controlling for them
-\item Estimating a consensus fluorescence intensity profile for each genomic interval
+\item Preprocessing the data by understanding the different sources of noise, and appropriately reducing their effect or controlling for their presence
+\item Estimating a consensus fluorescence intensity profile for each genomic interval and establish they are sequence dependent
 \item Setting up a hypothesis testing framework where intensity profiles from different genomic intervals could be tested for similarity
 \end{itemize}
 \end{tcolorbox}
