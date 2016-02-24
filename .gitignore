@@ -17,6 +17,8 @@ backup_linux
 *.lof
 *.toc
 *.bib
+*.nav
+*.snm
 HeaderfileTexDocs.tex
 derivs.m
 *.lot
