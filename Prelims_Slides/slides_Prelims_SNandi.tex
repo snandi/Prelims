@@ -1,0 +1,93 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+%\usetheme{Warsaw} 
+\usetheme{CambridgeUS}
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+\logo{\includegraphics[scale=0.4]{uwlogo_web_sm_fl_wht.png}}
+%\logo{\includegraphics[width=\beamer@sidebarwidth,height=\beamer@headheight]{uwlogo_web_sm_fl_wht.png}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Statistics for fluoroscanning]{Statistical methods for analyzing images of fluorochrome stained DNA molecules}
+\author{Subhrangshu Nandi}
+\institute[Prelim exam]{Preliminary Exam \\
+Department of Statistics \\
+University of Wisconsin-Madison}
+\date{March 1, 2016}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\setbeamertemplate{logo}{}
+
+\frame{\maketitle}
+
+%%%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Iterated Registration}
+Similarity index:
+\[ \rho(f_i, f_j) = \frac{\int _{S_{ij}}f'_i(s)f'_j(s) ds}{\int _{S_{ij}}f'_i(s)^2 ds \int _{S_{ij}}f'_j(s)^2 ds} \]
+where, $S_{ij} = S_i \cap S_j$, the intersection of Sobolev spaces formed by the functions $f_i, f_j$.\\
+
+Let $\phi$ denote the consensus intensity profile for a given set of curves. The objective is to maximize the average similarity to the consensus, i.e., maximize
+\[ \bar{\rho}_{\phi, N} = \frac{1}{N} \sum \limits_{j = 1}^{N} \rho(\phi, f_j)\]
+Stop iteration when $|\bar{\rho}_{\phi, N (t+1)} - \bar{\rho}_{\phi, N (t)} | < \epsilon$
+\end{frame}
+
+
+%%%%%%%%%%%%%% Slide 4 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simultaneous Registration and Clustering}
+\begin{enumerate}
+\item Eliminate outliers by using ``data-depth''
+\item Check if multiple clusters is better than one $\bar{\rho}_{\{\phi_1, \phi_2\}, N} > \bar{\rho}_{\phi, N}$
+\item Model based, or k-means to get initial clusters, based on pairwise distances between curves
+\item Estimate the medians, and ajust the clusters based on distance between medians and cluster members
+\item Register to the median, re-evaluate the distances between medians and cluster members
+\item Iterate until not much improvement in overall similarity index
+\item Goal: To maximize $\bar{\rho}_{\{\phi_1, \phi_2\}, N}$
+\end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 5 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Functional Data Depth}
+The univariate depth of the point $x_i(t)$ is given by
+\[ D_n(x_i(t)) = 1 - \left| \frac{1}{2} - F_{n,t} (x_i (t)) \right| \]
+where, $F_{n,t} (x_i (t)) = \frac{1}{n}\sum\limits_{k=1}^{n}\Ind\{ x_k(t) \leq x_i(t)\}$ is the empirical cdf at $t \in [a,b]$ \\
+Then, Fraiman and Muniz functional data depth is given by
+\[ \text{FMD}_n(x_i) = \int\limits_a^b D_n(x_i(t)) dt\] \\
+To detect outliers:
+\begin{itemize}
+\item Obtain the functional depths $\text{FMD}_n(x_1), \dots, \text{FMD}_n(x_n)$
+\item Let $x_{i_1}, \dots, x_{i_k}$ be the $k$ curves such that $\text{FMD}_n (x_{i_k}) \leq C$, for a given cutoff $C$. Then, assume that $x_{i_1}, \dots, x_{i_k}$ are outliers and delete them from the sample.
+\item Repeat until no more outliers
+\item {\emph{But, how do you estimate the cutoff $C$}}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%% Slide 6 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Outliers using Functional Data Depth}
+\begin{itemize}
+\item Obtain the functional depths $\text{FMD}_n(x_1), \dots, \text{FMD}_n(x_n)$
+\item Obtain $B$ standard bootstrap samples of size $n$ from the dataset of curves obtained after deleting the $\alpha \%$ less deepest curves. The bootstrap samples are denoted by $x_i^b$, for $i = 1, \dots, n$ and $b = 1, \dots, B$.
+\item For each bootstrap set $b = 1, \dots, B$, obtain $C^b$ as the empirical $1\%$ percentile of the distribution of the depths, $D(x_i^b), i = 1, \dots, n$.
+\item Take $C$ as the median values of $C^b, b = 1, \dots, B$.
+\end{itemize}
+\end{frame}
+
+
+\end{document}
+
