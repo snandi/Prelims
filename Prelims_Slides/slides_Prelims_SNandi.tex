@@ -52,19 +52,41 @@ Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out t
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Sequencing Technologies evolving \footnote{\tiny{Wikipedia}} }
+\vspace{-1cm}
 \begin{columns}[t]
 \begin{column}{0.6\textwidth}
 \begin{itemize} 
+
 \item {\bf{Pac Bio}}
 \begin{itemize}
 \item {\footnotesize{Avg 14 kb read length 
 \item only 87\% accuracy
-\item moderate throughput}}
+\item moderate throughput
+\item cost: \_\_\_\_\_ per human genome }}
+
 \end{itemize}
+
 \item {\bf{Ion Torrent Sequencing}} 
 \begin{itemize}
 \item {\footnotesize{up to 400 bp read length
-\item \$32 mil for 1 genome }}
+\item homopolymer errors
+\item cost: \_\_\_\_\_ per human genome }}
+\end{itemize}
+
+\item {\bf{Illumina sequencing}} 
+\begin{itemize}
+\item {\footnotesize{up to 300 bp read length
+\item very expensive equipment
+\item more than 99\% single read accuracy 
+\item cost: \_\_\_\_\_ per human genome }}
+\end{itemize}
+
+\item {\bf{Sanger sequencing}} 
+\begin{itemize}
+\item {\footnotesize{up to 900 bp read length
+\item more than 99\% single read accuracy 
+\item impractical for large sequencing projects
+\item cost: \_\_\_\_\_ per human genome }}
 \end{itemize}
 
 \end{itemize}
@@ -78,6 +100,16 @@ Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out t
 \end{center}
 %{\bf{Pac Bio}} Avg 14 kb read length; \textcolor{red}{only 87\% accuracy; moderate throughput} \\
 %{\bf{Ion Torrent Sequencing}} \textcolor{red}{up to 400 bp read length; \$32 mil for 1 genome}
+
+\begin{itemize}
+{\small{
+\item Human genome: 32 billion bp
+
+\item Reference genome is incomplete
+ 
+\item Need a parsimonious system to analyze the human population
+}}
+\end{itemize}
 \end{column}
 
 \end{columns}
@@ -87,7 +119,28 @@ Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out t
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Background: Genome sequencing}
+\frametitle{Motivation: mp3 representation of a Genome}
+\vspace{-0.8cm}
+\begin{columns}[t]
+\begin{column}{0.6\textwidth}
+\begin{itemize}
+\item Lower resolution: of the order of 400 - 600 bp
+\item Simple to obtain
+\item Contains the important structural information about a genome
+\end{itemize}
+\end{column}
+
+\begin{column}{0.4\textwidth}
+\begin{figure}[t]
+\includegraphics[scale=0.1]{Images/mp3_wav.jpg} \footnote{\tiny{http://coderzen.blogspot.com/ \\ 2014/03/wav-file-vs-mp3-file.html}}
+\end{figure}
+
+\end{column}
+
+\end{columns}
+\begin{figure}[H]
+\includegraphics[scale=0.6]{Plots/chr13_frag1000_consensusOnly.pdf}
+\end{figure}
 
 \note{}
 \end{frame}
