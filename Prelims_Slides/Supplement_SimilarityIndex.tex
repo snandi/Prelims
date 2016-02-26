@@ -1,0 +1,71 @@
+%\documentclass[10pt,dvipsnames,table, handout]{beamer} % To printout the slides without the animations
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+%\usetheme{Warsaw} 
+\usetheme{CambridgeUS}
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\setbeamercolor{block title}{bg=red!80,fg=white}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+\logo{\includegraphics[scale=0.4]{uwlogo_web_sm_fl_wht.png}}
+%\logo{\includegraphics[width=\beamer@sidebarwidth,height=\beamer@headheight]{uwlogo_web_sm_fl_wht.png}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[Similarity index]{Similarity index between two curves}
+\author{Subhrangshu Nandi}
+\institute[Prelim exam]{Preliminary Exam \\
+Department of Statistics \\
+University of Wisconsin-Madison}
+\date{March 1, 2016}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\setbeamertemplate{logo}{}
+
+%\frame{\maketitle}
+
+%%%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Similarity Index}
+\begin{itemize}
+\item let $y_i \in L^2(S_i \subset \Real; \Real)$ and $y_j \in L^2(S_j \subset \Real; \Real)$ be differentiable with $y'_i \in L^2(S_i \subset \Real; \Real)$ and $y'_j \in L^2(S_j \subset \Real; \Real)$, 
+\item let the domains $S_i \subset T$ and $S_j  \subset T$ be closed intervals in $\Real$ such that $S_{ij} = S_i \intersect S_j$ has a positive Lebesgue measure. $S_{(.)}$ are Sobolev spaces. 
+\item assume that $\|y'_i\|_{L^2(S_{ij})} \ne 0$ and $\|y'_j\|_{L^2(S_{ij})} \ne 0$, 
+\item the similarity index between $y_i$ and $y_j$ is defined as
+
+\begin{equation}
+\rho(y_i, y_j) = \frac{\int _{S_{ij}}y'_i(x)y'_j(x) dx}{\sqrt{\int _{S_{ij}}y'_i(x)^2 ds}\sqrt{ \int _{S_{ij}} y'_j(x)^2 dx}}
+\end{equation}
+\end{itemize}
+This is the cosine of the angle $\theta_{ij}$ between first derivatives of the functions $y_i$ and $y_j$, with the inner product $\int _{S_{ij}}y'_i(x)y'_j(x) dx$.  $\rho(y_i, y_j)$ can also be interpreted as a continuous version of Pearson’s uncentered correlation coefficient for first derivatives. Following are some useful properties of $\rho(y_i, y_j)$:
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide 2 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Properties of Similarity Index}
+\begin{enumerate}
+\item[(i)] From Cauchy-Schwartz inequality it follows that $|\rho(y_i, y_j)| \leq 1$
+\item[(ii)] $\rho(y_i, y_j) = 1 \ \Leftrightarrow \ \exists \ a \in \Real^{+}, b \in \Real, \ni y_i = ay_j + b $
+\item[(iii)] For all invertible affine transformations of $y_i$ and $y_j$, say $t_1 \circ y_i = a_1y_i + b_2$ and $t_2 \circ y_j = a_2y_j + b_2$, with $a_1, a_2 \ne 0$, 
+\[ \rho(y_i, y_j) = \text{sign}(a_1 a_2)\rho(t_1 \circ y_i, t_2 \circ y_j)\]
+\item[(iv)] For all invertible affine transformations of the abscissa $x$, say $h_1(x) = a_1 x + b_1$ and $h_2(x) = a_2 x + b_2$, with $a_1, a_2 > 0$, we have
+\[ \rho(y_i \circ h_1, y_j \circ h_2) = \rho(y_i \circ h_1 \circ h_2^{-1}, y_j) = \rho(y_i , y_j \circ h_2 \circ h_1^{-1}) \]
+\end{enumerate}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\end{document}
+
