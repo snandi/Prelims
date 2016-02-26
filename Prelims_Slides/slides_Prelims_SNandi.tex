@@ -230,9 +230,34 @@ Example, below is a reference map from a bacteria genome, and a nanocoded molecu
 \begin{block}{Aim 1}
 To establish that usable signals with information about genomic sequences could be extracted from the features of the fluorescence intensity profiles of imaged DNA molecules.
 \end{block}
-
+\vspace{1cm}
 \begin{block}{Aim 2}
 To extract two sets of fluorescence intensity profiles in heterozygous regions we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Compare intensity profiles of 2 intervals}
+\begin{figure}[t]
+\includegraphics[scale=0.34, page=2]{Plots/chr13_frag3332.pdf}
+%\hspace{0.25cm}
+\includegraphics[scale=0.34, page=2]{Plots/chr13_frag7453.pdf}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Statistical challenges}
+\begin{block}{Statistical challenges}
+The primary challenge of is to build statistical tools to enable fluoroscanning data analysis. This involves
+\begin{itemize}
+\item {\bf{Preprocessing}} the data by understanding the different sources of noise, and appropriately reducing their effect or controlling for their presence
+\item {\bf{Estimating}} a consensus fluorescence intensity profile for each genomic interval and establish they are sequence dependent
+\item Setting up a {\bf{hypothesis testing}} framework where intensity profiles from different genomic intervals could be tested for similarity
+\end{itemize}
 \end{block}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
