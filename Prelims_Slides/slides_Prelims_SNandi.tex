@@ -104,7 +104,7 @@ Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out t
 
 \begin{itemize}
 {\small{
-\item Human genome: 32 billion bp
+\item Human genome: over 3 billion base pairs
 
 \item Reference genome is incomplete
  
@@ -241,9 +241,9 @@ To extract two sets of fluorescence intensity profiles in heterozygous regions w
 \begin{frame}
 \frametitle{Compare intensity profiles of 2 intervals}
 \begin{figure}[t]
-\includegraphics[scale=0.34, page=2]{Plots/chr13_frag3332.pdf}
+\includegraphics[scale=0.34, page=2]{Plots/chr13_frag7465.pdf}
 %\hspace{0.25cm}
-\includegraphics[scale=0.34, page=2]{Plots/chr13_frag7453.pdf}
+\includegraphics[scale=0.34, page=2]{Plots/chr13_frag7491.pdf}
 \end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -270,7 +270,7 @@ The primary challenge of is to build statistical tools to enable fluoroscanning 
 \item {\bf{Step 2}} Detect functional outliers in the data set, using Fraiman and Muniz functional depth
 \item {\bf{Step 3}} Template estimation [{\emph{Expectation step}}]: To estimate the template to register the curves to, we employ a 2-step approach. 
 \begin{enumerate}
-\item {\emph{Median}}: Estimate $L_1-\text{Median}$, where $L_1-\text{Median }$ $y_m$ is the minimizer of 
+\item {\emph{Median}}: Estimate $L_1\text{-Median}$, where $L_1\text{-Median }$ $y_m$ is the minimizer of 
 \[ \sum\limits_{i = 1}^n \|y_i - y_m \| \]
 where $y_i \in \Real^p, \ i = 1,\dots,n$ and $\|u \| = \sqrt{\sum\limits_{j = 1}^p u_j^2}$. Here we ensure that the median is estimated only from the curves not deemed as ``functional outliers'' in Step 2. 
 \item {\emph{Weighted mean}}: Estimate the similarity indices $\rho(y_i, y_m), \ i = 1,\dots,n$ and estimate the template $\phi$ as the weighted average of the curves, 
@@ -278,7 +278,43 @@ where $y_i \in \Real^p, \ i = 1,\dots,n$ and $\|u \| = \sqrt{\sum\limits_{j = 1}
 \end{enumerate}
 \end{itemize}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Iterated Registration (contd.)}
+\begin{itemize}
+\item {\bf{Step 4}} Registration with varying roughness penalty [{\emph{Maximization step}}]: We use the minimum second eigenvalue method to register the curves to the template $\phi$. 
+\item {\bf{Step 5}} Convergence of iteration: The objective of iterated registration is to maximize the average similarity to the consensus, i.e., maximize 
+\[ \bar{\rho}_{\phi, n} = \frac{1}{n} \sum \limits_{i = 1}^{n} \rho(\phi, f_i)\]
+Hence, we iterate steps 3 and 4, until
+\[ |\bar{\rho}_{\phi_{(t+1)}, n}^{\ (t+1)} - \bar{\rho}_{\phi_{(t)}, n}^{ \ (t)} | < \epsilon \]
+where $t$ denotes iteration number, for some predetermined $\epsilon$
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{After ``iterated'' registration}
+\begin{figure}[t]
+\includegraphics[scale=0.34, page=7]{Plots/chr13_frag7465_registered.pdf}
+%\hspace{0.25cm}
+\includegraphics[scale=0.34, page=6]{Plots/chr13_frag7491_registered.pdf}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{After ``iterated'' registration, with GC composition}
+\begin{figure}[t]
+\includegraphics[scale=0.34, page=8]{Plots/chr13_frag7465_registered.pdf}
+%\hspace{0.25cm}
+\includegraphics[scale=0.34, page=7]{Plots/chr13_frag7491_registered.pdf}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
