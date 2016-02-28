@@ -460,21 +460,45 @@ To establish that usable signals with information about genomic sequences could 
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Simultaneous Registration and Clustering}
+\frametitle{For Aim 2}
+\begin{block}{Aim 2}
+To extract two sets of fluorescence intensity profiles in heterozygous regions we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
+\end{block}
+\begin{itemize}
+\item Extend the iterated registration algorithm to simultaneous cluster two sets of curves
+\item Implement the method on intensity profiles from different sequences and test sensitivity
+\item Implement the method on regions in the mm52 genome that has been confirmed by ``Optical mapping'' to be heterozygos
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{For statistical methods}
+\begin{itemize}
+\item[\checkmark] Select an appropriate registration algorithm for this data set
+\item[\checkmark] Select the most appropriate functional outlier detection method that works best for this data set
+\item[\checkmark] Select a test statistic to test the difference between two groups of curves
+\item Design a simulation that highlights that iterated registration has more power than the following existing registration algorithm
 \begin{enumerate}
-\item Eliminate outliers by using ``data-depth''
-\item Check if multiple clusters is better than one $\bar{\rho}_{\{\phi_1, \phi_2\}, N} > \bar{\rho}_{\phi, N}$
-\item Model based, or k-means to get initial clusters, based on pairwise distances between curves
-\item Estimate the medians, and ajust the clusters based on distance between medians and cluster members
-\item Register to the median, re-evaluate the distances between medians and cluster members
-\item Iterate until not much improvement in overall similarity index
-\item Goal: To maximize $\bar{\rho}_{\{\phi_1, \phi_2\}, N}$
+\item Single iteration minimum eigen value method (Ramsay, et al)
+\item Iterated registration with affine warping of abcissa (Sangalli, et al)
+\item Registration using Fisher-rao metric (Srivastava, et al)
 \end{enumerate}
+\item Build a regression model to relate mean intensity profiles with nucleotide sequence characteristics
+\item Extend the iterated registration algorithm to simultaneous cluster two sets of curves
+\end{itemize}
 \end{frame}
 
+\begin{frame}
+\frametitle{Questions please}
 
+Thank you very much!
+
+\end{frame}
 
 \end{document}
 

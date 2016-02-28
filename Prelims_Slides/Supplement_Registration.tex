@@ -42,5 +42,19 @@ University of Wisconsin-Madison}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Simultaneous Registration and Clustering}
+\begin{enumerate}
+\item Eliminate outliers by using ``data-depth''
+\item Check if multiple clusters is better than one $\bar{\rho}_{\{\phi_1, \phi_2\}, N} > \bar{\rho}_{\phi, N}$
+\item Model based, or k-means to get initial clusters, based on pairwise distances between curves
+\item Estimate the medians, and ajust the clusters based on distance between medians and cluster members
+\item Register to the median, re-evaluate the distances between medians and cluster members
+\item Iterate until not much improvement in overall similarity index
+\item Goal: To maximize $\bar{\rho}_{\{\phi_1, \phi_2\}, N}$
+\end{enumerate}
+\end{frame}
+
 \end{document}
 
