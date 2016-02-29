@@ -35,19 +35,19 @@ University of Wisconsin-Madison}
 \frame{\maketitle}
 
 %%%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Background: Genome sequencing}
-Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out the order of DNA nucleotides, or bases that make up an organism's DNA. The haploid human genome is made up of over {\underline{3.2 billion}} base pairs. A DNA sequence that has been translated from life's {\emph{chemical}} alphabet into our alphabet of written letters might look like this:
-\begin{figure}[H]
-\includegraphics[scale=0.48]{Images/Image_Sequence_1.jpg}
-\end{figure}
+%% \begin{frame}
+%% \frametitle{Background: Genome sequencing}
+%% Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out the order of DNA nucleotides, or bases that make up an organism's DNA. The haploid human genome is made up of over {\underline{3.2 billion}} base pairs. A DNA sequence that has been translated from life's {\emph{chemical}} alphabet into our alphabet of written letters might look like this:
+%% \begin{figure}[H]
+%% \includegraphics[scale=0.48]{Images/Image_Sequence_1.jpg}
+%% \end{figure}
 
-\begin{figure}[H]
-\includegraphics[scale=0.7]{Images/Image_DNA.jpg} \footnote{http://www.differencebetween.info/difference-between-gene-and-genome}
-\end{figure}
+%% \begin{figure}[H]
+%% \includegraphics[scale=0.7]{Images/Image_DNA.jpg} \footnote{http://www.differencebetween.info/difference-between-gene-and-genome}
+%% \end{figure}
 
-\note{}
-\end{frame}
+%% \note{}
+%% \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%%%
@@ -116,48 +116,6 @@ in an economical and parsimonious manner.
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Motivation: mp3 representation of a Genome}
-\vspace{-0.8cm}
-\begin{columns}[t]
-\begin{column}{0.6\textwidth}
-\begin{itemize} {\small{
-\item Lower resolution: of the order of 400 - 600 bp
-\item Simple to obtain
-\item Contains the important structural information about a genome
-}}
-\end{itemize}
-\end{column}
-
-\begin{column}{0.4\textwidth}
-\begin{figure}[t]
-\includegraphics[scale=0.08]{Images/mp3_wav.jpg} \footnote{\tiny{http://coderzen.blogspot.com/ \\ 2014/03/wav-file-vs-mp3-file.html}}
-\end{figure}
-
-\end{column}
-\end{columns}
-\begin{block}{Motivation}
-We want to construct signature fluorescence intensity profile of a genome.
-\end{block}
-
-\vspace{-0.2cm}
-\begin{figure}[H]
-\includegraphics[scale=0.3]{Plots/chr13_frag1000_consensusOnly.pdf}
-\hspace{0.5cm}
-\includegraphics[scale=0.28]{Plots/chr13_frag1025_consensusOnly.pdf} \\
-\includegraphics[scale=0.3]{Plots/chr13_frag1050_consensusOnly.pdf}
-\hspace{0.5cm}
-\includegraphics[scale=0.3]{Plots/chr13_frag1052_consensusOnly.pdf} \\
-\includegraphics[scale=0.28]{Plots/chr13_frag1064_consensusOnly.pdf}
-\hspace{0.5cm}
-\includegraphics[scale=0.3]{Plots/chr13_frag1088_consensusOnly.pdf}
-\end{figure}
-
-\note{}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Motivation: mp3 representation of a Genome}
 \vspace{-0.5cm}
 \begin{columns}[t]
 \begin{column}{0.5\textwidth}
@@ -213,42 +171,15 @@ We want to construct signature fluorescence intensity profile of a genome.
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Data obtained from Nanocoding system}
 %\vspace{-0.5cm}
 \begin{figure}[T]
-\includegraphics[scale=0.45]{Images/Image_Nanocoding.jpg} \footnote{\tiny{\cite{Kounovsky_etal_2013_Macromolecules}}}
+\includegraphics[scale=0.45]{Images/Image_Nanocoding.jpg} \footnote{\tiny{\cite{Kounovsky_2013_PhDThesis}}}
 \end{figure}
 
 \note{}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Nanocoding - alignment of molecules to reference}
-\vspace{-1cm}
-\begin{figure}[t]
-\includegraphics[scale=0.6]{Images/NMaps_Aligned.png}
-\hspace{1cm}
-\includegraphics[scale=0.2]{Images/BarcodeImage.jpg}
-\end{figure}
-
-{\emph{M. florum}} reference map: \\
-{\footnotesize{81.6 18.7 59.4 13.9 9.0 5.0 12.3 10.2 15.0 25.4 3.9 20.9 15.6 10.2 9.5 11.1 4.5 
-13.7 26.3 38.3 2.1 31.0 19.1 3.6 32.2 41.3 9.8}} \textcolor{Red}{16.4 15.7 6.3 36.5 18.3} {\footnotesize{32.1 21.0 
-3.3 14.3 51.3 16.0 17.9}} \\
-\vspace{0.5cm}
-Molecule {\small{$2064486\_0\_11$}}: {\bf{31.24 \textcolor{Red}{16.80  15.77  6.25  35.08  18.12}}}
-
-\note{
-The sequence of lengths between punctates is called a nanocode, akin to barcode\\
-It is unique to molecule, and it can be used to determine which location on the genome the molecule is from\\
-Example, below is a reference map from a bacteria genome, and a nanocoded molecule
-}
-
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -281,14 +212,44 @@ Example, below is a reference map from a bacteria genome, and a nanocoded molecu
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Aims}
+\frametitle{Aims of Fluoroscanning}
 \begin{block}{Aim 1}
-To establish that usable signals with information about genomic sequences that could be extracted from the features of the fluorescence intensity profiles of imaged DNA molecules.
+To establish that usable signals with information about genomic sequences that can be extracted from fluorescence intensity profiles of imaged DNA molecules.
 \end{block}
 \vspace{1cm}
 \begin{block}{Aim 2}
-To extract two sets of fluorescence intensity profiles in heterozygous regions from which we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
+To confirm that fluoroscanning can detect heterozygosity. 
+\begin{itemize}
+\footnotesize
+\item to test sensitivity of fluoroscanning: how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
+\end{itemize}
 \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Statistical challenges}
+\begin{block}{Statistical challenges}
+{\Large{The primary challenge is to build statistical tools to enable fluoroscanning data analysis.}} \\This involves
+\begin{itemize}
+\item {\bf{Preprocessing}} the data by understanding the different sources of noise, and appropriately reducing their effect or controlling for their presence
+\vspace{0.5cm}
+\item {\bf{Estimating}} a consensus fluorescence intensity profile for each genomic interval and establish they are sequence dependent
+\vspace{0.5cm}
+\item Setting up a {\bf{hypothesis testing}} framework where intensity profiles from different genomic intervals could be tested for similarity
+\end{itemize}
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Data}
+\Large
+Bacteria genome: Mesoplasma florum {\emph{(M. florum)}} \\
+\vspace{2cm}
+Human genome: with multiple myeloma cancer
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -386,26 +347,20 @@ To extract two sets of fluorescence intensity profiles in heterozygous regions f
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Compare intensity profiles of 2 intervals (part of Aim 1)}
+\frametitle{Aim 1 of Fluoroscanning}
+\begin{block}{Aim 1}
+To establish that usable signals with information about genomic sequences that can be extracted from fluorescence intensity profiles of imaged DNA molecules.
+\end{block}
+\end{frame}
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Compare fluorescence intensity profiles of 2 intervals}
 \begin{figure}[t]
 \includegraphics[scale=0.34, page=2]{Plots/chr13_frag7465.pdf}
 %\hspace{0.25cm}
 \includegraphics[scale=0.34, page=2]{Plots/chr13_frag7491.pdf}
 \end{figure}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Statistical challenges}
-\begin{block}{Statistical challenges}
-The primary challenge of is to build statistical tools to enable fluoroscanning data analysis. This involves
-\begin{itemize}
-\item {\bf{Preprocessing}} the data by understanding the different sources of noise, and appropriately reducing their effect or controlling for their presence
-\item {\bf{Estimating}} a consensus fluorescence intensity profile for each genomic interval and establish they are sequence dependent
-\item Setting up a {\bf{hypothesis testing}} framework where intensity profiles from different genomic intervals could be tested for similarity
-\end{itemize}
-\end{block}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -457,7 +412,7 @@ The primary challenge of is to build statistical tools to enable fluoroscanning 
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Why Registration?}
+\frametitle{Estimation: Why Registration?}
 \begin{columns}
 \begin{column}{0.5\textwidth}
 \begin{figure}[H]
@@ -471,12 +426,32 @@ The primary challenge of is to build statistical tools to enable fluoroscanning 
 \begin{itemize}
 %\footnotesize
 \item Molecules are differentially stretched
+\vspace{1cm}
 \item Features are not aligned
+\vspace{1cm}
 \item Estimating consensus is not simple
 \end{itemize}
 \end{column}
 \end{columns}
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Estimation: Why Iterated Registration to weighted consensus?}
+\begin{enumerate}
+\item[A] Outliers 
+
+\item[B] Starting template
+
+\item[C] Warping functions
+
+\item[D] Quality of registration
+
+\item[E] Simultaneous clustering and registration
+\end{enumerate}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
