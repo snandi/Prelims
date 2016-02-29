@@ -50,6 +50,21 @@ Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out t
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Introduction}
+{\Large{
+Next generation genomic sciences needs to build systems to
+\begin{enumerate}
+\item Analyze genomes of every individual of the population
+\item Analyze the complexities of cancer genomes
+\item Develop targeted and precise treatment options for complex diseases
+\end{enumerate}
+in an economical and parsimonious manner.
+}}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Limitations of Sequencing Technologies \footnote{\tiny{Wikipedia}} }
@@ -58,16 +73,16 @@ Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out t
 \begin{column}{0.6\textwidth}
 \begin{itemize} 
 
-\item {\small{\bf{Pac Bio}}}
+\item {\bf{\small{Pac Bio}}}
 {\footnotesize{only 87\% accuracy; moderate throughput }}
 
-\item {\small{\bf{Ion Torrent Sequencing}}}
+\item {\bf{\small{Ion Torrent Sequencing}}}
 {\footnotesize{up to 400 bp read length; homopolymer errors }}
 
-\item {\small{\bf{Illumina sequencing}}}
+\item {\bf{\small{Illumina sequencing}}}
 {\footnotesize{up to 300 bp read length; very expensive equipment}}
 
-\item {\small{\bf{{Sanger sequencing}}}
+\item {\bf{\small{Sanger sequencing}}}
 {\footnotesize{impractical for large sequencing projects}}
 
 \end{itemize}
@@ -142,10 +157,69 @@ We want to construct signature fluorescence intensity profile of a genome.
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
+\frametitle{Motivation: mp3 representation of a Genome}
+\vspace{-0.5cm}
+\begin{columns}[t]
+\begin{column}{0.5\textwidth}
+\vspace{-0.5cm}
+\begin{figure}[t]
+\includegraphics[scale=0.24]{Images/wav.png} 
+\end{figure}
+
+\vspace{-0.5cm}
+\begin{itemize}
+{\footnotesize{
+\item Wave is an uncompressed or ``lossless'' format
+\item High sampling frequency of sound waves; high quality of music
+\item Extremely large file size
+}}
+\end{itemize}
+
+\begin{figure}[H]
+\includegraphics[scale=0.18]{Images/200114_Genome_650.jpg} 
+\end{figure}
+
+\end{column}
+
+\begin{column}{0.5\textwidth}
+\vspace{-0.5cm}
+\begin{figure}[t]
+\includegraphics[scale=0.18]{Images/mp3.jpg}
+\end{figure}
+
+\vspace{-0.5cm}
+\begin{itemize}
+{\footnotesize{
+\item MP3 is a compressed or ``lossy'' format
+\item Reduces the signal to its most necessary components
+\item Very manageable file size; Easily transferrable
+}}
+\end{itemize}
+\vspace{-0.5cm}
+\begin{figure}[H]
+\hspace{-1cm}
+\includegraphics[scale=0.3]{Plots/chr13_frag1000_consensusOnly.pdf} \\
+\vspace{-0.5cm} \hspace{0.5cm}
+\includegraphics[scale=0.28]{Plots/chr13_frag1025_consensusOnly.pdf} \\
+\vspace{-0.5cm} \hspace{-2cm}
+\includegraphics[scale=0.3]{Plots/chr13_frag1050_consensusOnly.pdf} \\
+\vspace{-0.5cm} \hspace{1cm}
+\includegraphics[scale=0.3]{Plots/chr13_frag1052_consensusOnly.pdf} \\
+\end{figure}
+
+\end{column}
+\end{columns}
+{\tiny{Images from \footnote{\tiny{https://nasiirblog.wordpress.com/2014/05/22/wav-vs-mp3/, http://archive.cosmosmagazine.com/}} }}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
 \frametitle{Data obtained from Nanocoding system}
 %\vspace{-0.5cm}
 \begin{figure}[T]
-\includegraphics[scale=0.5]{Images/Image_Nanocoding.jpg}
+\includegraphics[scale=0.45]{Images/Image_Nanocoding.jpg} \footnote{\tiny{\cite{Kounovsky_etal_2013_Macromolecules}}}
 \end{figure}
 
 \note{}
@@ -183,7 +257,8 @@ Example, below is a reference map from a bacteria genome, and a nanocoded molecu
 \frametitle{Nanocoding Images}
 \begin{center}
 \begin{figure}[H]
-\includegraphics[scale=0.3]{Images/IView_Example2.png}
+%\includegraphics[scale=0.3]{Images/IView_Example2.png}
+\includegraphics[scale=0.4]{Images/IView_Example2_ppt.jpg}
 \end{figure}
 \end{center}
 \end{frame}
@@ -208,12 +283,104 @@ Example, below is a reference map from a bacteria genome, and a nanocoded molecu
 \begin{frame}
 \frametitle{Aims}
 \begin{block}{Aim 1}
-To establish that usable signals with information about genomic sequences could be extracted from the features of the fluorescence intensity profiles of imaged DNA molecules.
+To establish that usable signals with information about genomic sequences that could be extracted from the features of the fluorescence intensity profiles of imaged DNA molecules.
 \end{block}
 \vspace{1cm}
 \begin{block}{Aim 2}
-To extract two sets of fluorescence intensity profiles in heterozygous regions we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
+To extract two sets of fluorescence intensity profiles in heterozygous regions from which we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
 \end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Data description: {\emph{Mesoplasma florum (M. florum)}}}
+\begin{itemize}
+\item The {\emph{M. florum}} reference maps consists of 39 intervals, hence, 38 restriction sites 
+\item The whole genome is approximately 793 kb long 
+\item The intervals are between 2.111 kb and 81.621 kb 
+\end{itemize}
+
+% latex table generated in R 3.2.2 by xtable 1.8-0 package
+% Mon Feb 29 00:31:44 2016
+\begin{table}[h]
+\footnotesize
+\centering
+\begin{tabular}{lrrr|rrr}
+  \hline
+  \hline
+  \multicolumn{4}{c}{Reference Interval} & \multicolumn{3}{c}{Molecular Fragment lengths} \\
+  \hline
+   Int  & molecules & pixels & length(kb) & min (pixels) & avg (pixels) & max (pixels)\\ 
+  \hline
+  \hline
+  0 & 66 & 391 & 81.62 & 314 & 388 & 444 \\ 
+  1 & 208 & 89 & 18.68 & 63 & 89 & 103 \\ 
+  2 & 467 & 284 & 59.40 & 210 & 283 & 332 \\ 
+  3 & 734 & 67 & 13.94 & 46 & 66 & 83 \\ 
+  4 & 895 & 43 & 9.03 & 31 & 43 & 55 \\ 
+  5 & 849 & 24 & 5.04 & 10 & 24 & 28 \\ 
+  6 & 939 & 59 & 12.34 & 31 & 59 & 74 \\ 
+  7 & 1200 & 49 & 10.24 & 32 & 49 & 58 \\ 
+  \hline
+\end{tabular}
+\caption{Coverage of {\emph{M. florum}} data}
+\end{table}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Data description: human genome (mm52)}
+\begin{itemize}
+\footnotesize
+\item Nanocoded data of a multiple myeloma (cancer) genome
+\item This genome has been comprehensively analyzed to characterize its genome structure and variation at LMCG \footnote{\cite{Gupta_etal_2015_PNAS}}
+\item Retains substantial (more than $95\%$) similarity with a healthy human genome
+\end{itemize}
+
+\begin{table}[H]
+\footnotesize
+\centering
+\begin{tabular}{c | r || c | r}
+  \hline
+  \hline
+  Chromosome & Number of intervals & Chromosome & Number of intervals \\ 
+  \hline
+  1 & 26069  & 13 & 9916 \\
+  2 & 26772  & 14 & 9764 \\
+  3 & 21334  & 15 & 9701 \\
+  4 & 19406  & 16 & 9106 \\
+  5 & 19359  & 17 & 9291 \\
+  6 & 18504  & 18 & 8306 \\
+  7 & 16797  & 19 & 5763 \\
+  8 & 15828  & 20 & 7311 \\
+  9 & 13553  & 21 & 3900 \\
+  10 & 15053  & 22 & 4326 \\
+  11 & 15212  & X & 15953 \\
+  12 & 14371  & Y & 2582 \\
+  \hline
+  \hline
+\end{tabular}
+\caption{Number of intervals in each human chromosome}
+\label{tab:mm52intervals}
+\end{table}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Coverage of mm52 Data}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.32, page = 1]{Plots/mm52_Coverage.pdf}
+\includegraphics[scale = 0.32, page = 6]{Plots/mm52_Coverage.pdf}
+\end{center}
+\caption{Coverage of intervals (at least 6 kb long)}
+\label{fig:Coverage_mm1}
+\end{figure}
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -244,7 +411,76 @@ The primary challenge of is to build statistical tools to enable fluoroscanning 
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Iterated Registration}
+\frametitle{Preprocessing: Types of noise}
+\begin{columns}[t]
+\begin{column}{0.6\textwidth}
+\begin{figure}[H]
+\begin{center}
+%\hspace{2cm} \vspace{-1cm}
+\includegraphics[scale = 0.25]{Images/Outlier_1.png}
+\end{center}
+\caption{Molecules too close to each other}
+\end{figure}
+
+%\item Molecules not straight
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.25]{Images/Outlier_4.png}
+\end{center}
+\caption{Molecules not straight}
+\end{figure}
+
+\end{column}
+\begin{column}{0.4\textwidth}
+%\item Too much overlap, and curves molecules
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.2]{Images/Outlier_2.png}
+\end{center}
+\caption{Too much overlap, and curves molecules}
+\end{figure}
+
+%\item Fragments overlapping DNA molecules
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale = 0.2]{Images/Outlier_3.png}
+\end{center}
+\caption{Fragments overlapping DNA molecules}
+\end{figure}
+\end{column}
+
+%\item 
+%\end{itemize}
+\end{columns}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Why Registration?}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.3,page=2]{Plots/MF_Frag15.pdf}
+\end{center}
+\caption{NMaps aligned to {\emph{M. florum}} Interval 15}
+\end{figure}
+\end{column}
+\begin{column}{0.5\textwidth}
+\begin{itemize}
+%\footnotesize
+\item Molecules are differentially stretched
+\item Features are not aligned
+\item Estimating consensus is not simple
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Estimation: Iterated Registration}
 \begin{itemize}
 \item {\bf{Step 1}} Normalize and smooth using B-splines
 \item {\bf{Step 2}} Detect functional outliers in the data set, using Fraiman and Muniz functional depth
@@ -426,16 +662,16 @@ where $t$ denotes iteration number, for some predetermined $\epsilon$
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{For Aim 1}
+\frametitle{To do list: For Aim 1}
 \begin{block}{Aim 1}
 To establish that usable signals with information about genomic sequences could be extracted from the features of the fluorescence intensity profiles of imaged DNA molecules.
 \end{block}
 \begin{itemize}
 \item[\checkmark] Preprocess the curves to detect outlier molecular fragments
-\item[\checkmark] Control for the various type of noises: Different stretch; Different magnitudes of intensity values; Noises surrounding the molecule backbone; 
+\item[\checkmark] Control for the various type of noises: Different stretch; Different magnitudes of intensity values; Noise surrounding the molecule backbone; 
 \item[\checkmark] Estimate consensus by registering fluorescence intensity profiles
 \item Build a regression model to relate mean intensity profiles with nucleotide sequence characteristics
-\item Test the findings on ribosomal repeats on human genome (same sequence)
+\item Test the findings on ribosomal DNA repeats on human genome (same sequence)
 \item Test the findings on intensities from different sequences
 \end{itemize}
 \end{frame}
@@ -443,21 +679,21 @@ To establish that usable signals with information about genomic sequences could 
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{For Aim 2}
+\frametitle{To do list: For Aim 2}
 \begin{block}{Aim 2}
 To extract two sets of fluorescence intensity profiles in heterozygous regions we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
 \end{block}
 \begin{itemize}
 \item Extend the iterated registration algorithm to simultaneous cluster two (or more) sets of curves
 \item Implement the method on intensity profiles from different sequences and test sensitivity
-\item Implement the method on regions in the mm52 genome that has been confirmed by ``Optical mapping'' to be heterozygos
+\item Implement the method on regions in the mm52 genome that has been confirmed by ``Optical mapping'' to be heterozygous
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{For statistical methods}
+\frametitle{To do list: For statistical methods}
 \begin{itemize}
 \item[\checkmark] Select an appropriate registration algorithm for this data set
 \item[\checkmark] Select the most appropriate functional outlier detection method that works best for this data set
@@ -474,7 +710,7 @@ To extract two sets of fluorescence intensity profiles in heterozygous regions w
 \end{frame}
 
 \begin{frame}
-\frametitle{Questions please}
+\frametitle{Questions and suggestions please}
 
 Thank you very much!
 
@@ -482,12 +718,12 @@ Thank you very much!
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-    {\footnotesize
+\frametitle{Reference}
+{\footnotesize{
     \bibliographystyle{apalike}
     \bibliography{bibTex_Reference}
-    }
+}}
 \end{frame}
-
 
 \end{document}
 
