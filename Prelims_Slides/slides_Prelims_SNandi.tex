@@ -37,7 +37,7 @@ University of Wisconsin-Madison}
 %%%%%%%%%%%%%% Slide 1 %%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Background: Genome sequencing}
-Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out the order of DNA nucleotides, or bases that make up an organism's DNA. The human genome is made up of over {\underline{3 billion}} of these nucleic acids. A DNA sequence that has been translated from life's {\emph{chemical}} alphabet into our alphabet of written letters might look like this:
+Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out the order of DNA nucleotides, or bases that make up an organism's DNA. The haploid human genome is made up of over {\underline{3.2 billion}} base pairs. A DNA sequence that has been translated from life's {\emph{chemical}} alphabet into our alphabet of written letters might look like this:
 \begin{figure}[H]
 \includegraphics[scale=0.48]{Images/Image_Sequence_1.jpg}
 \end{figure}
@@ -52,43 +52,23 @@ Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out t
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Sequencing Technologies evolving \footnote{\tiny{Wikipedia}} }
-\vspace{-1cm}
+\frametitle{Limitations of Sequencing Technologies \footnote{\tiny{Wikipedia}} }
+\vspace{-0.8cm}
 \begin{columns}[t]
 \begin{column}{0.6\textwidth}
 \begin{itemize} 
 
-\item {\bf{Pac Bio}}
-\begin{itemize}
-\item {\footnotesize{Avg 14 kb read length 
-\item only 87\% accuracy
-\item moderate throughput
-\item cost: \_\_\_\_\_ per human genome }}
+\item {\small{\bf{Pac Bio}}}
+{\footnotesize{only 87\% accuracy; moderate throughput }}
 
-\end{itemize}
+\item {\small{\bf{Ion Torrent Sequencing}}}
+{\footnotesize{up to 400 bp read length; homopolymer errors }}
 
-\item {\bf{Ion Torrent Sequencing}} 
-\begin{itemize}
-\item {\footnotesize{up to 400 bp read length
-\item homopolymer errors
-\item cost: \_\_\_\_\_ per human genome }}
-\end{itemize}
+\item {\small{\bf{Illumina sequencing}}}
+{\footnotesize{up to 300 bp read length; very expensive equipment}}
 
-\item {\bf{Illumina sequencing}} 
-\begin{itemize}
-\item {\footnotesize{up to 300 bp read length
-\item very expensive equipment
-\item more than 99\% single read accuracy 
-\item cost: \_\_\_\_\_ per human genome }}
-\end{itemize}
-
-\item {\bf{Sanger sequencing}} 
-\begin{itemize}
-\item {\footnotesize{up to 900 bp read length
-\item more than 99\% single read accuracy 
-\item impractical for large sequencing projects
-\item cost: \_\_\_\_\_ per human genome }}
-\end{itemize}
+\item {\small{\bf{{Sanger sequencing}}}
+{\footnotesize{impractical for large sequencing projects}}
 
 \end{itemize}
 \end{column}
@@ -96,24 +76,24 @@ Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out t
 \begin{column}{0.4\textwidth}
 \begin{center}
 \begin{figure}[t]
-\includegraphics[scale=0.35]{Images/sequencingtechnology.pdf} \footnote{\tiny{https://www.broadinstitute.org/ \\blog/celebrating-fruits-human-genome-sequence}}
+\includegraphics[scale=0.28]{Images/sequencingtechnology.pdf} \footnote{\tiny{https://www.broadinstitute.org/ \\blog/celebrating-fruits-human-genome-sequence}}
 \end{figure}
 \end{center}
 %{\bf{Pac Bio}} Avg 14 kb read length; \textcolor{red}{only 87\% accuracy; moderate throughput} \\
 %{\bf{Ion Torrent Sequencing}} \textcolor{red}{up to 400 bp read length; \$32 mil for 1 genome}
-
-\begin{itemize}
-{\small{
-\item Human genome: over 3 billion base pairs
-
-\item Reference genome is incomplete
- 
-\item Need a parsimonious system to analyze the human population
-}}
-\end{itemize}
 \end{column}
 
 \end{columns}
+
+\begin{block}{Common limitations}
+\begin{itemize}
+{\small{
+\item CANNOT completely sequence a human genome because of repititive structures \footnote{\cite{Lander_etal_2001_Nature}} and other complexities
+\item CANNOT detect heterozygotes \footnote{\cite{Wheeler_etal_2008_Nature}}
+\item are Inadequate for analyzing complex cancer genomes, or other polygenic diseases
+}}
+\end{itemize}
+\end{block}
 \note{}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -139,8 +119,8 @@ Genome sequencing \footnote{http://www.genomenewsnetwork.org/} is figuring out t
 
 \end{column}
 \end{columns}
-\begin{block}{Thought!}
-What if we had Signature fluorescence intensity profiles of a whole genome?
+\begin{block}{Motivation}
+We want to construct signature fluorescence intensity profile of a genome.
 \end{block}
 
 \vspace{-0.2cm}
@@ -239,7 +219,7 @@ To extract two sets of fluorescence intensity profiles in heterozygous regions w
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Compare intensity profiles of 2 intervals}
+\frametitle{Compare intensity profiles of 2 intervals (part of Aim 1)}
 \begin{figure}[t]
 \includegraphics[scale=0.34, page=2]{Plots/chr13_frag7465.pdf}
 %\hspace{0.25cm}
@@ -453,13 +433,13 @@ To establish that usable signals with information about genomic sequences could 
 \begin{itemize}
 \item[\checkmark] Preprocess the curves to detect outlier molecular fragments
 \item[\checkmark] Control for the various type of noises: Different stretch; Different magnitudes of intensity values; Noises surrounding the molecule backbone; 
-\item[\checkmark] Estimate consensus by implement registration fluorescence intensity profiles
+\item[\checkmark] Estimate consensus by registering fluorescence intensity profiles
 \item Build a regression model to relate mean intensity profiles with nucleotide sequence characteristics
-\item Test the findings on ribosomal repeats on human genome
+\item Test the findings on ribosomal repeats on human genome (same sequence)
+\item Test the findings on intensities from different sequences
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
@@ -468,7 +448,7 @@ To establish that usable signals with information about genomic sequences could 
 To extract two sets of fluorescence intensity profiles in heterozygous regions we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
 \end{block}
 \begin{itemize}
-\item Extend the iterated registration algorithm to simultaneous cluster two sets of curves
+\item Extend the iterated registration algorithm to simultaneous cluster two (or more) sets of curves
 \item Implement the method on intensity profiles from different sequences and test sensitivity
 \item Implement the method on regions in the mm52 genome that has been confirmed by ``Optical mapping'' to be heterozygos
 \end{itemize}
@@ -499,6 +479,15 @@ To extract two sets of fluorescence intensity profiles in heterozygous regions w
 Thank you very much!
 
 \end{frame}
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+    {\footnotesize
+    \bibliographystyle{apalike}
+    \bibliography{bibTex_Reference}
+    }
+\end{frame}
+
 
 \end{document}
 
