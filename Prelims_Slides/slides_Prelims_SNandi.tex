@@ -21,7 +21,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
-\title[Statistics for fluoroscanning]{Statistical methods for analyzing images of fluorochrome stained DNA molecules}
+\title[Statistics for Fluoroscanning]{Statistical methods for analyzing images of fluorochrome stained DNA molecules}
 \author{Subhrangshu Nandi}
 \institute[Prelim exam]{Preliminary Exam \\
 Department of Statistics \\
@@ -77,7 +77,7 @@ in an economical and parsimonious manner.
 {\footnotesize{only 87\% accuracy; moderate throughput }}
 
 \item {\bf{\small{Ion Torrent Sequencing}}}
-{\footnotesize{up to 400 bp read length; homopolymer errors }}
+{\footnotesize{up to 400 bp read length; homo-polymer errors }}
 
 \item {\bf{\small{Illumina sequencing}}}
 {\footnotesize{up to 300 bp read length; very expensive equipment}}
@@ -103,7 +103,7 @@ in an economical and parsimonious manner.
 \begin{block}{Common limitations}
 \begin{itemize}
 {\small{
-\item CANNOT completely sequence a human genome because of repititive structures \footnote{\cite{Lander_etal_2001_Nature}} and other complexities
+\item CANNOT completely sequence a human genome because of repetitive structures \footnote{\cite{Lander_etal_2001_Nature}} and other complexities
 \item CANNOT detect heterozygotes \footnote{\cite{Wheeler_etal_2008_Nature}}
 \item are Inadequate for analyzing complex cancer genomes, or other polygenic diseases
 }}
@@ -150,7 +150,7 @@ in an economical and parsimonious manner.
 {\footnotesize{
 \item MP3 is a compressed or ``lossy'' format
 \item Reduces the signal to its most necessary components
-\item Very manageable file size; Easily transferrable
+\item Very manageable file size; Easily transferable
 }}
 \end{itemize}
 \vspace{-0.5cm}
@@ -199,10 +199,10 @@ in an economical and parsimonious manner.
 \begin{frame}
 \frametitle{Fluoroscanning: Beyond Nanocoding}
 \begin{figure}[H]
-\includegraphics[scale=0.5]{Images/IView_Example2_Mol1.png} \\
+\includegraphics[scale=0.5]{Images/IView_Example2_Mol1.jpg} \\
 \includegraphics[scale=0.5]{Plots/chr13_frag1058_Curve2.pdf} \\
 
-\includegraphics[scale=0.5]{Images/IView_Example2_Mol2.png} \\
+\includegraphics[scale=0.5]{Images/IView_Example2_Mol2.jpg} \\
 \includegraphics[scale=0.5]{Plots/chr13_frag1058_Curve4.pdf} 
 \includegraphics[scale=0.5]{Plots/chr13_frag1058_Curve6.pdf} 
 \end{figure}
@@ -214,14 +214,14 @@ in an economical and parsimonious manner.
 \begin{frame}
 \frametitle{Aims of Fluoroscanning}
 \begin{block}{Aim 1}
-To establish that usable signals with information about genomic sequences that can be extracted from fluorescence intensity profiles of imaged DNA molecules.
+To establish that usable signals with information about genomic sequences can be extracted from fluorescence intensity profiles of imaged DNA molecules.
 \end{block}
 \vspace{1cm}
 \begin{block}{Aim 2}
-To confirm that fluoroscanning can detect heterozygosity. 
+To confirm that Fluoroscanning can detect heterozygosity. 
 \begin{itemize}
 \footnotesize
-\item to test sensitivity of fluoroscanning: how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
+\item to test sensitivity of Fluoroscanning: how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
 \end{itemize}
 \end{block}
 \end{frame}
@@ -231,7 +231,7 @@ To confirm that fluoroscanning can detect heterozygosity.
 \begin{frame}
 \frametitle{Statistical challenges}
 \begin{block}{Statistical challenges}
-{\Large{The primary challenge is to build statistical tools to enable fluoroscanning data analysis.}} \\This involves
+{\Large{The primary challenge is to build statistical tools to enable Fluoroscanning data analysis.}} \\This involves
 \begin{itemize}
 \item {\bf{Preprocessing}} the data by understanding the different sources of noise, and appropriately reducing their effect or controlling for their presence
 \vspace{0.5cm}
@@ -332,7 +332,7 @@ Human genome: with multiple myeloma cancer
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Coverage of mm52 Data}
+\frametitle{Coverage of mm52 Data (example, Chr 1 \& 6)}
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale = 0.32, page = 1]{Plots/mm52_Coverage.pdf}
@@ -348,9 +348,8 @@ Human genome: with multiple myeloma cancer
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Aim 1 of Fluoroscanning}
-\begin{block}{Aim 1}
-To establish that usable signals with information about genomic sequences that can be extracted from fluorescence intensity profiles of imaged DNA molecules.
-\end{block}
+\Large
+Analysis of fluorescence intensity profiles and sequence compositions
 \end{frame}
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
@@ -372,7 +371,7 @@ To establish that usable signals with information about genomic sequences that c
 \begin{figure}[H]
 \begin{center}
 %\hspace{2cm} \vspace{-1cm}
-\includegraphics[scale = 0.25]{Images/Outlier_1.png}
+\includegraphics[scale = 0.25]{Images/Outlier_1.jpg}
 \end{center}
 \caption{Molecules too close to each other}
 \end{figure}
@@ -380,7 +379,7 @@ To establish that usable signals with information about genomic sequences that c
 %\item Molecules not straight
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale = 0.25]{Images/Outlier_4.png}
+\includegraphics[scale = 0.25]{Images/Outlier_4.jpg}
 \end{center}
 \caption{Molecules not straight}
 \end{figure}
@@ -390,15 +389,15 @@ To establish that usable signals with information about genomic sequences that c
 %\item Too much overlap, and curves molecules
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale = 0.2]{Images/Outlier_2.png}
+\includegraphics[scale = 0.2]{Images/Outlier_2.jpg}
 \end{center}
-\caption{Too much overlap, and curves molecules}
+\caption{Too much overlap, and curved molecules}
 \end{figure}
 
 %\item Fragments overlapping DNA molecules
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale = 0.2]{Images/Outlier_3.png}
+\includegraphics[scale = 0.2]{Images/Outlier_3.jpg}
 \end{center}
 \caption{Fragments overlapping DNA molecules}
 \end{figure}
@@ -425,7 +424,7 @@ To establish that usable signals with information about genomic sequences that c
 \begin{column}{0.5\textwidth}
 \begin{itemize}
 %\footnotesize
-\item Molecules are differentially stretched
+\item Molecules are of different lengths
 \vspace{1cm}
 \item Features are not aligned
 \vspace{1cm}
@@ -438,17 +437,68 @@ To establish that usable signals with information about genomic sequences that c
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
+\frametitle{Estimation: The registration problem}
+\Large
+Goal: To eliminate/reduce phase variability before analyzing smooth functions
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Estimation: The registration problem}
+\footnotesize
+\begin{equation}
+\text{MINEIG}_{\lambda}(h) = \text{MINEIG}(h) + \lambda \displaystyle \int \left\{ w^{(m)}(x) \right\}^2 dx
+\end{equation}
+where, $w(x) = \frac{D^2h}{Dh},\ \ D = \frac{\partial}{\partial x}$. $w(x)$ is the relative curvature of the warping function
+
+\begin{figure}[H]
+\includegraphics[scale=0.3, page=2]{Plots/Warpings_Seed58_Lambda_0_01.pdf}
+\includegraphics[scale=0.3, page=1]{Plots/Warpings_Seed58_Lambda_0_01.pdf}
+\end{figure}
+
+%% \begin{figure}[H]
+%% \begin{center}
+%% \includegraphics[scale=0.3,page=3]{Plots/Warpings_Seed58_Lambda_0_5.pdf}
+%% \caption{$\lambda $
+%% \includegraphics[scale=0.3,page=3]{Plots/Warpings_Seed58_Lambda_0_01.pdf}
+%% \end{center}
+%% \end{figure}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Estimation: The penalty on relative curvature}
+\vspace{-0.5cm}
+\begin{figure}[H]
+\includegraphics[scale=0.15, page=2]{Plots/Warpings_Seed58_Lambda_0_01.pdf}
+\includegraphics[scale=0.15, page=1]{Plots/Warpings_Seed58_Lambda_0_01.pdf}
+\end{figure}
+\vspace{-0.5cm}
+
+\begin{figure}[H]
+\includegraphics[scale=0.23,page=3]{Plots/Warpings_Seed58_Lambda_0_5.pdf}
+\includegraphics[scale=0.23,page=3]{Plots/Warpings_Seed58_Lambda_0_01.pdf}
+\caption{Left: $\lambda = 0.5$, Right: $\lambda = 0.01$}
+\end{figure}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
 \frametitle{Estimation: Why Iterated Registration to weighted consensus?}
 \begin{enumerate}
-\item[A] Outliers 
+\item[A] {\bf{Outliers}}: Need to detect and reduce the effect of outliers on consensus estimation
 
-\item[B] Starting template
+\item[B] {\bf{Starting template}}: A cross-sectional average is not adequate as starting consensus
 
-\item[C] Warping functions
+\item[C] {\bf{Quality of registration}}: Need to evaluate the quality of registration to estimate the consensus with statistical confidence
 
-\item[D] Quality of registration
-
-\item[E] Simultaneous clustering and registration
+\item[D] {\bf{Simultaneous clustering and registration}}: Extend the algorithm to simultaneously cluster and register
 \end{enumerate}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -473,7 +523,7 @@ where $y_i \in \Real^p, \ i = 1,\dots,n$ and $\|u \| = \sqrt{\sum\limits_{j = 1}
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Iterated Registration (contd.)}
+\frametitle{Estimation: Iterated Registration (contd.)}
 \begin{itemize}
 \item {\bf{Step 4}} Registration with varying roughness penalty [{\emph{Maximization step}}]: We use the minimum second eigenvalue method to register the curves to the template $\phi$. 
 \item {\bf{Step 5}} Convergence of iteration: The objective of iterated registration is to maximize the average similarity to the consensus, i.e., maximize 
@@ -486,82 +536,34 @@ where $t$ denotes iteration number, for some predetermined $\epsilon$
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
-%\begin{frame}
-%\frametitle{After ``iterated'' registration}
-%\begin{figure}[t]
-%\includegraphics[scale=0.34, page=6]{Plots/chr13_frag7465_registered.pdf}
-%\hspace{0.25cm}
-%\includegraphics[scale=0.34, page=6]{Plots/chr13_frag7491_registered.pdf}
-%\end{figure}
-%\end{frame}
+\begin{frame}
+\frametitle{Hypothesis Testing}
+\Large
+Iterated registration improves sensitivity
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{After registration, with GC composition, Interval 7465}
-\begin{figure}[t]
-\includegraphics[scale=0.34, page=6]{Plots/chr13_frag7465.pdf}
-%\hspace{0.25cm}
-\includegraphics[scale=0.34, page=8]{Plots/chr13_frag7465_registered.pdf}
+\frametitle{Hypothesis Testing}
+\vspace{-0.5cm}
+\begin{figure}
+\begin{center}
+\includegraphics[scale = 0.23, page = 2]{Plots/pValue_Comparison_Run08_6.pdf}
+\hspace{2cm}
+\includegraphics[scale = 0.23, page = 3]{Plots/pValue_Comparison_forPrelims.pdf} \\
+\vspace{-1cm}
+\includegraphics[scale = 0.23, page = 3]{Plots/pValue_Comparison_Run08_6.pdf}
+\end{center}
 \end{figure}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{After registration, with GC composition, Interval 7465}
-\begin{figure}[t]
-\includegraphics[scale=0.3, page=6]{Plots/chr13_frag7465.pdf}
-\hspace{0.5cm}
-\includegraphics[scale=0.3, page=8]{Plots/chr13_frag7465_registered.pdf}
-\end{figure}
-
-\vspace{-0.5cm}
-\begin{columns}
-\begin{column}{0.5\textwidth}
-% latex table generated in R 3.2.2 by xtable 1.8-0 package
-% Sat Feb 27 16:10:06 2016
-\begin{table}[ht]
-\centering
-{\footnotesize{
-\begin{tabular}{rrrr}
-  \hline
-  & $\hat{\beta}$ & SE & p-value \\ 
-  \hline
-  (Intercept) & 0.9788 & 0.0102 & 0.0000 \\ 
-  GC & 0.0083 & 0.0306 & 0.7866 \\ 
-  GC\_Lag1 & 0.0410 & 0.0260 & 0.1192 \\ 
-  GC\_Lead1 & 0.0435 & 0.0260 &  0.0992 \\ 
-  \hline
-\end{tabular}
-\caption{$\tiny{R^2 = 0.1205}$}
-}}
-\end{table}
-\end{column}
-
-\begin{column}{0.5\textwidth}
-% latex table generated in R 3.2.2 by xtable 1.8-0 package
-% Sat Feb 27 16:12:34 2016
-\begin{table}[ht]
-\centering
-{\footnotesize{
-\begin{tabular}{rrrr}
-  \hline
-  & $\hat{\beta}$ & SE & p-value \\ 
-  \hline
-  (Intercept) & 0.9686 & 0.0178 & 0.0000 \\ 
-  GC & 0.0090 & 0.0536 & 0.8665 \\ 
-  GC\_Lag1 & 0.0583 & 0.0456 & 0.2048 \\ 
-  GC\_Lead1 & 0.0537 & 0.0456 & 0.2425 \\ 
-  \hline
-\end{tabular}
-\caption{$\tiny{R^2 = 0.0707}$}
-}}
-\end{table}
-\end{column}
-
-\end{columns}
-
+\frametitle{Application to Human genome}
+\Large
+Applying iterated registration to intervals of human genome with sufficient coverage
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -639,14 +641,14 @@ where $t$ denotes iteration number, for some predetermined $\epsilon$
 \begin{frame}
 \frametitle{To do list: For Aim 1}
 \begin{block}{Aim 1}
-To establish that usable signals with information about genomic sequences could be extracted from the features of the fluorescence intensity profiles of imaged DNA molecules.
+To establish that usable signals with information about genomic sequences that can be extracted from fluorescence intensity profiles of imaged DNA molecules.
 \end{block}
 \begin{itemize}
 \item[\checkmark] Preprocess the curves to detect outlier molecular fragments
 \item[\checkmark] Control for the various type of noises: Different stretch; Different magnitudes of intensity values; Noise surrounding the molecule backbone; 
 \item[\checkmark] Estimate consensus by registering fluorescence intensity profiles
 \item Build a regression model to relate mean intensity profiles with nucleotide sequence characteristics
-\item Test the findings on ribosomal DNA repeats on human genome (same sequence)
+\item Test the findings on Ribosomal DNA repeats on human genome (same sequence)
 \item Test the findings on intensities from different sequences
 \end{itemize}
 \end{frame}
@@ -656,7 +658,11 @@ To establish that usable signals with information about genomic sequences could 
 \begin{frame}
 \frametitle{To do list: For Aim 2}
 \begin{block}{Aim 2}
-To extract two sets of fluorescence intensity profiles in heterozygous regions we want to test the sensitivity of fluoroscanning, i.e., how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
+To confirm that Fluoroscanning can detect heterozygosity. 
+\begin{itemize}
+\footnotesize
+\item to test sensitivity of Fluoroscanning: how little of a difference in sequences is translated to detectable dissimilarity in the fluorescence intensity profiles?
+\end{itemize}
 \end{block}
 \begin{itemize}
 \item Extend the iterated registration algorithm to simultaneous cluster two (or more) sets of curves
@@ -677,10 +683,10 @@ To extract two sets of fluorescence intensity profiles in heterozygous regions w
 \begin{enumerate}
 \item Single iteration minimum eigen value method (Ramsay, et al)
 \item Iterated registration with affine warping of abcissa (Sangalli, et al)
-\item Registration using Fisher-rao metric (Srivastava, et al)
+\item Registration using Fisher-Rao metric (Srivastava, et al)
 \end{enumerate}
 \item Build a regression model to relate mean intensity profiles with nucleotide sequence characteristics
-\item Extend the iterated registration algorithm to simultaneous cluster two sets of curves
+\item Extend the iterated registration algorithm to simultaneously cluster and register two (or more) sets of fluorescence intensity profiles
 \end{itemize}
 \end{frame}
 

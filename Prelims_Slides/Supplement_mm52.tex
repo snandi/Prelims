@@ -1,0 +1,105 @@
+\documentclass[10pt,dvipsnames,table]{beamer} 
+%\usetheme{Luebeck} 
+%\usetheme{Madrid} 
+%\usetheme{Marburg} 
+%\usetheme{Warsaw} 
+\usetheme{CambridgeUS}
+%\setbeamercolor{structure}{fg=cyan!90!white}
+%\setbeamercolor{normal text}{fg=white, bg=black}
+\setbeamercolor{block title}{bg=red!80,fg=white}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Input header file 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{HeaderfileTexSlides}
+
+\logo{\includegraphics[scale=0.4]{uwlogo_web_sm_fl_wht.png}}
+%\logo{\includegraphics[width=\beamer@sidebarwidth,height=\beamer@headheight]{uwlogo_web_sm_fl_wht.png}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% TITLE PAGE 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\title[mm52Chr13]{Registration of intervals of chr 13}
+\author{Subhrangshu Nandi}
+\institute[Prelim exam]{Preliminary Exam \\
+Department of Statistics \\
+University of Wisconsin-Madison}
+\date{March 1, 2016}
+
+\begin{document}
+\setlength{\baselineskip}{16truept}
+\setbeamertemplate{logo}{}
+
+%\frame{\maketitle}
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{After registration, with GC composition, Interval 7465}
+\begin{figure}[t]
+\includegraphics[scale=0.34, page=6]{Plots/chr13_frag7465.pdf}
+%\hspace{0.25cm}
+\includegraphics[scale=0.34, page=8]{Plots/chr13_frag7465_registered.pdf}
+\end{figure}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{After registration, with GC composition, Interval 7465}
+\begin{figure}[t]
+\includegraphics[scale=0.3, page=6]{Plots/chr13_frag7465.pdf}
+\hspace{0.5cm}
+\includegraphics[scale=0.3, page=8]{Plots/chr13_frag7465_registered.pdf}
+\end{figure}
+
+\vspace{-0.5cm}
+\begin{columns}
+\begin{column}{0.5\textwidth}
+% latex table generated in R 3.2.2 by xtable 1.8-0 package
+% Sat Feb 27 16:10:06 2016
+\begin{table}[ht]
+\centering
+{\footnotesize{
+\begin{tabular}{rrrr}
+  \hline
+  & $\hat{\beta}$ & SE & p-value \\ 
+  \hline
+  (Intercept) & 0.9788 & 0.0102 & 0.0000 \\ 
+  GC & 0.0083 & 0.0306 & 0.7866 \\ 
+  GC\_Lag1 & 0.0410 & 0.0260 & 0.1192 \\ 
+  GC\_Lead1 & 0.0435 & 0.0260 &  0.0992 \\ 
+  \hline
+\end{tabular}
+\caption{$\tiny{R^2 = 0.1205}$}
+}}
+\end{table}
+\end{column}
+
+\begin{column}{0.5\textwidth}
+% latex table generated in R 3.2.2 by xtable 1.8-0 package
+% Sat Feb 27 16:12:34 2016
+\begin{table}[ht]
+\centering
+{\footnotesize{
+\begin{tabular}{rrrr}
+  \hline
+  & $\hat{\beta}$ & SE & p-value \\ 
+  \hline
+  (Intercept) & 0.9686 & 0.0178 & 0.0000 \\ 
+  GC & 0.0090 & 0.0536 & 0.8665 \\ 
+  GC\_Lag1 & 0.0583 & 0.0456 & 0.2048 \\ 
+  GC\_Lead1 & 0.0537 & 0.0456 & 0.2425 \\ 
+  \hline
+\end{tabular}
+\caption{$\tiny{R^2 = 0.0707}$}
+}}
+\end{table}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}
