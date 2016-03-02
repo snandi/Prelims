@@ -54,7 +54,7 @@ University of Wisconsin-Madison}
 \begin{frame}
 \frametitle{Introduction}
 {\Large{
-Next generation genomic sciences needs to build systems to
+Next generation genomic sciences need to build systems to
 \begin{enumerate}
 \item Analyze genomes of every individual of the population
 \item Analyze the complexities of cancer genomes
@@ -173,7 +173,16 @@ in an economical and parsimonious manner.
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Data obtained from Nanocoding system}
+\frametitle{Fluoroscanning}
+\begin{block}{Fluoroscanning}
+A system to extract usable information about genomic sequences from fluorescence intensity profiles of imaged DNA molecules. 
+\end{block}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Background: Nanocoding system (LMCG)}
 %\vspace{-0.5cm}
 \begin{figure}[T]
 \includegraphics[scale=0.45]{Images/Image_Nanocoding.jpg} \footnote{\tiny{\cite{Kounovsky_2013_PhDThesis}}}
@@ -235,9 +244,9 @@ To confirm that Fluoroscanning can detect heterozygosity.
 \begin{itemize}
 \item {\bf{Preprocessing}} the data by understanding the different sources of noise, and appropriately reducing their effect or controlling for their presence
 \vspace{0.5cm}
-\item {\bf{Estimating}} a consensus fluorescence intensity profile for each genomic interval and establish they are sequence dependent
+\item {\bf{Estimating}} a consensus fluorescence intensity profile for each genomic interval and establishing their sequence dependence
 \vspace{0.5cm}
-\item Setting up a {\bf{hypothesis testing}} framework where intensity profiles from different genomic intervals could be tested for similarity
+\item Setting up a {\bf{hypothesis testing}} framework to test intensity profiles from different genomic intervals for dissimilarity
 \end{itemize}
 \end{block}
 \end{frame}
@@ -297,7 +306,7 @@ Human genome: with multiple myeloma cancer
 \footnotesize
 \item Nanocoded data of a multiple myeloma (cancer) genome
 \item This genome has been comprehensively analyzed to characterize its genome structure and variation at LMCG \footnote{\cite{Gupta_etal_2015_PNAS}}
-\item Retains substantial (more than $95\%$) similarity with a healthy human genome
+\item Retains substantial (more than $95\%$) similarity with a normal human genome
 \end{itemize}
 
 \begin{table}[H]
@@ -411,6 +420,19 @@ Analysis of fluorescence intensity profiles and sequence compositions
 
 %%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
 \begin{frame}
+\frametitle{Preprocessing}
+\begin{itemize}
+\item Image processing to detect noisy molecules
+\vspace{0.5cm}
+\item Normalize fluorescence intensities of each fragment by its median
+\vspace{0.5cm}
+\item Smooth the fluorescence intensities and evaluate them at equidistant points
+\end{itemize}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%% Slide x %%%%%%%%%%%%%%
+\begin{frame}
 \frametitle{Estimation: Why Registration?}
 \begin{columns}
 \begin{column}{0.5\textwidth}
@@ -449,7 +471,7 @@ Goal: To eliminate/reduce phase variability before analyzing smooth functions
 \frametitle{Estimation: The registration problem}
 \footnotesize
 \begin{equation}
-\text{MINEIG}_{\lambda}(h) = \text{MINEIG}(h) + \lambda \displaystyle \int \left\{ w^{(m)}(x) \right\}^2 dx
+\text{MINEIG}_{\lambda}(h) = \text{MINEIG}(h) + \lambda \displaystyle \int \left\{ w^{(m)}(x) \right\}^2 dx \footnote{\cite{Ramsay_Silverman_2002_Applied}}
 \end{equation}
 where, $w(x) = \frac{D^2h}{Dh},\ \ D = \frac{\partial}{\partial x}$. $w(x)$ is the relative curvature of the warping function
 
@@ -507,13 +529,18 @@ where, $w(x) = \frac{D^2h}{Dh},\ \ D = \frac{\partial}{\partial x}$. $w(x)$ is t
 \begin{frame}
 \frametitle{Estimation: Iterated Registration}
 \begin{itemize}
+\pause
 \item {\bf{Step 1}} Normalize and smooth using B-splines
+\pause
 \item {\bf{Step 2}} Detect functional outliers in the data set, using Fraiman and Muniz functional depth
+\pause
 \item {\bf{Step 3}} Template estimation [{\emph{Expectation step}}]: To estimate the template to register the curves to, we employ a 2-step approach. 
 \begin{enumerate}
+\pause
 \item {\emph{Median}}: Estimate $L_1\text{-Median}$, where $L_1\text{-Median }$ $y_m$ is the minimizer of 
 \[ \sum\limits_{i = 1}^n \|y_i - y_m \| \]
 where $y_i \in \Real^p, \ i = 1,\dots,n$ and $\|u \| = \sqrt{\sum\limits_{j = 1}^p u_j^2}$. Here we ensure that the median is estimated only from the curves not deemed as ``functional outliers'' in Step 2. 
+\pause
 \item {\emph{Weighted mean}}: Estimate the similarity indices $\rho(y_i, y_m), \ i = 1,\dots,n$ and estimate the template $\phi$ as the weighted average of the curves, 
 \[ \phi = \frac{1}{n}\sum\limits_{i = 1}^n \rho(y_i, y_m) y_i \]
 \end{enumerate}
@@ -525,7 +552,9 @@ where $y_i \in \Real^p, \ i = 1,\dots,n$ and $\|u \| = \sqrt{\sum\limits_{j = 1}
 \begin{frame}
 \frametitle{Estimation: Iterated Registration (contd.)}
 \begin{itemize}
+\pause
 \item {\bf{Step 4}} Registration with varying roughness penalty [{\emph{Maximization step}}]: We use the minimum second eigenvalue method to register the curves to the template $\phi$. 
+\pause
 \item {\bf{Step 5}} Convergence of iteration: The objective of iterated registration is to maximize the average similarity to the consensus, i.e., maximize 
 \[ \bar{\rho}_{\phi, n} = \frac{1}{n} \sum \limits_{i = 1}^{n} \rho(\phi, f_i)\]
 Hence, we iterate steps 3 and 4, until
@@ -551,7 +580,9 @@ Iterated registration improves sensitivity
 \begin{center}
 \includegraphics[scale = 0.23, page = 2]{Plots/pValue_Comparison_Run08_6.pdf}
 \hspace{2cm}
+\pause
 \includegraphics[scale = 0.23, page = 3]{Plots/pValue_Comparison_forPrelims.pdf} \\
+\pause
 \vspace{-1cm}
 \includegraphics[scale = 0.23, page = 3]{Plots/pValue_Comparison_Run08_6.pdf}
 \end{center}
@@ -645,11 +676,11 @@ To establish that usable signals with information about genomic sequences that c
 \end{block}
 \begin{itemize}
 \item[\checkmark] Preprocess the curves to detect outlier molecular fragments
-\item[\checkmark] Control for the various type of noises: Different stretch; Different magnitudes of intensity values; Noise surrounding the molecule backbone; 
+\item[\checkmark] Control for the various type of noises: different fragment lengths; different magnitudes of intensity values; noise surrounding the molecule backbone; 
 \item[\checkmark] Estimate consensus by registering fluorescence intensity profiles
 \item Build a regression model to relate mean intensity profiles with nucleotide sequence characteristics
 \item Test the findings on Ribosomal DNA repeats on human genome (same sequence)
-\item Test the findings on intensities from different sequences
+\item Test association between ``sequence similarity'' and ``consensus intensity profile similarity''
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
